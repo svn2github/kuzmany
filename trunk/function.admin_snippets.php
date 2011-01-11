@@ -43,7 +43,7 @@ if (!$this->CheckAccess('manage ' . $prefix . 'mle'))
 */
 
 
-$template_list = $this->ListTemplatesWithPrefix($prefix);
+$template_list = cge_template_utils::get_templates_by_prefix('', $prefix);
 
 $rowclass = 'row1';
 

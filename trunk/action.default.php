@@ -40,9 +40,5 @@ if (isset($params['name']) && $template = $this->GetTemplate($params['name'])) {
 
     $template = json_decode($template);
     $output = $this->ProcessTemplateFromData($template->$lang_parent);
-
-
-    if (!isset($params['output']) || $params['output']) {
-        echo $output;
-    }
+    echo $output;
 }

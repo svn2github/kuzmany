@@ -39,16 +39,8 @@ define('MLE_SNIPPET', 'snippet_');
 define('MLE_BLOCK', 'block_');
 
 class MleCMS extends CGExtensions {
-    /* ---------------------------------------------------------
-      FeuFacebook() -- Constructor
-      --------------------------------------------------------- */
-
     function __construct() {
         parent::CMSModule();
-
-
-        //$this->AddEventHandler('Core', 'TemplatePreCompile', false);
-        //$this->AddEventHandler('Core', 'ContentPostRender', false);
     }
 
     function GetName() {

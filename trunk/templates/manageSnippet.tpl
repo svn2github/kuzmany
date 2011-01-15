@@ -18,7 +18,11 @@
 </fieldset>
 <div class="pageoverflow">
 		<p class="pagetext"></p>
-		<p class="pageinput"> {$form_details_cancel} {$form_details_apply} {$form_details_submit}</p>
+		<p class="pageinput">{$form_details_submit} {$form_details_apply}</p>
+</div>
+<div class="pageoverflow">
+		<p class="pagetext"></p>
+		<p  class="pageinput">{$form_details_cancel}</p>
 </div>
 
 {$form_end}

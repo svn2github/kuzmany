@@ -23,6 +23,12 @@
 	{$locale}
 	</p>
 </div>
+<div class="pageoverflow">
+<p class="pagetext">{$mod->Lang('flag')}:</p>
+<p class="pageinput">
+	{$flag}
+	</p>
+</div>
 
 
 

@@ -46,9 +46,9 @@ if ($this->CheckAccess('manage ' . MLE_BLOCK . 'mle')) {
     echo $this->SetTabHeader('manage_' . MLE_BLOCK . 'mle', $this->Lang('manage_blocks'));
 }
 
-if ($this->CheckAccess('manage translator_mle')) {
+/*if ($this->CheckAccess('manage translator_mle')) {
     echo $this->SetTabHeader('mle_translator', $this->Lang('mle_translator'));
-}
+}*/
 
 
 if ($this->CheckPermission('Modify Site Preferences')) {
@@ -83,14 +83,14 @@ if ($this->CheckAccess('manage ' . MLE_BLOCK . 'mle')) {
     include(dirname(__FILE__) . '/function.admin_snippets.php');
     echo $this->EndTab();
 }
-
+/*
 if ($this->CheckAccess('manage translator_mle')) {
     $prefix = MLE_BLOCK;
     echo $this->StartTab('mle_translator', $params);
     $wysiwyg = true;
     include(dirname(__FILE__) . '/function.admin_mle_translator.php');
     echo $this->EndTab();
-}
+}*/
 
 
 if ($this->CheckPermission('Modify Site Preferences')) {

@@ -34,8 +34,6 @@ if (!$this->CheckAccess()) {
     return $this->DisplayErrorPage($id, $params, $returnid, $this->Lang('accessdenied'));
 }
 
-
-
 if (isset($params['cancel'])) {
     $this->RedirectToTab($id, "mle_config");
 }
@@ -65,14 +63,19 @@ if (isset($params['locale'])) {
     $locale = $params['locale'];
 }
 
+$flag = '';
+if (isset($params['flag'])) {
+    $flag = $params['flag'];
+}
+
 if (isset($params['submit'])) {
     if ($compid == "") {
         // insert the order record
         $sort = $db->GetOne('SELECT MAX(sort) FROM ' . cms_db_prefix() . 'module_mlecms_config');
         $query = 'INSERT INTO ' . cms_db_prefix() . 'module_mlecms_config
-		(name,alias,locale,sort,created_date,modified_date)
-		VALUES (?,?,?,?,NOW(),NOW())';
-        $dbr = $db->Execute($query, array($name, $alias, $locale,($sort+1)));
+		(name,alias,locale,flag,sort,created_date,modified_date)
+		VALUES (?,?,?,?,?,NOW(),NOW())';
+        $dbr = $db->Execute($query, array($name, $alias, $locale, $flag, ($sort + 1)));
         $cid = $db->Insert_ID();
         if (!$cid) {
             echo $this->ShowErrors($this->Lang('nonamegiven'));
@@ -82,9 +85,10 @@ if (isset($params['submit'])) {
 		name=?,
                 alias = ?,
                 locale = ?,
+                flag  = ?,
                 modified_date = NOW()
 		WHERE id = ?';
-        $dbr = $db->Execute($query, array($name, $alias, $locale, $compid));
+        $dbr = $db->Execute($query, array($name, $alias, $locale, $flag, $compid));
         $cid = $compid;
     }
 
@@ -106,6 +110,8 @@ if ($compid) {
         $alias = $row["alias"];
     if ($row["locale"])
         $locale = $row["locale"];
+    if ($row["flag"])
+        $flag = $row["flag"];
 }else {
     $this->smarty->assign('startform', $this->CreateFormStart($id, 'admin_mlecms_config_editlang', $returnid, 'post', 'multipart/form-data'));
 }
@@ -114,7 +120,12 @@ $this->smarty->assign('endform', $this->CreateFormEnd());
 
 $this->smarty->assign('name', $this->CreateInputText($id, 'name', $name, 50, 255));
 $this->smarty->assign('alias', $this->CreateInputText($id, 'alias', $alias, 50, 255));
-$this->smarty->assign('locale', $this->CreateInputText($id, 'locale', $locale, 50, 255));
+$this->smarty->assign('locale', $this->CreateInputDropdown($id, 'locale', $this->getLangsLocale(), -1, $locale));
+
+$gbfp = cms_utils::get_module('GBFilePicker');
+if ($gbfp) {
+    $this->smarty->assign('flag', $gbfp->CreateFilePickerInput($gbfp, $id, 'flag', $flag, array('dir' => 'images', 'mode' => 'browser')));
+}
 
 $this->smarty->assign('submit', $this->CreateInputSubmit($id, 'submit', $this->lang('submit')));
 $this->smarty->assign('cancel', $this->CreateInputSubmit($id, 'cancel', $this->lang('cancel')));

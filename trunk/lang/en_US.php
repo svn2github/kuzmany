@@ -21,10 +21,11 @@ $lang['postinstall'] = 'Post Install Message, (e.g., Be sure to set "manage mle_
 // Mle config
 $lang['mle_config'] = 'Multilang config';
 $lang['idtext'] = 'ID';
-$lang['alias'] = 'Alias';
+$lang['alias'] = 'Root alias';
 $lang['name'] = 'Name';
 
 $lang['locale'] = 'Locale';
+$lang['flag'] = 'Flag';
 
 // Snippets
 

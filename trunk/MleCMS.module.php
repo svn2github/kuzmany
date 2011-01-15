@@ -39,6 +39,9 @@ define('MLE_SNIPPET', 'snippet_');
 define('MLE_BLOCK', 'block_');
 
 class MleCMS extends CGExtensions {
+    
+    public $alllangs = array("Afrikaans" => "af_ZA", "Български" => "bg_BG", "Català" => "ca_ES", "Česky" => "cs_CZ", "Dansk" => "da_DK", "Deutsch" => "de_DE", "Ελληνικα" => "el_GR", "English" => "en_US", "Español" => "es_ES", "Eesti" => "et_EE", "Euskara" => "eu_ES", "Suomi" => "fi_FI", "Français" => "fr_FR", "Magyar" => "hu_HU", "Bahasa Indonesia" => "id_ID", "Íslenska" => "is_IS", "Italiano" => "it_IT", "日本語" => "ja_JP", "Lietuvių" => "lt_LT", "Norsk bokmål" => "nb_NO", "Nederlands" => "nl_NL", "Polski" => "pl_PL", "Português Brasileiro" => "pt_BR", "Português" => "pt_PT", "Română" => "ro_RO", "Русский" => "ru_RU", "Slovenčina" => "sk_SK", "српски Srpski" => "sr_YU", "Svenska" => "sv_SE", "Türkçe" => "tr_TR", "简体中文" => "zh_CN", "繁體中文" => "zh_TW");
+
     function __construct() {
         parent::CMSModule();
     }
@@ -52,7 +55,7 @@ class MleCMS extends CGExtensions {
     }
 
     function GetVersion() {
-        return '1.0';
+        return '1.1';
     }
 
     function GetHelp() {
@@ -170,7 +173,7 @@ class MleCMS extends CGExtensions {
       --------------------------------------------------------- */
 
     function GetDependencies() {
-        return array('CGExtensions' => '1.22');
+        return array('CGExtensions' => '1.22','GBFilePicker' => '1.2');
     }
 
     /* ---------------------------------------------------------
@@ -232,6 +235,10 @@ class MleCMS extends CGExtensions {
 
         $this->CreateParameter('name', '', $this->Lang('help_name'));
         $this->SetParameterType('name', CLEAN_STRING);
+    }
+
+    public function getLangsLocale(){
+        return $this->alllangs;
     }
 
     public function getLangs($sortorder='ASC') {

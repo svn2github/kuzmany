@@ -34,6 +34,7 @@ $flds = "
 	name C(64),
 	alias C(10),
 	locale C(10),
+	flag C(20),
 	sort I,
 	modified_date " . CMS_ADODB_DT . ",
 	created_date " . CMS_ADODB_DT . "

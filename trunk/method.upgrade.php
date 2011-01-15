@@ -1,4 +1,5 @@
 <?php
+
 # Module: Multilanguage CMS
 # Zdeno Kuzmany (zdeno@kuzmany.biz) kuzmany.biz
 #
@@ -24,18 +25,23 @@
 # Or read it online: http://www.gnu.org/licenses/licenses.html#GPL
 #
 #-------------------------------------------------------------------------
-if (!isset($gCms)) exit;
+if (!isset($gCms))
+    exit;
 
-		$current_version = $oldversion;
-		switch($current_version)
-		{
-			case "1.0":
-			     break;
-			case "1.1":
-			     break;
-		}
-		
-		// put mention into the admin log
-		$this->Audit( 0, $this->Lang('friendlyname'), $this->Lang('upgraded',$this->GetVersion()));
+$current_version = $oldversion;
+$db = & $this->GetDb();
 
+switch ($current_version) {
+    case "1.0":
+        $dict = NewDataDictionary($db);
+        $sqlarray = $dict->AddColumnSQL(cms_db_prefix() . "module_mlecms_config", "flag C(20)");
+        $dict->ExecuteSQLArray($sqlarray);
+        $current_version = "1.1";
+        break;
+    case "1.1":
+        break;
+}
+
+// put mention into the admin log
+$this->Audit(0, $this->Lang('friendlyname'), $this->Lang('upgraded', $this->GetVersion()));
 ?>

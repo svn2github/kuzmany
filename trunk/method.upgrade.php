@@ -34,7 +34,7 @@ $db = & $this->GetDb();
 switch ($current_version) {
     case "1.0":
         $dict = NewDataDictionary($db);
-        $sqlarray = $dict->AddColumnSQL(cms_db_prefix() . "module_mlecms_config", "flag C(20)");
+        $sqlarray = $dict->AddColumnSQL(cms_db_prefix() . "module_mlecms_config", "flag C(60)");
         $dict->ExecuteSQLArray($sqlarray);
         $current_version = "1.1";
         break;

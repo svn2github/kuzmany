@@ -39,11 +39,16 @@ define('MLE_SNIPPET', 'snippet_');
 define('MLE_BLOCK', 'block_');
 
 class MleCMS extends CGExtensions {
-    
-    public $alllangs = array("Afrikaans" => "af_ZA", "Български" => "bg_BG", "Català" => "ca_ES", "Česky" => "cs_CZ", "Dansk" => "da_DK", "Deutsch" => "de_DE", "Ελληνικα" => "el_GR", "English" => "en_US", "Español" => "es_ES", "Eesti" => "et_EE", "Euskara" => "eu_ES", "Suomi" => "fi_FI", "Français" => "fr_FR", "Magyar" => "hu_HU", "Bahasa Indonesia" => "id_ID", "Íslenska" => "is_IS", "Italiano" => "it_IT", "日本語" => "ja_JP", "Lietuvių" => "lt_LT", "Norsk bokmål" => "nb_NO", "Nederlands" => "nl_NL", "Polski" => "pl_PL", "Português Brasileiro" => "pt_BR", "Português" => "pt_PT", "Română" => "ro_RO", "Русский" => "ru_RU", "Slovenčina" => "sk_SK", "српски Srpski" => "sr_YU", "Svenska" => "sv_SE", "Türkçe" => "tr_TR", "简体中文" => "zh_CN", "繁體中文" => "zh_TW");
+
+    public $alllangs = array(
+        "Afrikaans" => "af_ZA", "Български" => "bg_BG", "Català" => "ca_ES", "Česky" => "cs_CZ", "Dansk" => "da_DK", "Deutsch" => "de_DE", "Ελληνικα" => "el_GR", "English" => "en_US",
+        "Español" => "es_ES", "Eesti" => "et_EE", "Euskara" => "eu_ES", "Esperanto" => "eo_UY", "Suomi" => "fi_FI", "Français" => "fr_FR", "Magyar" => "hu_HU", "Bahasa Indonesia" => "id_ID", "Íslenska" => "is_IS", "Italiano" => "it_IT", "Hebrew" => "iw_IL",
+        "日本語" => "ja_JP", "Lietuvių" => "lt_LT", "Mongolian" => "mn_MN", "Norsk bokmål" => "nb_NO", "Nederlands" => "nl_NL", "Polski" => "pl_PL", "Português Brasileiro" => "pt_BR",
+        "Português" => "pt_PT", "Romansh" => "rm_CH", "Română" => "ro_RO", "Русский" => "ru_RU", "Slovenčina" => "sk_SK", "Slovenia" => "sl_SI", "српски Srpski" => "sr_YU", "Svenska" => "sv_SE", "Türkçe" => "tr_TR", "简体中文" => "zh_CN", "繁體中文" => "zh_TW");
 
     function __construct() {
         parent::CMSModule();
+        //$this->AddEventHandler('Core', 'SmartyPreCompile', false);
     }
 
     function GetName() {
@@ -173,7 +178,7 @@ class MleCMS extends CGExtensions {
       --------------------------------------------------------- */
 
     function GetDependencies() {
-        return array('CGExtensions' => '1.22','GBFilePicker' => '1.2');
+        return array('CGExtensions' => '1.22', 'GBFilePicker' => '1.2');
     }
 
     /* ---------------------------------------------------------
@@ -237,7 +242,15 @@ class MleCMS extends CGExtensions {
         $this->SetParameterType('name', CLEAN_STRING);
     }
 
-    public function getLangsLocale(){
+    function DoEvent($originator, $eventname, &$params) {
+        global $gCms;
+
+        if ($originator == 'Core' && $eventname == 'SmartyPreCompile') {
+            // Main content
+        }
+    }
+
+    public function getLangsLocale() {
         return $this->alllangs;
     }
 

@@ -50,6 +50,8 @@ $this->CreatePermission('manage ' . MLE_BLOCK . 'mle', 'manage ' . MLE_BLOCK . '
 
 // preference
 $this->SetPreference('mle_hierarchy_switch',1);
+$this->SetPreference('mle_auto_redirect',0);
+$this->SetPreference('mle_id','{MleCMS action="get_root_alias"}');
 
 # Setup unlike template
 $fn = cms_join_path(dirname(__FILE__), 'templates', 'orig_mle_template.tpl');
@@ -58,7 +60,8 @@ if (file_exists($fn)) {
     $this->SetTemplate('mle_template', $template);
 }
 
-    
+  $this->AddEventHandler('Core', 'ContentPostRender', false);
+
 // put mention into the admin log
 $this->Audit(0, $this->Lang('friendlyname'), $this->Lang('installed', $this->GetVersion()));
 ?>

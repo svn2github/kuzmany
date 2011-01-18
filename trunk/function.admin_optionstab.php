@@ -27,11 +27,20 @@
 
 if (!isset($gCms)) exit;
 
+$auto_redirect_items = array();
+$auto_redirect_items[0] = $this->Lang('none');
+$auto_redirect_items[1] = $this->Lang('root_redirect');
+$auto_redirect_items[2] = $this->Lang('hierarchy_redirect');
+
 $smarty->assign('startform', $this->CreateFormStart($id, 'admin_optionstab_edit', $returnid,'get'));
 $smarty->assign('endform', $this->CreateFormEnd());
+
 $smarty->assign('submit', $this->CreateInputSubmit($id, 'optionssubmitbutton', $this->Lang('submit')));
+$this->smarty->assign('mle_id', $this->CreateInputText($id, 'mle_id', $this->GetPreference('mle_id')));
+$this->smarty->assign('mle_auto_redirect',$this->CreateInputDropdown($id, 'mle_auto_redirect', array_flip($auto_redirect_items),-1,$this->GetPreference('mle_auto_redirect')));
 $this->smarty->assign('mle_hierarchy_switch', $this->CreateInputYesNoDropdown($id,  'mle_hierarchy_switch',$this->GetPreference('mle_hierarchy_switch')));
-$this->smarty->assign('mle_id', $this->CreateTextArea(false,$id, $this->GetTemplate('mle_template'), 'mle_template'));
+$this->smarty->assign('mle_template', $this->CreateTextArea(false,$id, $this->GetTemplate('mle_template'), 'mle_template'));
+
 
 // Display the populated template
 echo $this->ProcessTemplate('adminprefs.tpl');

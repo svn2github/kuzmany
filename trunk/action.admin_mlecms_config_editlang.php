@@ -28,7 +28,9 @@
 
 if (!isset($gCms))
     exit;
-global $hls, $hl;
+
+$db = cmsms()->GetDb();
+$config = cmsms()->GetConfig();
 
 if (!$this->CheckAccess()) {
     return $this->DisplayErrorPage($id, $params, $returnid, $this->Lang('accessdenied'));
@@ -42,11 +44,6 @@ $compid = '';
 if (isset($params['compid'])) {
     $compid = (int) $params['compid'];
 }
-
-$db = &$gCms->GetDb();
-$config = & $gCms->GetConfig();
-
-global $hl, $hls;
 
 $name = '';
 if (isset($params['name'])) {

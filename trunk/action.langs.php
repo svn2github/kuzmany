@@ -28,24 +28,24 @@
 if (!isset($gCms))
     exit;
 
-if($this->GetPreference('mle_hierarchy_switch')){
+if ($this->GetPreference('mle_hierarchy_switch')) {
 // get hierarchy lang switch
-$smarty = cmsms()->GetSmarty();
-$friendly_position = $smarty->get_template_vars('friendly_position');
-$friendly_position_array = explode(".", $friendly_position);
-unset($friendly_position_array[0]);
-$hierarchy_array = array();
-foreach($friendly_position_array as $one){
-$hierarchy_array[] = str_pad($one, 5, '0', STR_PAD_LEFT); 
-}
-$new_friendly_position = (count($hierarchy_array)?'.':'').implode(".", $hierarchy_array);
-$query = 'SELECT mle.*,content_hierchy.content_alias as alias FROM ' . cms_db_prefix() . 'module_mlecms_config mle
+    $smarty = cmsms()->GetSmarty();
+    $friendly_position = $smarty->get_template_vars('friendly_position');
+    $friendly_position_array = explode(".", $friendly_position);
+    unset($friendly_position_array[0]);
+    $hierarchy_array = array();
+    foreach ($friendly_position_array as $one) {
+        $hierarchy_array[] = str_pad($one, 5, '0', STR_PAD_LEFT);
+    }
+    $new_friendly_position = (count($hierarchy_array) ? '.' : '') . implode(".", $hierarchy_array);
+    $query = 'SELECT mle.*,content_hierchy.content_alias as alias FROM ' . cms_db_prefix() . 'module_mlecms_config mle
 INNER JOIN ' . cms_db_prefix() . 'content  content ON content.content_alias = mle.alias
 LEFT JOIN ' . cms_db_prefix() . 'content  content_hierchy ON (content_hierchy.hierarchy = CONCAT(content.hierarchy,?))
-ORDER BY mle.sort ASC' ;
-$langs = $db->GetAll($query,array($new_friendly_position));
-}else{
-$langs = $this->getLangs();
+ORDER BY mle.sort ASC';
+    $langs = $db->GetAll($query, array($new_friendly_position));
+} else {
+    $langs = $this->getLangs();
 }
 
 

@@ -60,6 +60,8 @@ if (!$this->CheckPermission('Modify Site Preferences')) {
     $this->RedirectToTab($id);
 }
 
+$this->SetPreference('mle_id',$params['mle_id']);
+$this->SetPreference('mle_auto_redirect',$params['mle_auto_redirect']);
 $this->SetPreference('mle_hierarchy_switch',$params['mle_hierarchy_switch']);
 $this->SetTemplate('mle_template',$params['mle_template']);
 

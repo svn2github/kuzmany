@@ -1,6 +1,18 @@
 {$startform}
 <fieldset>
     <legend>{$mod->Lang('options')}</legend>
+        <div class="pageoverflow">
+        <p class="pagetext">{$mod->Lang('mle_id')}:</p>
+        <p class="pageinput">
+                  {$mle_id}
+        </p>
+    </div>
+    <div class="pageoverflow">
+        <p class="pagetext">{$mod->Lang('mle_auto_redirect')}:</p>
+        <p class="pageinput">
+                  {$mle_auto_redirect}
+        </p>
+    </div>
     <div class="pageoverflow">
         <p class="pagetext">{$mod->Lang('mle_hierarchy_switch')}:</p>
         <p class="pageinput">
@@ -10,7 +22,7 @@
     <div class="pageoverflow">
         <p class="pagetext">{$mod->Lang('mle_template')}:</p>
         <p class="pageinput">
-                  {$mle_id}
+                  {$mle_template}
         </p>
     </div>
    </fieldset>

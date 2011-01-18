@@ -39,6 +39,12 @@ switch ($current_version) {
         $current_version = "1.1";
         break;
     case "1.1":
+        $this->AddEventHandler('Core','ContentPostRender',false);
+        $this->SetPreference('mle_auto_redirect',0);
+        $this->SetPreference('mle_id','{MleCMS action="get_root_alias"}');
+        $current_version = "1.2";
+        break;
+    case "1.2":
         break;
 }
 

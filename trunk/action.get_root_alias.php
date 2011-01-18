@@ -27,18 +27,5 @@
 #-------------------------------------------------------------------------
 if (!isset($gCms))
     exit;
-
-$alias = $this->ProcessTemplateFromData($this->GetPreference('mle_id'));
-if(!$alias) $alias = $this->get_root_alias();
-
-if (!$alias)
-    return;
-
-$db = & $this->GetDb();
-$query = 'SELECT * FROM ' . cms_db_prefix() . 'module_mlecms_config  WHERE alias = ?';
-$lang = $db->GetRow($query, array($alias));
-if (!$lang)
-    return;
-$smarty->assign('lang_parent', $lang["alias"]);
-$smarty->assign('lang_locale', $lang["locale"]);
+echo  $this->get_root_alias();
 ?>

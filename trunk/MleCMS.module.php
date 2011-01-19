@@ -250,7 +250,6 @@ class MleCMS extends CGExtensions {
 
             $contentops = $gCms->GetContentOperations();
             $smarty = $gCms->GetSmarty();
-
             // set cookie
             $pu_root_url = parse_url($config['root_url']);
             $pu_root_url['path'] = (empty($pu_root_url['path'])) ? '/' : $pu_root_url['path'];

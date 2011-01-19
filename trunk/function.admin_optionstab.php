@@ -36,7 +36,7 @@ $smarty->assign('startform', $this->CreateFormStart($id, 'admin_optionstab_edit'
 $smarty->assign('endform', $this->CreateFormEnd());
 
 $smarty->assign('submit', $this->CreateInputSubmit($id, 'optionssubmitbutton', $this->Lang('submit')));
-$this->smarty->assign('mle_id', $this->CreateInputText($id, 'mle_id', $this->GetPreference('mle_id')));
+$this->smarty->assign('mle_id', $this->CreateInputText($id, 'mle_id', $this->GetPreference('mle_id'),55,255));
 $this->smarty->assign('mle_auto_redirect',$this->CreateInputDropdown($id, 'mle_auto_redirect', array_flip($auto_redirect_items),-1,$this->GetPreference('mle_auto_redirect')));
 $this->smarty->assign('mle_hierarchy_switch', $this->CreateInputYesNoDropdown($id,  'mle_hierarchy_switch',$this->GetPreference('mle_hierarchy_switch')));
 $this->smarty->assign('mle_template', $this->CreateTextArea(false,$id, $this->GetTemplate('mle_template'), 'mle_template'));

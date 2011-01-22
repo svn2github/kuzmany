@@ -54,38 +54,21 @@ $lang['none'] = 'None';
 $lang['root_redirect'] = 'Redirect in the root directory';
 $lang['hierarchy_redirect'] = 'Redirect on each level of hierarchy';
 
+// Translator
+$lang['mle_translator'] = 'Translator';
 
 $lang['help_name'] = 'snippet or block name';
 
 
 $lang['changelog'] = '<ul>
-<li>Version 1 - january 2011 Initial Release.</li>
+<li>Version 1.3 - january 2011 - new millestone - Mle Translator</li>
+<li>Version 1.2 - january 2011 - new millestone - auto redirection</li>
+<li>Version 1.1 - january 2011 - small update</li>
+<li>Version 1 - january 2011 - Initial Release.</li>
 </ul>';
 $lang['help'] = '<h3>What Does This Do?</h3>
 <p>This module add multilanguage solution to your CMS Made Simple.</p>
 <h3>How Do I Use It</h3>
-
-    <p>1. Create Page structure - each lanuage have own page structure. Root alias is identificatior </p>
-    <p>2. Configure your MleCMS module in admin area</p>
-    <p>3. Put to your template</p>
-    <p>
-        Init action
-        <br />
-        {MleCMS action="init"}
-    </p>
-    <p>Mle language switch
-        <br />
-        {MleCMS action="langs"} 
-    </p>
-
-    <p>4. Use MLE blocks and snippets in module</p>
-    <p>5. Example usage MLE modules</p>
-    <p>Add  lang=$lang_locale param to each your module in templates. Examples:</p>
-    <p>
-        <code>{menu loadprops=0 template=\'cssmenu_ulshadow.tpl\' childrenof=$lang_parent lang=$lang_locale}</code><br >
-        <code>{news number=\'3\' category=$lang_parent lang=$lang_locale}</code><br >
-        <code>{search search_method="post" lang=$lang_locale}</code><br >
-        <code>{breadcrumbs starttext=\'You are here\' root=\'Home\' delimiter=\'&raquo;\'  lang=$lang_locale}</code>
-    </p>
+<p>Check installation guide <a href="../modules/MleCMS/installation-guide.html">Installation Guide</a></p>
 ';
 ?>

@@ -29,7 +29,6 @@
 if (!isset($gCms))
     exit;
 
-
 $query = "SELECT * FROM " . cms_db_prefix() . "module_mlecms_config ORDER BY sort ASC";
 $dbresult = $db->Execute($query);
 

@@ -38,6 +38,7 @@ require_once($cgextensions);
 
 define('MLE_SNIPPET', 'snippet_');
 define('MLE_BLOCK', 'block_');
+define('MLE_CACHE_PREFIX', 'mlecms_');
 
 class MleCMS extends CGExtensions
 {
@@ -50,8 +51,6 @@ class MleCMS extends CGExtensions
     function __construct()
     {
         parent::CMSModule();
-
-        //Translation::checkKeysFile();
 
         $smarty = & cmsms()->GetSmarty();
         $smarty->register_function('translate', array(&$this, 'smarty_translator'));
@@ -74,7 +73,7 @@ class MleCMS extends CGExtensions
 
     function GetVersion()
     {
-        return '1.3';
+        return '1.4';
     }
 
     function GetHelp()
@@ -204,7 +203,7 @@ class MleCMS extends CGExtensions
 
     function GetDependencies()
     {
-        return array('CGExtensions' => '1.22', 'GBFilePicker' => '1.2');
+        return array('CGExtensions' => '1.22', 'GBFilePicker' => '1.2', 'ContentCache' => '1.0');
     }
 
     /* ---------------------------------------------------------

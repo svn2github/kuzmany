@@ -90,8 +90,10 @@ if (isset($params['submit'])) {
     }
 
     $errors = array();
-
+    // send event
+    @$this->SendEvent('LangEdited', array('compid'=>$cid));
     $this->SetMessage($this->Lang('info_success'));
+    //redirect
     $this->RedirectToTab($id, "mle_config");
 }
 
@@ -126,6 +128,7 @@ if ($gbfp) {
 
 $this->smarty->assign('submit', $this->CreateInputSubmit($id, 'submit', $this->lang('submit')));
 $this->smarty->assign('cancel', $this->CreateInputSubmit($id, 'cancel', $this->lang('cancel')));
+
 
 echo $this->ProcessTemplate('editlang.tpl');
 ?>

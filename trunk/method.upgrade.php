@@ -37,15 +37,16 @@ switch ($current_version) {
         $sqlarray = $dict->AddColumnSQL(cms_db_prefix() . "module_mlecms_config", "flag C(60)");
         $dict->ExecuteSQLArray($sqlarray);
         $current_version = "1.1";
-        break;
     case "1.1":
-        $this->AddEventHandler('Core','ContentPostRender',false);
-        $this->SetPreference('mle_auto_redirect',0);
-        $this->SetPreference('mle_id','{MleCMS action="get_root_alias"}');
+        $this->AddEventHandler('Core', 'ContentPostRender', false);
+        $this->SetPreference('mle_auto_redirect', 0);
+        $this->SetPreference('mle_id', '{MleCMS action="get_root_alias"}');
         $current_version = "1.2";
-        break;
     case "1.2":
-        break;
+    case "1.3":
+        $this->CreateEvent('LangEdited');
+        $this->CreateEvent('BlockEdited');
+        $current_version = "1.4";
 }
 
 // put mention into the admin log

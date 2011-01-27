@@ -30,7 +30,7 @@ class Translation {
         self::$languages = $langs;
     }
 
-    protected static function getFolderLocation() {
+    public static function getFolderLocation() {
         // set cms uploads/MleCMS path
         if (!self::$folder) {
             self::setFolderLocation();
@@ -97,6 +97,14 @@ class Translation {
 
     public static function checkKeysFile() {
         self::checkFile(self::$defFile . '.xml');
+    }
+
+    /**
+     *  get file location
+     * @return string
+     */
+    public static function getFileLocation(){
+        return self::getFolderLocation() . '/' . self::$defFile . '.xml';
     }
 
     public function getValue(&$params) {

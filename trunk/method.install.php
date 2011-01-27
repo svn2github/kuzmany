@@ -62,6 +62,9 @@ if (file_exists($fn)) {
 
   $this->AddEventHandler('Core', 'ContentPostRender', false);
 
+  $this->CreateEvent('LangEdited');
+  $this->CreateEvent('BlockEdited');
+
 // put mention into the admin log
 $this->Audit(0, $this->Lang('friendlyname'), $this->Lang('installed', $this->GetVersion()));
 ?>

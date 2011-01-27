@@ -42,7 +42,7 @@ if (isset($params['name']) && $params['name'] != '') {
     if (isset($params['submitbutton']) || isset($params['applybutton'])) {
         // set all langaugages
         $this->SetTemplate($params["prefix"] . $params['name'], json_encode($params["source"]));
-
+        @$this->SendEvent('BlockEdited', array('name'=>$params["prefix"] . $params['name']));
         if (isset($params['submitbutton'])) {
             $this->SetMessage($this->Lang('info_success'));
             $this->RedirectToTab($id, "manage_" . $params["prefix"] . "mle");

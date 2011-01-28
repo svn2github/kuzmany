@@ -1,4 +1,5 @@
 <?php
+
 # Module: Multilanguage CMS
 # Zdeno Kuzmany (zdeno@kuzmany.biz) kuzmany.biz
 #
@@ -39,7 +40,7 @@ $flds = "
 	modified_date " . CMS_ADODB_DT . ",
 	created_date " . CMS_ADODB_DT . "
 	";
-$dict = NewDataDictionary( $db );
+$dict = NewDataDictionary($db);
 $sqlarray = $dict->CreateTableSQL(cms_db_prefix() . "module_mlecms_config", $flds, $taboptarray);
 $dict->ExecuteSQLArray($sqlarray);
 
@@ -49,9 +50,10 @@ $this->CreatePermission('manage ' . MLE_SNIPPET . 'mle', 'manage ' . MLE_SNIPPET
 $this->CreatePermission('manage ' . MLE_BLOCK . 'mle', 'manage ' . MLE_BLOCK . 'mle');
 
 // preference
-$this->SetPreference('mle_hierarchy_switch',1);
-$this->SetPreference('mle_auto_redirect',0);
-$this->SetPreference('mle_id','{MleCMS action="get_root_alias"}');
+$this->SetPreference('mle_hierarchy_switch', 1);
+$this->SetPreference('mle_auto_redirect', 0);
+$this->SetPreference('mle_id', '{MleCMS action="get_root_alias"}');
+$this->SetPreference('mle_search_restriction', 1);
 
 # Setup unlike template
 $fn = cms_join_path(dirname(__FILE__), 'templates', 'orig_mle_template.tpl');
@@ -60,10 +62,10 @@ if (file_exists($fn)) {
     $this->SetTemplate('mle_template', $template);
 }
 
-  $this->AddEventHandler('Core', 'ContentPostRender', false);
+$this->RegisterEvents();
 
-  $this->CreateEvent('LangEdited');
-  $this->CreateEvent('BlockEdited');
+$this->CreateEvent('LangEdited');
+$this->CreateEvent('BlockEdited');
 
 // put mention into the admin log
 $this->Audit(0, $this->Lang('friendlyname'), $this->Lang('installed', $this->GetVersion()));

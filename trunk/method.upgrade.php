@@ -38,7 +38,7 @@ switch ($current_version) {
         $dict->ExecuteSQLArray($sqlarray);
         $current_version = "1.1";
     case "1.1":
-        $this->AddEventHandler('Core', 'ContentPostRender', false);
+        $this->RegisterEvents();
         $this->SetPreference('mle_auto_redirect', 0);
         $this->SetPreference('mle_id', '{MleCMS action="get_root_alias"}');
         $current_version = "1.2";
@@ -47,6 +47,10 @@ switch ($current_version) {
         $this->CreateEvent('LangEdited');
         $this->CreateEvent('BlockEdited');
         $current_version = "1.4";
+    case "1.4":
+        $this->RegisterEvents();
+        $this->SetPreference('mle_search_restriction', 1);
+        $current_version = "1.5";
 }
 
 // put mention into the admin log

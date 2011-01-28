@@ -46,15 +46,14 @@ class Translation {
     public static function setFolderLocation($folder = '') {
 
         // set folder
-        if($folder) {
+        if ($folder) {
             self::$folder = $folder;
             return;
         }
-
         // default folder
         $config = cmsms()->GetConfig();
         $module = cge_utils::get_module('MleCMS');
-        self::$folder = cms_join_path($config["uploads_path"],$module->GetName());
+        self::$folder = cms_join_path($config["uploads_path"], $module->GetName());
     }
 
     protected static function getFileContent($filename) {
@@ -103,7 +102,7 @@ class Translation {
      *  get file location
      * @return string
      */
-    public static function getFileLocation(){
+    public static function getFileLocation() {
         return self::getFolderLocation() . '/' . self::$defFile . '.xml';
     }
 
@@ -138,7 +137,7 @@ class Translation {
         $key = $post['editKey'];
         $value = $post['editValue'];
 
-        $filePath =  self::getFolderLocation() . '/' . $editLang . '.xml';
+        $filePath = self::getFolderLocation() . '/' . $editLang . '.xml';
 
         self::checkFile($editLang . '.xml');
 
@@ -177,7 +176,7 @@ class Translation {
 
         /** check if store folder exist */
         if (!file_exists($storePath))
-            if (!cge_dir::mkdirr ($storePath))
+            if (!cge_dir::mkdirr($storePath))
                 throw new Exception(__CLASS__ . ' :: Cannot create store folder');
 
         if (!file_exists($storePath . DIR_SEP . $filename))

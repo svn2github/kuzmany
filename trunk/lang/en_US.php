@@ -49,6 +49,7 @@ $lang['options'] = 'Options';
 $lang['mle_id'] = 'Mle identifier';
 $lang['mle_template'] = 'Multilang template';
 $lang['mle_hierarchy_switch'] = 'Hierarchy switch';
+$lang['mle_search_restriction'] = 'Search MLE restriction (only for page)';
 $lang['mle_auto_redirect'] = 'Language detection';
 $lang['none'] = 'None';
 $lang['root_redirect'] = 'Redirect in the root directory';

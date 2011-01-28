@@ -20,6 +20,12 @@
         </p>
     </div>
     <div class="pageoverflow">
+        <p class="pagetext">{$mod->Lang('mle_search_restriction')}:</p>
+        <p class="pageinput">
+                  {$mle_search_restriction}
+        </p>
+    </div>
+    <div class="pageoverflow">
         <p class="pagetext">{$mod->Lang('mle_template')}:</p>
         <p class="pageinput">
                   {$mle_template}

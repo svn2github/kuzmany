@@ -39,7 +39,12 @@ if ($this->GetPreference('mle_hierarchy_switch')) {
         $hierarchy_array[] = str_pad($one, 5, '0', STR_PAD_LEFT);
     }
     $new_friendly_position = (count($hierarchy_array) ? '.' : '') . implode(".", $hierarchy_array);
-    $query = 'SELECT mle.*,content_hierchy.content_alias as alias FROM ' . cms_db_prefix() . 'module_mlecms_config mle
+    $query = 'SELECT 
+        mle.id,
+        mle.name,
+        mle.locale,
+        mle.flag,
+        content_hierchy.content_alias as alias FROM ' . cms_db_prefix() . 'module_mlecms_config mle
 INNER JOIN ' . cms_db_prefix() . 'content  content ON content.content_alias = mle.alias
 LEFT JOIN ' . cms_db_prefix() . 'content  content_hierchy ON (content_hierchy.hierarchy = CONCAT(content.hierarchy,?))
 ORDER BY mle.sort ASC';

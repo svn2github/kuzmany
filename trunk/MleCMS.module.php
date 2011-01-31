@@ -37,7 +37,6 @@ require_once($cgextensions);
 
 define('MLE_SNIPPET', 'snippet_');
 define('MLE_BLOCK', 'block_');
-define('MLE_CACHE_PREFIX', 'mlecms_');
 
 class MleCMS extends CGExtensions {
 

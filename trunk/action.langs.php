@@ -53,7 +53,6 @@ ORDER BY mle.sort ASC';
     $langs = $this->getLangs();
 }
 
-
 $smarty->assign_by_ref('langs', cge_array::to_object($langs));
 echo $this->ProcessTemplateFromDatabase('mle_template');
 ?>

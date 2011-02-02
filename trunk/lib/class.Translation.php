@@ -6,7 +6,8 @@
  * @author malware
  * @package Translator
  */
-class Translation {
+class Translation
+{
 
     /** possible languages to translate */
     protected static $languages = null;
@@ -18,21 +19,26 @@ class Translation {
     public static $defFile = 'keys';
 
     /** static class */
-    private function __construct() {
+    private function __construct()
+    {
 
     }
 
-    public static function getLanguages() {
+    public static function getLanguages()
+    {
         return self::$languages;
     }
 
-    public static function setLanguages(array $langs) {
+    public static function setLanguages(array $langs)
+    {
         self::$languages = $langs;
     }
 
-    public static function getFolderLocation() {
+    public static function getFolderLocation()
+    {
         // set cms uploads/MleCMS path
-        if (!self::$folder) {
+        if (!self::$folder)
+        {
             self::setFolderLocation();
         }
 
@@ -43,10 +49,11 @@ class Translation {
         return self::$folder;
     }
 
-    public static function setFolderLocation($folder = '') {
-
+    public static function setFolderLocation($folder = '')
+    {
         // set folder
-        if ($folder) {
+        if ($folder)
+        {
             self::$folder = $folder;
             return;
         }
@@ -56,7 +63,43 @@ class Translation {
         self::$folder = cms_join_path($config["uploads_path"], $module->GetName());
     }
 
-    protected static function getFileContent($filename) {
+    public static function remove($key)
+    {
+        if ($key)
+        {
+            /** remove key from keys file */
+            $keysFile = self::getFolderLocation() . '/' . self::$defFile . '.xml';
+            self::removeKeyFromFile($keysFile, $key);
+
+            /** remove key from all lang files */
+            foreach(self::getLanguages() as $language)
+            {
+                $langFile = self::getFolderLocation() . '/' . $language['locale'] . '.xml';
+                self::removeKeyFromFile($langFile, $key);
+            }
+
+            return true;
+
+        }
+
+        return false;
+    }
+
+    protected static function removeKeyFromFile($file, $key)
+    {
+        $xml = simplexml_load_file($file);
+        foreach ($xml->items[0]->item as $item)
+            if ((string) $item['key'] == $key)
+            {
+                $dom = dom_import_simplexml($item);
+                $dom->parentNode->removeChild($dom);
+            }
+
+        $xml->asXML($file);
+    }
+
+    protected static function getFileContent($filename)
+    {
         self::checkFile($filename);
 
         $filePath = self::getFolderLocation() . '/' . $filename;
@@ -75,14 +118,17 @@ class Translation {
         return $items;
     }
 
-    public static function getKeysTable() {
+    public static function getKeysTable()
+    {
         return self::getFileContent(self::$defFile . '.xml');
     }
 
-    public static function getContentTable() {
+    public static function getContentTable()
+    {
         $items['langs'] = self::getLanguages();
 
-        foreach (self::$languages as $lang) {
+        foreach (self::$languages as $lang)
+        {
             $filename = $lang['locale'] . '.xml';
             $items['xml'][$lang['locale']]['items'] = self::getFileContent($filename);
         }
@@ -90,11 +136,13 @@ class Translation {
         return $items;
     }
 
-    public static function getFromKeys() {
+    public static function getFromKeys()
+    {
         
     }
 
-    public static function checkKeysFile() {
+    public static function checkKeysFile()
+    {
         self::checkFile(self::$defFile . '.xml');
     }
 
@@ -102,11 +150,13 @@ class Translation {
      *  get file location
      * @return string
      */
-    public static function getFileLocation() {
+    public static function getFileLocation()
+    {
         return self::getFolderLocation() . '/' . self::$defFile . '.xml';
     }
 
-    public function getValue(&$params) {
+    public function getValue(&$params)
+    {
         $editLang = self::$defFile;
         $key = $params['editKey'];
 
@@ -118,12 +168,14 @@ class Translation {
         $xml->load($filePath);
 
         $xpath = new DOMXPath($xml);
-
         $result = $xpath->query('//root/items/item[@key="' . $key . '"]');
 
-        if ($result->item(0) != NULL) {
+        if ($result->item(0) != NULL)
+        {
             return ($result->item(0)->nodeValue != "") ? $result->item(0)->nodeValue : $key;
-        } else {
+        }
+        else
+        {
             $params['editLang'] = & $editLang;
             $params['editValue'] = & $key;
             self::update($params);
@@ -132,7 +184,8 @@ class Translation {
         }
     }
 
-    public static function update(&$post) {
+    public static function update(&$post)
+    {
         $editLang = $post['editLang'];
         $key = $post['editKey'];
         $value = $post['editValue'];
@@ -148,11 +201,14 @@ class Translation {
 
         $result = $xpath->query('//root/items/item[@key="' . $key . '"]');
 
-        if ($result->item(0) != NULL) {
+        if ($result->item(0) != NULL)
+        {
             $result->item(0)->nodeValue = "";
             $cdata = $xml->createCDATASection($value);
             $result->item(0)->appendChild($cdata);
-        } else {
+        }
+        else
+        {
             $root = $xml->getElementsByTagName('items')->item(0);
 
             $cdata = $xml->createCDATASection($value);
@@ -167,7 +223,8 @@ class Translation {
         $xml->save($filePath);
     }
 
-    protected static function checkFile($filename) {
+    protected static function checkFile($filename)
+    {
         /** check filename */
         if (!$filename)
             throw new Exception(__CLASS__ . ' :: Filename is empty');

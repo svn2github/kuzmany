@@ -1,6 +1,6 @@
 {literal}
     <style type="text/css">
-        #trans input { width: 99%; }
+        #trans input { width: 100%; }
         #trans span { display: block; cursor: pointer; }
     </style>
 {/literal}
@@ -15,6 +15,8 @@
         {foreach from=$pLangs item=pLang}
             <th><span>{$pLang.name}</span></th>
         {/foreach}
+
+            <th class="pageicon"></th>
     </tr>
 
     <br />
@@ -33,6 +35,7 @@
                 </td>
 
             {/foreach}
+            <td><a class='del' href="#">{$deleteIcon}</a></td>
         </tr>
     {/foreach}
 
@@ -42,7 +45,7 @@
 <script type="text/javascript">
 
     $(window).load(function(){
-       $('#trans .keys td').css('width', $('#trans').width() / $('#trans th').size());
+       //$('#trans .keys td').css('width', $('#trans').width() / $('#trans th').size());
     });
 
     $(document).ready(function(){
@@ -52,6 +55,38 @@
             $(this).siblings('input').val($.trim($(this).text())).focus().select();
         });
 
+        /** remove events */
+        $('#trans .del').bind('click', function(event){
+            var confirmBox = window.confirm('Are you sure?');
+            if (confirmBox){
+                $.myvars = {};
+                $.myvars.thisObj = $(this);
+                event.preventDefault();
+                var delKey = $(this).parents('tr').attr('id');
+
+                $.ajax({
+                    type: 'POST',
+                    url: '{/literal}{$ajaxLink}{literal}',
+                    dataType: 'json',
+                    data: ({
+                        'delKey': delKey,
+                        'sp_': '{/literal}{$smarty.get.sp_}{literal}',
+                        'module': '{/literal}{$smarty.get.module}{literal}',
+                        'showtemplate': 'false',
+                        'aAction': 'remove'
+                    }),
+                    complete: function(){
+                        $.myvars.thisObj.parents('tr').find('td').css('background-color','yellow').parents('tr').fadeOut('slow', function(){
+                            $(this).remove();
+                            $('#trans tr').removeClass('row2');
+                            $('#trans tr:even').addClass('row2');
+                        });
+                    }
+                });
+            } // end confirmBox
+        })
+
+        /** update events */
         $('#trans tr td input').live('blur', function(){
             var $this = this;
             $.ajax({
@@ -64,7 +99,8 @@
                     'editLang': $(this).parents('td').attr('data-lang'),
                     'sp_': '{/literal}{$smarty.get.sp_}{literal}',
                     'module': '{/literal}{$smarty.get.module}{literal}',
-                    'showtemplate': 'false'
+                    'showtemplate': 'false',
+                    'aAction': 'update'
                 }),
                 complete: function(){
                     $($this).hide();

@@ -66,7 +66,7 @@ class MleCMS extends CGExtensions {
     }
 
     function GetVersion() {
-        return '1.5';
+        return '1.6';
     }
 
     function GetHelp() {
@@ -112,16 +112,8 @@ class MleCMS extends CGExtensions {
         return $this->CheckPermission($perm);
     }
 
-    function DisplayErrorPage($id, &$params, $return_id, $message='') {
-        $this->smarty->assign('title_error', $this->Lang('error'));
-        $this->smarty->assign_by_ref('message', $message);
-
-        // Display the populated template
-        echo $this->ProcessTemplate('error.tpl');
-    }
-
     function GetDependencies() {
-        return array('CGExtensions' => '1.22', 'GBFilePicker' => '1.2', 'ContentCache' => '1.0');
+        return array('CGExtensions' => '1.23', 'GBFilePicker' => '1.2', 'ContentCache' => '1.2');
     }
 
     function MinimumCMSVersion() {
@@ -146,6 +138,9 @@ class MleCMS extends CGExtensions {
 
         $this->CreateParameter('name', '', $this->Lang('help_name'));
         $this->SetParameterType('name', CLEAN_STRING);
+
+        $this->CreateParameter('template', '', $this->Lang('help_template'));
+        $this->SetParameterType('template', CLEAN_STRING);
     }
 
     function RegisterEvents() {

@@ -54,5 +54,11 @@ ORDER BY mle.sort ASC';
 }
 
 $smarty->assign_by_ref('langs', cge_array::to_object($langs));
-echo $this->ProcessTemplateFromDatabase('mle_template');
+
+// unlike template
+$template = 'mle_template' . $this->GetPreference('current_mle_template');
+if (isset($params['template'])) {
+    $template = 'mle_template' . $params['template'];
+}
+echo $this->ProcessTemplateFromDatabase($template);
 ?>

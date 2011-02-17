@@ -27,8 +27,8 @@
 
 if (!isset($gCms)) exit;
 
-if (!$this->CheckAccess("")) {
-    return $this->DisplayErrorPage($id, $params, $returnid, $this->Lang('accessdenied'));
+if (!$this->CheckAccess()) {
+    echo $this->ShowErrors($this->Lang('accessdenied')); return;
 }
 
 if (!isset($params['compid'])) {

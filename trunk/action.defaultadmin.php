@@ -31,6 +31,16 @@
 if (!isset($gCms))
     exit;
 
+if(is_array($this->GetDependencies())){
+    foreach($this->GetDependencies() as $module=>$module_version){
+        if(!cge_utils::get_module($module,$module_version))     {
+            echo $this->ShowErrors($this->Lang('module_missing',$module.' '.$module_version));
+            return;
+        }
+    }
+}
+
+
 ## TAB HEADERS from CGE
 echo $this->StartTabHeaders();
 if ($this->CheckAccess())

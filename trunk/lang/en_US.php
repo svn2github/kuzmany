@@ -11,6 +11,7 @@ $lang['upgraded'] = 'Module upgraded to version %s.';
 $lang['moddescription'] = 'This module add multilanguage solutions to you CMS Made Simple';
 $lang['info_success'] = 'Succes';
 $lang['optionsupdated'] = 'Options updated';
+$lang['module_missing'] = 'Please, instal module %s';
 
 $lang['error'] = 'Error!';
 $land['admin_title'] = 'Admin Panel';
@@ -48,6 +49,7 @@ $lang['manage_blocks'] = 'Blocks';
 $lang['options'] = 'Options';
 $lang['mle_id'] = 'Mle identifier';
 $lang['mle_template'] = 'Multilang template';
+$lang['addedit_mle_template'] = 'Add/Edit multilang template';
 $lang['mle_hierarchy_switch'] = 'Hierarchy switch';
 $lang['mle_search_restriction'] = 'Search MLE restriction (only for page)';
 $lang['mle_auto_redirect'] = 'Language detection';
@@ -59,6 +61,7 @@ $lang['hierarchy_redirect'] = 'Redirect on each level of hierarchy';
 $lang['mle_translator'] = 'Translator';
 
 $lang['help_name'] = 'snippet or block name';
+$lang['help_template'] = 'template (default Flags)';
 
 
 $lang['changelog'] = '<ul>

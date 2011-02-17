@@ -27,9 +27,9 @@
     </div>
     <div class="pageoverflow">
         <p class="pagetext">{$mod->Lang('mle_template')}:</p>
-        <p class="pageinput">
+        <div class="pageinput">
                   {$mle_template}
-        </p>
+        </div>
     </div>
    </fieldset>
 <div class="pageoverflow">

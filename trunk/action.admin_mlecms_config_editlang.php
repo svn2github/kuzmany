@@ -33,7 +33,7 @@ $db = cmsms()->GetDb();
 $config = cmsms()->GetConfig();
 
 if (!$this->CheckAccess()) {
-    return $this->DisplayErrorPage($id, $params, $returnid, $this->Lang('accessdenied'));
+    echo $this->ShowErrors($this->Lang('accessdenied')); return;
 }
 
 if (isset($params['cancel'])) {

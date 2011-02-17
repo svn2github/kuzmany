@@ -5,7 +5,7 @@ if (!isset($gCms))
 
 if (!$this->CheckAccess('manage translator_mle'))
 {
-    return $this->DisplayErrorPage($id, $params, $returnid, $this->Lang('accessdenied'));
+    echo $this->ShowErrors($this->Lang('accessdenied')); return;
 }
 
 $config = cmsms()->getConfig();

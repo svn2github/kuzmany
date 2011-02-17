@@ -28,7 +28,7 @@
 if (!isset($gCms))
     exit;
 if (!$this->CheckAccess('manage ' . $params["prefix"] . 'mle')) {
-    return $this->DisplayErrorPage($id, $params, $returnid, $this->Lang('accessdenied'));
+    echo $this->ShowErrors($this->Lang('accessdenied')); return;
 }
 
 

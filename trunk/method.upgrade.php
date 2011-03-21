@@ -72,10 +72,11 @@ switch ($current_version) {
             $template = file_get_contents($fn);
             $this->SetTemplate('mle_templateSeparator', $template);
         }
-
-
         $this->DeleteTemplate('mle_template');
         $current_version = "1.6";
+     case "1.6":
+         $this->CreatePermission('manage translator_mle', 'manage translator_mle');
+         $current_version = "1.7";
 }
 
 // put mention into the admin log

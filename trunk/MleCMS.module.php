@@ -48,7 +48,6 @@ class MleCMS extends CGExtensions {
 
     function __construct() {
         parent::CMSModule();
-
         $smarty = & cmsms()->GetSmarty();
         $smarty->register_function('translate', array(&$this, 'smarty_translator'));
     }
@@ -93,6 +92,7 @@ class MleCMS extends CGExtensions {
         return ($this->CheckAccess()
         || $this->CheckAccess('manage ' . MLE_SNIPPET . 'mle')
         || $this->CheckAccess('manage ' . MLE_BLOCK . 'mle')
+        || $this->CheckAccess('manage translator_mle')
         );
     }
 

@@ -45,6 +45,7 @@ $sqlarray = $dict->CreateTableSQL(cms_db_prefix() . "module_mlecms_config", $fld
 $dict->ExecuteSQLArray($sqlarray);
 
 // permissions
+$this->CreatePermission('manage translator_mle', 'manage translator_mle');
 $this->CreatePermission('manage mle_cms', 'manage mle_cms');
 $this->CreatePermission('manage ' . MLE_SNIPPET . 'mle', 'manage ' . MLE_SNIPPET . 'mle');
 $this->CreatePermission('manage ' . MLE_BLOCK . 'mle', 'manage ' . MLE_BLOCK . 'mle');

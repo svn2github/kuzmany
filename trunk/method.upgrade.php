@@ -52,7 +52,8 @@ switch ($current_version) {
         $this->SetPreference('mle_search_restriction', 1);
         $current_version = "1.5";
     case "1.5":
-        # Setup notlike template
+        $this->SetPreference('mle_separator', '/');
+
         $fn = cms_join_path(dirname(__FILE__), 'templates', 'orig_mle_template.tpl');
         if (file_exists($fn)) {
             $template = file_get_contents($fn);
@@ -60,12 +61,19 @@ switch ($current_version) {
             $this->SetTemplate('mle_templateFlags', $this->GetTemplate('mle_template'));
             $this->SetPreference('current_mle_template', 'Flags');
         }
-        # Setup unlike template
         $fn = cms_join_path(dirname(__FILE__), 'templates', 'orig_mle_template_dropdown.tpl');
         if (file_exists($fn)) {
             $template = file_get_contents($fn);
             $this->SetTemplate('mle_templateDropdown', $template);
         }
+
+        $fn = cms_join_path(dirname(__FILE__), 'templates', 'orig_mle_template_separator.tpl');
+        if (file_exists($fn)) {
+            $template = file_get_contents($fn);
+            $this->SetTemplate('mle_templateSeparator', $template);
+        }
+
+
         $this->DeleteTemplate('mle_template');
         $current_version = "1.6";
 }

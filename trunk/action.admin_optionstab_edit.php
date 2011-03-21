@@ -61,10 +61,11 @@ if (!$this->CheckPermission('Modify Site Preferences')) {
 }
 
 $this->SetPreference('mle_id',$params['mle_id']);
+$this->SetPreference('mle_separator',$params['mle_separator']);
+
 $this->SetPreference('mle_auto_redirect',$params['mle_auto_redirect']);
 $this->SetPreference('mle_hierarchy_switch',$params['mle_hierarchy_switch']);
 $this->SetPreference('mle_search_restriction',$params['mle_search_restriction']);
-$this->SetTemplate('mle_template',$params['mle_template']);
 
 $this->SetMessage($this->Lang('optionsupdated'));
 

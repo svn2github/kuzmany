@@ -37,15 +37,12 @@ $smarty->assign('endform', $this->CreateFormEnd());
 
 $smarty->assign('submit', $this->CreateInputSubmit($id, 'optionssubmitbutton', $this->Lang('submit')));
 $this->smarty->assign('mle_id', $this->CreateInputText($id, 'mle_id', $this->GetPreference('mle_id'),55,255));
+$this->smarty->assign('mle_separator', $this->CreateInputText($id, 'mle_separator', $this->GetPreference('mle_separator'),50,50));
+
 $this->smarty->assign('mle_auto_redirect',$this->CreateInputDropdown($id, 'mle_auto_redirect', array_flip($auto_redirect_items),-1,$this->GetPreference('mle_auto_redirect')));
 $this->smarty->assign('mle_hierarchy_switch', $this->CreateInputYesNoDropdown($id,  'mle_hierarchy_switch',$this->GetPreference('mle_hierarchy_switch')));
 $this->smarty->assign('mle_search_restriction', $this->CreateInputYesNoDropdown($id,  'mle_search_restriction',$this->GetPreference('mle_search_restriction')));
 ##$this->smarty->assign('mle_template', $this->CreateTextArea(false,$id, $this->GetTemplate('mle_template'), 'mle_template'));
-$this->smarty->assign('mle_template', $this->ShowTemplateList($id,$returnid,'mle_template',
-			     'default_mle_template',
-			     'mle_template',
-			     'current_mle_template',
-                              $this->Lang('addedit_mle_template'),''));
 
 
 // Display the populated template

@@ -53,6 +53,7 @@ ORDER BY mle.sort ASC';
     $langs = $this->getLangs();
 }
 
+$smarty->assign_by_ref('mle_separator', $this->GetPreference('mle_separator'));
 $smarty->assign_by_ref('langs', cge_array::to_object($langs));
 
 // unlike template

@@ -53,9 +53,9 @@ $this->CreatePermission('manage ' . MLE_BLOCK . 'mle', 'manage ' . MLE_BLOCK . '
 $this->SetPreference('mle_hierarchy_switch', 1);
 $this->SetPreference('mle_auto_redirect', 0);
 $this->SetPreference('mle_id', '{MleCMS action="get_root_alias"}');
+$this->SetPreference('mle_separator', '/');
 $this->SetPreference('mle_search_restriction', 1);
 
-# Setup unlike template
 $fn = cms_join_path(dirname(__FILE__), 'templates', 'orig_mle_template.tpl');
 if (file_exists($fn)) {
     $template = file_get_contents($fn);
@@ -64,11 +64,15 @@ if (file_exists($fn)) {
     $this->SetPreference('current_mle_template', 'Flags');
 }
 
-# Setup unlike template
 $fn = cms_join_path(dirname(__FILE__), 'templates', 'orig_mle_template_dropdown.tpl');
 if (file_exists($fn)) {
     $template = file_get_contents($fn);
     $this->SetTemplate('mle_templateDropdown', $template);
+}
+$fn = cms_join_path(dirname(__FILE__), 'templates', 'orig_mle_template_separator.tpl');
+if (file_exists($fn)) {
+    $template = file_get_contents($fn);
+    $this->SetTemplate('mle_templateSeparator', $template);
 }
 
 $this->RegisterEvents();

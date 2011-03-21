@@ -123,7 +123,7 @@ $this->smarty->assign('locale', $this->CreateInputDropdown($id, 'locale', $this-
 
 $gbfp = cms_utils::get_module('GBFilePicker');
 if ($gbfp) {
-    $this->smarty->assign('flag', $gbfp->CreateFilePickerInput($gbfp, $id, 'flag', $flag, array('dir' => 'images', 'mode' => 'browser')));
+    $this->smarty->assign('flag', $gbfp->CreateFilePickerInput($gbfp, $id, 'flag', $flag, array('dir' => 'images')));
 }
 
 $this->smarty->assign('submit', $this->CreateInputSubmit($id, 'submit', $this->lang('submit')));

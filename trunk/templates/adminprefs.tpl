@@ -7,6 +7,12 @@
                   {$mle_id}
         </p>
     </div>
+        <div class="pageoverflow">
+        <p class="pagetext">{$mod->Lang('mle_separator')}:</p>
+        <p class="pageinput">
+                  {$mle_separator}
+        </p>
+    </div>
     <div class="pageoverflow">
         <p class="pagetext">{$mod->Lang('mle_auto_redirect')}:</p>
         <p class="pageinput">
@@ -25,12 +31,7 @@
                   {$mle_search_restriction}
         </p>
     </div>
-    <div class="pageoverflow">
-        <p class="pagetext">{$mod->Lang('mle_template')}:</p>
-        <div class="pageinput">
-                  {$mle_template}
-        </div>
-    </div>
+    
    </fieldset>
 <div class="pageoverflow">
     <p class="pagetext">&nbsp;</p>

@@ -48,6 +48,7 @@ $lang['manage_blocks'] = 'Blocks';
 // Options
 $lang['options'] = 'Options';
 $lang['mle_id'] = 'Mle identifier';
+$lang['mle_separator'] = 'Separator';
 $lang['mle_template'] = 'Multilang template';
 $lang['addedit_mle_template'] = 'Add/Edit multilang template';
 $lang['mle_hierarchy_switch'] = 'Hierarchy switch';
@@ -73,6 +74,6 @@ $lang['changelog'] = '<ul>
 $lang['help'] = '<h3>What Does This Do?</h3>
 <p>This module add multilanguage solution to your CMS Made Simple.</p>
 <h3>How Do I Use It</h3>
-<p>Check installation guide <a href="../modules/MleCMS/installation-guide.html">Installation Guide</a></p>
+<p>Check installation guide <a href="http://cmsmadesimple.sk/modules/MleCMS/installation-guide.html">Installation Guide</a></p>
 ';
 ?>

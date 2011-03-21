@@ -31,10 +31,10 @@
 if (!isset($gCms))
     exit;
 
-if(is_array($this->GetDependencies())){
-    foreach($this->GetDependencies() as $module=>$module_version){
-        if(!cge_utils::get_module($module,$module_version))     {
-            echo $this->ShowErrors($this->Lang('module_missing',$module.' '.$module_version));
+if (is_array($this->GetDependencies())) {
+    foreach ($this->GetDependencies() as $module => $module_version) {
+        if (!cge_utils::get_module($module, $module_version)) {
+            echo $this->ShowErrors($this->Lang('module_missing', $module . ' ' . $module_version));
             return;
         }
     }
@@ -43,29 +43,28 @@ if(is_array($this->GetDependencies())){
 
 ## TAB HEADERS from CGE
 echo $this->StartTabHeaders();
-if ($this->CheckAccess())
-{
+if ($this->CheckAccess()) {
     echo $this->SetTabHeader('mle_config', $this->Lang('mle_config'));
 }
 
-if ($this->CheckAccess('manage ' . MLE_SNIPPET . 'mle'))
-{
+if ($this->CheckAccess('manage ' . MLE_SNIPPET . 'mle')) {
     echo $this->SetTabHeader('manage_' . MLE_SNIPPET . 'mle', $this->Lang('manage_snippets'));
 }
 
-if ($this->CheckAccess('manage ' . MLE_BLOCK . 'mle'))
-{
+if ($this->CheckAccess('manage ' . MLE_BLOCK . 'mle')) {
     echo $this->SetTabHeader('manage_' . MLE_BLOCK . 'mle', $this->Lang('manage_blocks'));
 }
 
-if ($this->CheckAccess('manage translator_mle'))
-{
+if ($this->CheckAccess('manage translator_mle')) {
     echo $this->SetTabHeader('mle_translator', $this->Lang('mle_translator'));
 }
 
 
-if ($this->CheckPermission('Modify Site Preferences'))
-{
+if ($this->CheckPermission('Modify Templates')) {
+    echo $this->SetTabHeader('mle_template', $this->Lang('mle_template'));
+}
+
+if ($this->CheckPermission('Modify Site Preferences')) {
     echo $this->SetTabHeader('options', $this->Lang('options'));
 }
 
@@ -76,15 +75,13 @@ echo $this->EndTabHeaders();
 #
 echo $this->StartTabContent();
 
-if ($this->CheckAccess())
-{
+if ($this->CheckAccess()) {
     echo $this->StartTab('mle_config');
     include(dirname(__FILE__) . '/function.admin_mle_config.php');
     echo $this->EndTab();
 }
 
-if ($this->CheckAccess('manage ' . MLE_SNIPPET . 'mle'))
-{
+if ($this->CheckAccess('manage ' . MLE_SNIPPET . 'mle')) {
     $prefix = MLE_SNIPPET;
     echo $this->StartTab('manage_' . $prefix . 'mle', $params);
     $wysiwyg = false;
@@ -92,8 +89,7 @@ if ($this->CheckAccess('manage ' . MLE_SNIPPET . 'mle'))
     echo $this->EndTab();
 }
 
-if ($this->CheckAccess('manage ' . MLE_BLOCK . 'mle'))
-{
+if ($this->CheckAccess('manage ' . MLE_BLOCK . 'mle')) {
     $prefix = MLE_BLOCK;
     echo $this->StartTab('manage_' . $prefix . 'mle', $params);
     $wysiwyg = true;
@@ -101,8 +97,7 @@ if ($this->CheckAccess('manage ' . MLE_BLOCK . 'mle'))
     echo $this->EndTab();
 }
 
-if ($this->CheckAccess('manage translator_mle'))
-{
+if ($this->CheckAccess('manage translator_mle')) {
     $prefix = MLE_BLOCK;
     echo $this->StartTab('mle_translator', $params);
     $wysiwyg = true;
@@ -110,14 +105,22 @@ if ($this->CheckAccess('manage translator_mle'))
     echo $this->EndTab();
 }
 
+if ($this->CheckPermission('Modify Templates')) {
+    echo $this->StartTab('mle_template', $params);
+    echo $this->ShowTemplateList($id, $returnid, 'mle_template',
+                    'default_mle_template',
+                    'mle_template',
+                    'current_mle_template',
+                    $this->Lang('addedit_mle_template'), '');
+    echo $this->EndTab();
+}
 
-if ($this->CheckPermission('Modify Site Preferences'))
-{
+
+if ($this->CheckPermission('Modify Site Preferences')) {
     echo $this->StartTab('options', $params);
     include(dirname(__FILE__) . '/function.admin_optionstab.php');
     echo $this->EndTab();
 }
 
 echo $this->EndTabContent();
-
 ?>

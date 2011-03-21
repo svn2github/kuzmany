@@ -5,7 +5,7 @@ if (!isset($gCms))
 
 $smarty = & cmsms()->GetSmarty();
 $vars['editKey'] = $params['text'];
-
+Translation::$defFile = 'keys';
 $cache_id =  Translation::$defFile . $vars['editKey'];
 $key = cache_cms::getKey($cache_id,'',array('files'=>  array(Translation::getFileLocation())),$this->GetName());
 // set key

@@ -38,7 +38,8 @@ switch ($current_version) {
         $dict->ExecuteSQLArray($sqlarray);
         $current_version = "1.1";
     case "1.1":
-        $this->RegisterEvents();
+        $this->AddEventHandler('Core', 'ContentPostRender', false);
+        $this->AddEventHandler('Search', 'SearchCompleted', false);
         $this->SetPreference('mle_auto_redirect', 0);
         $this->SetPreference('mle_id', '{MleCMS action="get_root_alias"}');
         $current_version = "1.2";
@@ -48,7 +49,8 @@ switch ($current_version) {
         $this->CreateEvent('BlockEdited');
         $current_version = "1.4";
     case "1.4":
-        $this->RegisterEvents();
+        $this->AddEventHandler('Core', 'ContentPostRender', false);
+        $this->AddEventHandler('Search', 'SearchCompleted', false);
         $this->SetPreference('mle_search_restriction', 1);
         $current_version = "1.5";
     case "1.5":
@@ -74,9 +76,9 @@ switch ($current_version) {
         }
         $this->DeleteTemplate('mle_template');
         $current_version = "1.6";
-     case "1.6":
-         $this->CreatePermission('manage translator_mle', 'manage translator_mle');
-         $current_version = "1.7";
+    case "1.6":
+        $this->CreatePermission('manage translator_mle', 'manage translator_mle');
+        $current_version = "1.7";
 }
 
 // put mention into the admin log

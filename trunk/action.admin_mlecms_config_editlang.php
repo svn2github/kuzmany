@@ -33,7 +33,8 @@ $db = cmsms()->GetDb();
 $config = cmsms()->GetConfig();
 
 if (!$this->CheckAccess()) {
-    echo $this->ShowErrors($this->Lang('accessdenied')); return;
+    echo $this->ShowErrors($this->Lang('accessdenied'));
+    return;
 }
 
 if (isset($params['cancel'])) {
@@ -61,11 +62,37 @@ if (isset($params['locale'])) {
 }
 
 $flag = '';
-if (isset($params['flag'])) {
-    $flag = $params['flag'];
-}
+/*
+  if (isset($params['flag'])) {
+  $flag = $params['flag'];
+  } */
 
 if (isset($params['submit'])) {
+
+    $destdir = cms_join_path($gCms->config['image_uploads_path'], $this->GetName());
+
+    // handle image delete first
+    if (isset($params['deleteimg'])) {
+        $srcname = cms_join_path($destdir, $params['deleteimg']);
+        @unlink($srcname);
+        $flag = '';
+    }
+
+
+    $errors = array();
+    if (!is_dir($destdir))
+        cge_dir::mkdirr($destdir);
+
+    $handler = cge_setup::get_uploader($id, $destdir);
+    $handler->set_allow_overwrite(true);
+    $res = $handler->handle_upload('flag', '', '');
+    $err = $handler->get_error();
+    if ($res === FALSE)
+        $flag = '';
+    else
+        $flag = 'images/' . $this->GetName() . '/' . $res;
+
+
     if ($compid == "") {
         // insert the order record
         $sort = $db->GetOne('SELECT MAX(sort) FROM ' . cms_db_prefix() . 'module_mlecms_config');
@@ -91,7 +118,7 @@ if (isset($params['submit'])) {
 
     $errors = array();
     // send event
-    @$this->SendEvent('LangEdited', array('compid'=>$cid));
+    @$this->SendEvent('LangEdited', array('compid' => $cid));
     $this->SetMessage($this->Lang('info_success'));
     //redirect
     $this->RedirectToTab($id, "mle_config");
@@ -100,7 +127,7 @@ if (isset($params['submit'])) {
 //if($compid != "")
 #Display template
 if ($compid) {
-    $this->smarty->assign('startform', $this->CreateFormStart($id, 'admin_mlecms_config_editlang', $returnid, 'post', '', false, '', array("compid" => $compid)));
+    $this->smarty->assign('startform', $this->CreateFormStart($id, 'admin_mlecms_config_editlang', $returnid, 'post', 'multipart/form-data', false, '', array("compid" => $compid)));
     $query = 'SELECT * FROM ' . cms_db_prefix() . 'module_mlecms_config  WHERE id = ?';
     $row = $db->GetRow($query, array($compid));
     if ($row["name"])
@@ -120,12 +147,7 @@ $this->smarty->assign('endform', $this->CreateFormEnd());
 $this->smarty->assign('name', $this->CreateInputText($id, 'name', $name, 50, 255));
 $this->smarty->assign('alias', $this->CreateInputText($id, 'alias', $alias, 50, 255));
 $this->smarty->assign('locale', $this->CreateInputDropdown($id, 'locale', $this->getLangsLocale(), -1, $locale));
-
-$gbfp = cms_utils::get_module('GBFilePicker');
-if ($gbfp) {
-    $this->smarty->assign('flag', $gbfp->CreateFilePickerInput($gbfp, $id, 'flag', $flag, array('dir' => 'images')));
-}
-
+$this->smarty->assign('flag', $flag);
 $this->smarty->assign('submit', $this->CreateInputSubmit($id, 'submit', $this->lang('submit')));
 $this->smarty->assign('cancel', $this->CreateInputSubmit($id, 'cancel', $this->lang('cancel')));
 

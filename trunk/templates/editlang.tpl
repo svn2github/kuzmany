@@ -1,41 +1,43 @@
 {$startform} 
 {if isset($compid)}
 <div class="pageoverflow">
-<p class="pagetext">{$idtext}:</p>
-<p class="pageinput">{$compid}</p>
+    <p class="pagetext">{$idtext}:</p>
+    <p class="pageinput">{$compid}</p>
 </div>
 {/if}
 <div class="pageoverflow">
-<p class="pagetext">{$mod->Lang('name')}:</p>
-<p class="pageinput">
+    <p class="pagetext">{$mod->Lang('name')}:</p>
+    <p class="pageinput">
 	{$name}
-	</p>
+    </p>
 </div>
 <div class="pageoverflow">
-<p class="pagetext">{$mod->Lang('alias')}:</p>
-<p class="pageinput">
+    <p class="pagetext">{$mod->Lang('alias')}:</p>
+    <p class="pageinput">
 	{$alias}
-	</p>
+    </p>
 </div>
 <div class="pageoverflow">
-<p class="pagetext">{$mod->Lang('locale')}:</p>
-<p class="pageinput">
+    <p class="pagetext">{$mod->Lang('locale')}:</p>
+    <p class="pageinput">
 	{$locale}
-	</p>
+    </p>
 </div>
 <div class="pageoverflow">
-<p class="pagetext">{$mod->Lang('flag')}:</p>
-<p class="pageinput">
-	{$flag}
-	</p>
+    <p class="pagetext">{$mod->Lang('flag')}:</p>
+    <p class="pageinput">
+	     {if isset($flag) && !empty($flag) && $flag != '0'}{$flag}<br/>
+       {$mod->Lang('delete')}:<input type="checkbox" name="{$mod->GetActionId()}deleteimg" value="{$flag}"><br/>
+     {/if}
+        <input type="file" name="{$actionid}flag" size="50" maxlength="255">
+    </p>
 </div>
 
 
 
 <div class="pageoverflow">
-<p class="pagetext">&nbsp;</p>
-<p class="pageinput">{$hidden}{$submit}{$cancel}</p>
+    <p class="pagetext">&nbsp;</p>
+    <p class="pageinput">{$hidden}{$submit}{$cancel}</p>
 </div>
-    
+
 {$endform}
-    

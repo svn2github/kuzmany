@@ -113,7 +113,7 @@ class MleCMS extends CGExtensions {
     }
 
     function GetDependencies() {
-        return array('CGExtensions' => '1.23', 'GBFilePicker' => '1.2', 'ContentCache' => '1.2');
+        return array('CGExtensions' => '1.23', 'ContentCache' => '1.2');
     }
 
     function MinimumCMSVersion() {
@@ -141,11 +141,6 @@ class MleCMS extends CGExtensions {
 
         $this->CreateParameter('template', '', $this->Lang('help_template'));
         $this->SetParameterType('template', CLEAN_STRING);
-    }
-
-    function RegisterEvents() {
-        $this->AddEventHandler('Core', 'ContentPostRender', false);
-        $this->AddEventHandler('Search', 'SearchCompleted', false);
     }
 
     function DoEvent($originator, $eventname, &$params) {

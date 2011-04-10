@@ -24,6 +24,12 @@
     </p>
 </div>
 <div class="pageoverflow">
+    <p class="pagetext">{$mod->Lang('locale_custom')}:</p>
+    <p class="pageinput">
+	{$locale_custom}
+    </p>
+</div>
+<div class="pageoverflow">
     <p class="pagetext">{$mod->Lang('flag')}:</p>
     <p class="pageinput">
 	     {if isset($flag) && !empty($flag) && $flag != '0'}{$flag}<br/>

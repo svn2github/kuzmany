@@ -32,6 +32,7 @@ if (!isset($gCms))
 $db = cmsms()->GetDb();
 $config = cmsms()->GetConfig();
 
+
 if (!$this->CheckAccess()) {
     echo $this->ShowErrors($this->Lang('accessdenied'));
     return;
@@ -60,6 +61,12 @@ $locale = '';
 if (isset($params['locale'])) {
     $locale = $params['locale'];
 }
+
+$locale_custom = '';
+if (isset($params['locale_custom']) && empty($params['locale_custom']) == false  && $locale == 'custom') {
+    $locale = $params['locale_custom'];
+}
+
 
 $flag = '';
 /*
@@ -146,7 +153,8 @@ $this->smarty->assign('endform', $this->CreateFormEnd());
 
 $this->smarty->assign('name', $this->CreateInputText($id, 'name', $name, 50, 255));
 $this->smarty->assign('alias', $this->CreateInputText($id, 'alias', $alias, 50, 255));
-$this->smarty->assign('locale', $this->CreateInputDropdown($id, 'locale', $this->getLangsLocale(), -1, $locale));
+$this->smarty->assign('locale', $this->CreateInputDropdown($id, 'locale', $this->getLangsLocale(), -1, (array_search($locale,$this->getLangsLocale()) ? $locale : "custom")));
+$this->smarty->assign('locale_custom', $this->CreateInputText($id, 'locale_custom', (array_search($locale,$this->getLangsLocale()) ? "" : $locale), 50, 255));
 $this->smarty->assign('flag', $flag);
 $this->smarty->assign('submit', $this->CreateInputSubmit($id, 'submit', $this->lang('submit')));
 $this->smarty->assign('cancel', $this->CreateInputSubmit($id, 'cancel', $this->lang('cancel')));

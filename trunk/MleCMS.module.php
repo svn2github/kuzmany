@@ -40,19 +40,13 @@ define('MLE_BLOCK', 'block_');
 
 class MleCMS extends CGExtensions {
 
-    public $alllangs = array(
-        "Afrikaans" => "af_ZA", "Български" => "bg_BG", "Català" => "ca_ES", "Česky" => "cs_CZ", "Dansk" => "da_DK", "Deutsch" => "de_DE", "Ελληνικα" => "el_GR", "English" => "en_US",
-        "Español" => "es_ES", "Eesti" => "et_EE", "Euskara" => "eu_ES", "Esperanto" => "eo_UY", "Suomi" => "fi_FI", "Français" => "fr_FR", "Magyar" => "hu_HU", "Bahasa Indonesia" => "id_ID", "Íslenska" => "is_IS", "Italiano" => "it_IT", "Hebrew" => "iw_IL",
-        "日本語" => "ja_JP", "Lietuvių" => "lt_LT", "Mongolian" => "mn_MN", "Norsk bokmål" => "nb_NO", "Nederlands" => "nl_NL", "Polski" => "pl_PL", "Português Brasileiro" => "pt_BR",
-        "Português" => "pt_PT", "Romansh" => "rm_CH", "Română" => "ro_RO", "Русский" => "ru_RU", "Slovenčina" => "sk_SK", "Slovenia" => "sl_SI", "српски Srpski" => "sr_YU", "Svenska" => "sv_SE", "Türkçe" => "tr_TR", "简体中文" => "zh_CN", "繁體中文" => "zh_TW");
-
-    function __construct() {
+    public function __construct() {
         parent::CMSModule();
         $smarty = & cmsms()->GetSmarty();
         $smarty->register_function('translate', array(&$this, 'smarty_translator'));
     }
 
-    function smarty_translator($params, &$smarty) {
+    public function smarty_translator($params, &$smarty) {
         return $this->DoAction('translator', '', $params);
     }
 
@@ -154,7 +148,7 @@ class MleCMS extends CGExtensions {
                 if (isSet($param->module) && isSet($param->modulerecord)) {
                     $results[] = $param;
                 } else {
-                    if (startswith($param->url, $config["root_url"] .'/'. $this->get_root_alias())) {
+                    if (startswith($param->url, $config["root_url"] . '/' . $this->get_root_alias())) {
                         $results[] = $param;
                     }
                 }
@@ -238,7 +232,14 @@ LEFT JOIN ' . cms_db_prefix() . 'content  content_hierchy ON (content_hierchy.hi
     }
 
     public function getLangsLocale() {
-        return $this->alllangs;
+        $alllangs = array(
+            "Afrikaans" => "af_ZA", "Български" => "bg_BG", "Català" => "ca_ES", "Česky" => "cs_CZ", "Dansk" => "da_DK", "Deutsch" => "de_DE", "Ελληνικα" => "el_GR", "English" => "en_US",
+            "Español" => "es_ES", "Eesti" => "et_EE", "Euskara" => "eu_ES", "Esperanto" => "eo_UY", "Suomi" => "fi_FI", "Français" => "fr_FR", "Magyar" => "hu_HU", "Bahasa Indonesia" => "id_ID", "Íslenska" => "is_IS", "Italiano" => "it_IT", "Hebrew" => "iw_IL",
+            "日本語" => "ja_JP", "Lietuvių" => "lt_LT", "Mongolian" => "mn_MN", "Norsk bokmål" => "nb_NO", "Nederlands" => "nl_NL", "Polski" => "pl_PL", "Português Brasileiro" => "pt_BR",
+            "Português" => "pt_PT", "Romansh" => "rm_CH", "Română" => "ro_RO", "Русский" => "ru_RU", "Slovenčina" => "sk_SK", "Slovenia" => "sl_SI", "српски Srpski" => "sr_YU", "Svenska" => "sv_SE", "Türkçe" => "tr_TR", "简体中文" => "zh_CN", "繁體中文" => "zh_TW",
+            $this->Lang("custom") => "custom"
+        );
+        return $alllangs;
     }
 
     public function getLangs($sortorder='ASC') {

@@ -25,6 +25,8 @@ $lang['idtext'] = 'ID';
 $lang['alias'] = 'Root alias';
 $lang['name'] = 'Name';
 
+$lang['custom'] = 'Custom';
+$lang['locale_custom'] = 'Locale custom';
 $lang['locale'] = 'Locale';
 $lang['flag'] = 'Flag';
 

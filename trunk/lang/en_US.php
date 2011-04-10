@@ -68,6 +68,7 @@ $lang['help_template'] = 'template (default Flags)';
 
 
 $lang['changelog'] = '<ul>
+<li>Version 1.4 - 1.7 - april 2011 - som small updates</li>
 <li>Version 1.3 - january 2011 - new millestone - Mle Translator</li>
 <li>Version 1.2 - january 2011 - new millestone - auto redirection</li>
 <li>Version 1.1 - january 2011 - small update</li>

@@ -1,8 +1,10 @@
+
+
 {literal}
-    <style type="text/css">
-        #trans input { width: 100%; }
-        #trans span { display: block; cursor: pointer; }
-    </style>
+<style type="text/css">
+    #trans input { width: 100%; }
+    #trans span { display: block; cursor: pointer; }
+</style>
 {/literal}
 
 {assign var=pLangs value=$langsArray.langs}
@@ -13,31 +15,38 @@
 
     <tr id="label">
         {foreach from=$pLangs item=pLang}
-            <th><span>{$pLang.name}</span></th>
+        <th><span>{$pLang.name}</span></th>
         {/foreach}
 
-            <th class="pageicon"></th>
+        <th class="pageicon"></th>
     </tr>
 
     <br />
 
-    
+
 
     {foreach from=$keysArray item=item key=key name=itemsLoop}
-        <tr id="{$key}" class="keys{if $smarty.foreach.itemsLoop.index is odd} row2{else} row1{/if}">
+    <tr id="{$key}" class="keys{if $smarty.foreach.itemsLoop.index is odd} row2{else} row1{/if}">
             {foreach from=$pLangs item=aLang name=parser}
                 {assign var=loopLang value=$aLang.locale}
 
-                <td data-lang="{$loopLang}">
-                    <span>
+        <td data-lang="{$loopLang}">
+            <span>
                         {if $xml.$loopLang.items.$key}{$xml.$loopLang.items.$key}{else}{$key}{/if}
-                    </span>
-                </td>
+            </span>
+        </td>
 
             {/foreach}
-            <td><a class='del' href="#">{$deleteIcon}</a></td>
-        </tr>
+        <td><a class='del' href="#">{$deleteIcon}</a></td>
+    </tr>
+        {foreachelse}
+    <tr>
+        <td>
+            <p>{$mod->Lang('mle_translator_example')}</p>
+        </td>
+    </tr>
     {/foreach}
+
 
 </table>
 
@@ -112,3 +121,4 @@
     })
 </script>
 {/literal}
+

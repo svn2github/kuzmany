@@ -49,12 +49,12 @@ $lang['manage_blocks'] = 'Blocks';
 
 // Options
 $lang['options'] = 'Options';
-$lang['mle_id'] = 'Mle identifier';
-$lang['mle_separator'] = 'Separator';
+$lang['mle_id'] = 'Mle identifier (don\'t change)';
+$lang['mle_separator'] = 'Separator between langs (for {MleCMS action="langs" template="Separator"})';
 $lang['mle_template'] = 'Multilang template';
 $lang['addedit_mle_template'] = 'Add/Edit multilang template';
 $lang['mle_hierarchy_switch'] = 'Hierarchy switch';
-$lang['mle_search_restriction'] = 'Search MLE restriction (only for page)';
+$lang['mle_search_restriction'] = 'Search MLE restriction (only for page search)';
 $lang['mle_auto_redirect'] = 'Language detection';
 $lang['none'] = 'None';
 $lang['root_redirect'] = 'Redirect in the root directory';
@@ -62,6 +62,7 @@ $lang['hierarchy_redirect'] = 'Redirect on each level of hierarchy';
 
 // Translator
 $lang['mle_translator'] = 'Translator';
+$lang['mle_translator_example'] = 'Put to your template: {translate text="anything"}, return to the translator tab and edit it.';
 
 $lang['help_name'] = 'snippet or block name';
 $lang['help_template'] = 'template (default Flags)';

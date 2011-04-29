@@ -49,7 +49,7 @@ $lang['manage_blocks'] = 'Blocks';
 
 // Options
 $lang['options'] = 'Options';
-$lang['mle_id'] = 'Mle identifier (don\'t change)';
+$lang['mle_id'] = 'Mle identifier (for monolingual site use {$lang})';
 $lang['mle_separator'] = 'Separator between langs (for {MleCMS action="langs" template="Separator"})';
 $lang['mle_template'] = 'Multilang template';
 $lang['addedit_mle_template'] = 'Add/Edit multilang template';

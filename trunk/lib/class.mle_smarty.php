@@ -36,6 +36,7 @@ class mle_smarty {
 
         $smarty->register_function('mle_assign', array('mle_smarty', 'mle_assign'));
         $smarty->register_function('translate', array('mle_smarty', 'translator'));
+        $smarty->register_block('translator', array('mle_smarty', 'translator_block'));
     }
 
     /**
@@ -47,6 +48,25 @@ class mle_smarty {
     public function translator($params, &$smarty) {
         $module = cms_utils::get_module('MleCMS');
         return $module->DoAction('translator', '', $params);
+    }
+
+    public function translator_block($params, $content, &$smarty, &$repeat) {
+        if (!$content)
+            return;
+
+        $module = cms_utils::get_module('MleCMS');
+        // opening tag
+        if ($repeat) {
+            // get from cache
+            // exist, stop work
+            $repeat = false;
+        } else {
+            // set cache
+            $params["text"] = $content;
+            return $module->DoAction('translator', '', $params);
+
+            return;
+        }
     }
 
     /**

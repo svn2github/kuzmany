@@ -79,6 +79,21 @@ $lang['help'] = '<h3>What Does This Do?</h3>
 <p>This module add multilanguage solution to your CMS Made Simple.</p>
 <h3>How Do I Use It</h3>
 <p>Check installation guide <a href="http://cmsmadesimple.sk/modules/MleCMS/installation-guide.html">Installation Guide</a></p>
+<h3>Plugins</h3>
+<p><strong>Translate</strong> {translate text="some text"} or {translator}some text{/translator}</p>
+<p>Params</p>
+<ul>
+<li>text (required) - text for translate</li>
+<li>assign (optional)  - smarty assign</li>
+</ul>
+<br />
+<p><strong>Mle assign</strong> - (news example: {mle_assign object=$entry par="title" assign="entry"}) </p>
+<p>Params</p>
+<ul>
+<li>object (required) - object for mle assign</li>
+<li>par (required)  - par for find mutlilangue string (example: title and mle version  are  title_sk, title_de, title_fr)</li>
+<li>assign (optional)  - assign to object</li>
+</ul>
     <h3>Like it? Donate :)</h3>
     <p><form action="https://www.paypal.com/cgi-bin/webscr" method="post">
 <input type="hidden" name="cmd" value="_s-xclick">

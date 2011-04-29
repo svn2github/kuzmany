@@ -27,8 +27,7 @@
 #-------------------------------------------------------------------------
 
 
-$cgextensions = cms_join_path($gCms->config['root_path'], 'modules',
-                'CGExtensions', 'CGExtensions.module.php');
+$cgextensions = cms_join_path($gCms->config['root_path'], 'modules', 'CGExtensions', 'CGExtensions.module.php');
 if (!is_readable($cgextensions)) {
     echo '<h1><font color="red">ERROR: The CGExtensions module could not be found.</font></h1>';
     return;
@@ -41,13 +40,7 @@ define('MLE_BLOCK', 'block_');
 class MleCMS extends CGExtensions {
 
     public function __construct() {
-        parent::CMSModule();
-        $smarty = & cmsms()->GetSmarty();
-        $smarty->register_function('translate', array(&$this, 'smarty_translator'));
-    }
-
-    public function smarty_translator($params, &$smarty) {
-        return $this->DoAction('translator', '', $params);
+        parent::__construct();
     }
 
     function GetName() {
@@ -135,6 +128,8 @@ class MleCMS extends CGExtensions {
 
         $this->CreateParameter('template', '', $this->Lang('help_template'));
         $this->SetParameterType('template', CLEAN_STRING);
+
+        mle_smarty::init();
     }
 
     function DoEvent($originator, $eventname, &$params) {

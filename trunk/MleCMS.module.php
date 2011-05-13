@@ -41,6 +41,7 @@ class MleCMS extends CGExtensions {
 
     public function __construct() {
         parent::__construct();
+        mle_smarty::init();
     }
 
     function GetName() {
@@ -129,7 +130,6 @@ class MleCMS extends CGExtensions {
         $this->CreateParameter('template', '', $this->Lang('help_template'));
         $this->SetParameterType('template', CLEAN_STRING);
 
-        mle_smarty::init();
     }
 
     function DoEvent($originator, $eventname, &$params) {
@@ -143,7 +143,14 @@ class MleCMS extends CGExtensions {
                 if (isSet($param->module) && isSet($param->modulerecord)) {
                     $results[] = $param;
                 } else {
-                    if (startswith($param->url, $config["root_url"] . '/' . $this->get_root_alias())) {
+                    // only for url_rewriting
+                    // url check
+                    if ($config['url_rewriting'] == 'mod_rewrite') {
+                        $base_url = $config["root_url"] . '/' . $this->get_root_alias();
+                    } else if ($config['url_rewriting'] == 'internal') {
+                        $base_url = $config["root_url"] . '/index.php/' . $this->get_root_alias();
+                    }
+                    if (startswith($param->url, $base_url)) {
                         $results[] = $param;
                     }
                 }

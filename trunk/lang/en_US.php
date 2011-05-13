@@ -90,8 +90,29 @@ $lang['help'] = '<h3>What Does This Do?</h3>
 <p><strong>Mle assign</strong> - (news example: {mle_assign object=$entry par="title" assign="entry"}) </p>
 <p>Params</p>
 <ul>
-<li>object (required) - object for mle assign</li>
+<li>from (required) - object for mle assign</li>
 <li>par (required)  - par for find mutlilangue string (example: title and mle version  are  title_sk, title_de, title_fr)</li>
+<li>assign (optional)  - assign to object</li>
+</ul>
+<br />
+<p><strong>Mle search checker</strong> - (for modules search search restriction, plugin create sql query) </p>
+<p>Example</p>
+<code>
+ {foreach from=$results item=entry}<br />
+        {if $entry->module == "MyModule"}<br />
+        {mle_search_checker select="filed" from="module_mymodule" id=$entry->modulerecord assign="language"}                <br />
+        {if !$lang_parent}{MleCMS action="get_root_alias" assign="lang_parent"}{/if}<br />
+        {*display every record from my category *}<br />
+        {if $language == $lang_parent}  <br />
+        {$entry->title}<br />
+        '.htmlspecialchars('<a href="{$entry->url}">{$entry->urltxt}</a>&nbsp;<span>({$entry->weight}%)</span>').'<br />
+        {/if}<br />
+        {/foreach}<br />
+</code><br />
+<p>Params</p>
+<ul>
+<li>select (required)  - SELECT select</li>
+<li>from (required) - FROM table</li>
 <li>assign (optional)  - assign to object</li>
 </ul>
     <h3>Like it? Donate :)</h3>

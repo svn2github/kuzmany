@@ -36,6 +36,7 @@ class mle_smarty {
 
         $smarty->register_function('mle_assign', array('mle_smarty', 'mle_assign'));
         $smarty->register_function('translate', array('mle_smarty', 'translator'));
+        $smarty->register_function('mle_search_checker', array('mle_smarty', 'mle_search_checker'));
         $smarty->register_block('translator', array('mle_smarty', 'translator_block'));
     }
 
@@ -94,6 +95,47 @@ class mle_smarty {
 
         if (isSet($params["assign"]))
             $smarty->assign($params["assign"], $object);
+        else
+            echo $value;
+    }
+
+    /**
+     * Return GetOne from Table for search restriction - require select, table
+     * @param array $params 
+     * @param object $smarty
+     * @return string 
+     */
+    public function mle_search_checker($params, &$smarty) {
+
+        if (!isSet($params["from"]) || !isSet($params["select"]))
+            return;
+
+        $where = '';
+
+        $key = implode(',', $params);
+        $value = cms_utils::get_app_data($key);
+
+
+        if (!$value) {
+
+            $parms = $params;
+            unset($parms["assign"]);
+            unset($parms["from"]);
+            unset($parms["select"]);
+
+            if (count($parms) > 0)
+                $where = " WHERE " . cge_array::implode_with_key($parms, "=", " AND ");
+
+
+
+            $db = cmsms()->GetDb();
+            $query = "SELECT " . $params["select"] . " FROM " . cms_db_prefix() . $params["from"] . $where;
+            $value = $db->GetOne($query);
+            cms_utils::set_app_data($key, $value);
+        }
+
+        if (isSet($params["assign"]))
+            $smarty->assign($params["assign"], $value);
         else
             echo $value;
     }

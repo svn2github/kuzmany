@@ -27,5 +27,8 @@
 #-------------------------------------------------------------------------
 if (!isset($gCms))
     exit;
-echo  $this->get_root_alias();
+
+$value = $this->get_root_alias();
+
+echo $value;
 ?>

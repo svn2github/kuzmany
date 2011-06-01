@@ -79,6 +79,10 @@ switch ($current_version) {
     case "1.6":
         $this->CreatePermission('manage translator_mle', 'manage translator_mle');
         $current_version = "1.7";
+    case "1.8":
+        $contentops = cmsms()->GetContentOperations();        
+	$contentops->ClearCache();
+        $current_version = "1.9";
 }
 
 // put mention into the admin log

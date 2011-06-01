@@ -80,7 +80,7 @@ $lang['help'] = '<h3>What Does This Do?</h3>
 <h3>How Do I Use It</h3>
 <p>Check installation guide <a href="http://cmsmadesimple.sk/modules/MleCMS/installation-guide.html">Installation Guide</a></p>
 <h3>Plugins</h3>
-<p><strong>Translate</strong> {translate text="some text"} or {translator}some text{/translator}</p>
+<p><strong>Translate</strong> {translate text="some text"} or {translator}some text{/translator} or {"some text"|translate}</p>
 <p>Params</p>
 <ul>
 <li>text (required) - text for translate</li>

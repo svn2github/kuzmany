@@ -38,6 +38,7 @@ class mle_smarty {
         $smarty->register_function('translate', array('mle_smarty', 'translator'));
         $smarty->register_function('mle_search_checker', array('mle_smarty', 'mle_search_checker'));
         $smarty->register_block('translator', array('mle_smarty', 'translator_block'));
+        $smarty->register_modifier('translate', array('mle_smarty', 'translator_modifier'));
     }
 
     /**
@@ -68,6 +69,19 @@ class mle_smarty {
 
             return;
         }
+    }
+
+    public static function translator_modifier($content, $assign = null) {
+        
+        $module = cms_utils::get_module('MleCMS');
+
+        $params = array();
+        if ($assign)
+            $params["assign"] = $assign;
+
+        $params["text"] = $content;
+
+        $module->DoAction('translator', '', $params);
     }
 
     /**

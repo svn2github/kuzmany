@@ -33,7 +33,7 @@ if (!isset($gCms))
 
 if (is_array($this->GetDependencies())) {
     foreach ($this->GetDependencies() as $module => $module_version) {
-        if (!cge_utils::get_module($module, $module_version)) {
+        if (!cms_utils::get_module($module)) {
             echo $this->ShowErrors($this->Lang('module_missing', $module . ' ' . $module_version));
             return;
         }

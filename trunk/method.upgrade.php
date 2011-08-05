@@ -29,7 +29,7 @@ if (!isset($gCms))
     exit;
 
 $current_version = $oldversion;
-$db = & $this->GetDb();
+$db = cmsms()->GetDb();
 
 switch ($current_version) {
     case "1.0":
@@ -80,8 +80,15 @@ switch ($current_version) {
         $this->CreatePermission('manage translator_mle', 'manage translator_mle');
         $current_version = "1.7";
     case "1.8":
-        $contentops = cmsms()->GetContentOperations();        
-	$contentops->ClearCache();
+        $contentops = cmsms()->GetContentOperations();
+        $contentops->ClearCache();
+        $current_version = "1.9";
+    case "1.9":
+        // delete any dependencies
+        $query = "DELETE FROM " . cms_db_prefix() . "module_deps WHERE child_module = ? AND parent_module = ?";
+        $db->Execute($query, array($this->GetName(),'ContentCache'));
+        $contentops = cmsms()->GetContentOperations();
+        $contentops->ClearCache();
         $current_version = "1.9";
 }
 

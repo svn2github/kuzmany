@@ -1,4 +1,5 @@
 <?php
+
 # Module: Multilanguage CMS
 # Zdeno Kuzmany (zdeno@kuzmany.biz) kuzmany.biz
 #
@@ -24,11 +25,12 @@
 # Or read it online: http://www.gnu.org/licenses/licenses.html#GPL
 #
 #-------------------------------------------------------------------------
-if (!isset($gCms)) exit;
+if (!isset($gCms))
+    exit;
 
-$db =$this->GetDb();
-$dict = NewDataDictionary( $db );
-$sqlarray = $dict->DropTableSQL( cms_db_prefix()."module_mlecms_config" );
+$db = cmsms()->GetDb();
+$dict = NewDataDictionary($db);
+$sqlarray = $dict->DropTableSQL(cms_db_prefix() . "module_mlecms_config");
 $dict->ExecuteSQLArray($sqlarray);
 
 // remove the permissions
@@ -46,4 +48,4 @@ $this->DeleteTemplate();
 $this->RemoveEventHandler('Core', 'ContentPostRender');
 
 // put mention into the admin log
-$this->Audit( 0, $this->Lang('friendlyname'), $this->Lang('uninstalled'));
+$this->Audit(0, $this->Lang('friendlyname'), $this->Lang('uninstalled'));

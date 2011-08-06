@@ -53,7 +53,7 @@ class MleCMS extends CGExtensions {
     }
 
     function GetVersion() {
-        return '1.9.1';
+        return '1.9.2';
     }
 
     function GetHelp() {

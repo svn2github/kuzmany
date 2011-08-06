@@ -2,7 +2,7 @@
 
 if (!isset($gCms))
     exit;
-$smarty = & cmsms()->GetSmarty();
+$smarty = cmsms()->GetSmarty();
 $vars['editKey'] = $params['text'];
 
 Translation::$defFile = 'keys';

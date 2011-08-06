@@ -134,7 +134,7 @@ class Translation {
         return self::getFolderLocation() . '/' . self::$defFile . '.xml';
     }
 
-    public function getValue(&$params) {
+    public static function getValue(&$params) {
         $editLang = self::$defFile;
         $key = $params['editKey'];
 

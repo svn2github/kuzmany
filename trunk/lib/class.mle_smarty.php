@@ -47,12 +47,12 @@ class mle_smarty {
      * @param array $smarty
      * @return type 
      */
-    public function translator($params, &$smarty) {
+    public static function translator($params, &$smarty) {
         $module = cms_utils::get_module('MleCMS');
         return $module->DoAction('translator', '', $params);
     }
 
-    public function translator_block($params, $content, &$smarty, &$repeat) {
+    public static function translator_block($params, $content, &$smarty, &$repeat) {
         if (!$content)
             return;
 
@@ -89,7 +89,7 @@ class mle_smarty {
      * @param array $params
      * @param array $smarty 
      */
-    public function mle_assign($params, &$smarty) {
+    public static function mle_assign($params, &$smarty) {
 
         if (!isSet($params["object"]) || !is_object($params["object"]) || !isSet($params["par"]))
             return;
@@ -119,7 +119,7 @@ class mle_smarty {
      * @param object $smarty
      * @return string 
      */
-    public function mle_search_checker($params, &$smarty) {
+    public static function mle_search_checker($params, &$smarty) {
 
         if (!isSet($params["from"]) || !isSet($params["select"]))
             return;

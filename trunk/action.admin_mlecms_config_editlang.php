@@ -57,7 +57,7 @@ if (isset($params['alias'])) {
     $alias = $params['alias'];
 }
 
-$locale = '';
+$locale = get_site_preference('frontendlang','');
 if (isset($params['locale'])) {
     $locale = $params['locale'];
 }

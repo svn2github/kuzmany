@@ -55,7 +55,7 @@ $(document).ready(function(){
 
 <div class="pageoverflow">
     <p class="pagetext">&nbsp;</p>
-    <p class="pageinput">{$hidden}{$submit}{$cancel}</p>
+    <p class="pageinput">{$submit}{$cancel}</p>
 </div>
 
 {$endform}

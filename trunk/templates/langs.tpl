@@ -21,7 +21,10 @@
 			<td>{$entry->title}</td>
 			<td>{$entry->alias}</td>
 			<td>{$entry->locale}</td>
-			<td>{$entry->moveuplink}{$entry->movedownlink}</td>
+			<td>
+                        {if isSet($entry->moveuplink)}{$entry->moveuplink}{/if}
+                        {if isSet($entry->movedownlink)}{$entry->movedownlink}{/if}
+                        </td>
 			<td>{$entry->editlink}</td>
 			<td>{$entry->deletelink}</td>
 		</tr>

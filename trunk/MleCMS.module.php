@@ -120,16 +120,25 @@ class MleCMS extends CGExtensions {
         return $this->Lang('really_uninstall');
     }
 
-    function SetParameters() {
+    function InitializeFrontend() {
         $this->RegisterModulePlugin();
         $this->RestrictUnknownParams();
-
-        $this->CreateParameter('name', '', $this->Lang('help_name'));
-        $this->SetParameterType('name', CLEAN_STRING);
-
-        $this->CreateParameter('template', '', $this->Lang('help_template'));
+        
         $this->SetParameterType('template', CLEAN_STRING);
+        $this->SetParameterType('name', CLEAN_STRING);
+    }
 
+    function SetParameters() {
+        $this->CreateParameter('name', '', $this->Lang('help_name'));
+        $this->CreateParameter('template', '', $this->Lang('help_template'));
+    }
+
+    function InitializeAdmin() {
+        $this->SetParameters();
+    }
+
+    function LazyLoadFrontend() {
+        return TRUE;
     }
 
     function DoEvent($originator, $eventname, &$params) {

@@ -155,6 +155,7 @@ class MleCMS extends CGExtensions {
     }
 
     function SetParameters() {
+        //$this->InitializeFrontend();
         $this->CreateParameter('name', '', $this->Lang('help_name'));
         $this->CreateParameter('template', '', $this->Lang('help_template'));
     }

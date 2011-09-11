@@ -34,7 +34,7 @@ if(!$alias) $alias = $this->get_root_alias();
 if (!$alias)
     return;
 
-$db = & $this->GetDb();
+$db = cmsms()->GetDb();
 $query = 'SELECT * FROM ' . cms_db_prefix() . 'module_mlecms_config  WHERE alias = ?';
 $lang = $db->GetRow($query, array($alias));
 if (!$lang)

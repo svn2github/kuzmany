@@ -4,6 +4,7 @@ if (!isset($gCms))
     exit;
 $smarty = cmsms()->GetSmarty();
 
+
 // do nothing
 if (!isSet($params['text']))
     return;

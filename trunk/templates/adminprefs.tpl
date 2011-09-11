@@ -13,6 +13,12 @@
                   {$mle_separator}
         </p>
     </div>
+        <div class="pageoverflow">
+        <p class="pagetext">{$mod->Lang('translator_action_params')}:</p>
+        <p class="pageinput">
+                  {$translator_action_params}
+        </p>
+    </div>
     <div class="pageoverflow">
         <p class="pagetext">{$mod->Lang('mle_auto_redirect')}:</p>
         <p class="pageinput">

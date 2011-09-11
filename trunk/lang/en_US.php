@@ -51,6 +51,7 @@ $lang['manage_blocks'] = 'Blocks';
 $lang['options'] = 'Options';
 $lang['mle_id'] = 'Mle identifier (for monolingual site use {$lang})';
 $lang['mle_separator'] = 'Separator between langs (for {MleCMS action="langs" template="Separator"})';
+$lang['translator_action_params'] = 'Default params for translator action';
 $lang['mle_template'] = 'Multilang template';
 $lang['addedit_mle_template'] = 'Add/Edit multilang template';
 $lang['mle_hierarchy_switch'] = 'Hierarchy switch';

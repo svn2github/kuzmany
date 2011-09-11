@@ -78,10 +78,36 @@ class MleCMS extends CGExtensions {
 
     function HasAdmin() {
         return ($this->CheckAccess()
-        || $this->CheckAccess('manage ' . MLE_SNIPPET . 'mle')
-        || $this->CheckAccess('manage ' . MLE_BLOCK . 'mle')
-        || $this->CheckAccess('manage translator_mle')
-        );
+                || $this->CheckAccess('manage ' . MLE_SNIPPET . 'mle')
+                || $this->CheckAccess('manage ' . MLE_BLOCK . 'mle')
+                || $this->CheckAccess('manage translator_mle')
+                );
+    }
+
+    /**
+     * DoAction - default add default params
+     * @param type $name
+     * @param type $id
+     * @param type $params
+     * @param type $returnid 
+     */
+    public function DoAction($name, $id, $params, $returnid='') {
+        switch ($name) {
+            case "translator":
+                if ($this->GetPreference('default_action_params') != "") {
+                    $default_action_params = explode(" ", $this->GetPreference('default_action_params'));
+                    if (is_array($default_action_params)) {
+                        foreach ($default_action_params as $default_action_param) {
+                            $default_action_param_array = explode("=", $default_action_param);
+                            if (count($default_action_param_array) == 2) {
+                                $params[$default_action_param_array[0]] = $this->ProcessTemplateFromData(str_replace(array('"', "'"), array('', ''), $default_action_param_array[1]));
+                            }
+                        }
+                    }
+                    break;
+                }
+        }
+        parent::DoAction($name, $id, $params, $returnid);
     }
 
     function GetAdminSection() {
@@ -123,7 +149,7 @@ class MleCMS extends CGExtensions {
     function InitializeFrontend() {
         $this->RegisterModulePlugin();
         $this->RestrictUnknownParams();
-        
+
         $this->SetParameterType('template', CLEAN_STRING);
         $this->SetParameterType('name', CLEAN_STRING);
     }

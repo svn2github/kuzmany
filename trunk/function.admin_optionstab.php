@@ -38,6 +38,7 @@ $smarty->assign('endform', $this->CreateFormEnd());
 $smarty->assign('submit', $this->CreateInputSubmit($id, 'optionssubmitbutton', $this->Lang('submit')));
 $this->smarty->assign('mle_id', $this->CreateInputText($id, 'mle_id', $this->GetPreference('mle_id'),55,255));
 $this->smarty->assign('mle_separator', $this->CreateInputText($id, 'mle_separator', $this->GetPreference('mle_separator'),50,50));
+$this->smarty->assign('translator_action_params', $this->CreateInputText($id, 'translator_action_params', $this->GetPreference('translator_action_params'),50,50));
 
 $this->smarty->assign('mle_auto_redirect',$this->CreateInputDropdown($id, 'mle_auto_redirect', array_flip($auto_redirect_items),-1,$this->GetPreference('mle_auto_redirect')));
 $this->smarty->assign('mle_hierarchy_switch', $this->CreateInputYesNoDropdown($id,  'mle_hierarchy_switch',$this->GetPreference('mle_hierarchy_switch')));

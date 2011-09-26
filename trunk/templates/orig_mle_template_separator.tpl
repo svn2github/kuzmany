@@ -1,15 +1,15 @@
 {if $langs|@count}
-{foreach from=$langs item=lang name=language}
+{foreach from=$langs item=l name=language}
 {if $smarty.foreach.language.first==false}{$mle_separator}{/if}
-{capture assign="lang_href"}{cms_selflink href=$lang.alias}{/capture}
+{capture assign="lang_href"}{cms_selflink href=$l.alias}{/capture}
 {if $lang_href}
-{if $page_alias==$lang.alias}
+{if $page_alias==$l.alias}
 <span class="active">
-{$lang.name}
+{$l.name}
 </span>
 {else}
 <a   href="{$lang_href}">
-    {$lang.name}
+    {$l.name}
 </a>
 {/if}
 {/if}

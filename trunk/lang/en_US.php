@@ -77,6 +77,7 @@ $lang['changelog'] = '<ul>
 <li>Version 1.1 - january 2011 - small update</li>
 <li>Version 1 - january 2011 - Initial Release.</li>
 </ul>';
+
 $lang['help'] = '<h3>What Does This Do?</h3>
 <p>This module add multilanguage solution to your CMS Made Simple.</p>
 <h3>How Do I Use It</h3>
@@ -92,7 +93,7 @@ $lang['help'] = '<h3>What Does This Do?</h3>
 <p><strong>Mle assign</strong> - (news example: {mle_assign object=$entry par="title" assign="entry"}) </p>
 <p>Params</p>
 <ul>
-<li>from (required) - object for mle assign</li>
+<li>object or array (required) - object/array for mle assign</li>
 <li>par (required)  - par for find mutlilangue string (example: title and mle version  are  title_sk, title_de, title_fr)</li>
 <li>assign (optional)  - assign to object</li>
 </ul>

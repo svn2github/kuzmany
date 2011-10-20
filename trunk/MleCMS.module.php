@@ -94,8 +94,8 @@ class MleCMS extends CGExtensions {
     public function DoAction($name, $id, $params, $returnid='') {
         switch ($name) {
             case "translator":
-                if ($this->GetPreference('default_action_params') != "") {
-                    $default_action_params = explode(" ", $this->GetPreference('default_action_params'));
+                if ($this->GetPreference('translator_action_params') != "") {
+                    $default_action_params = explode(" ", $this->GetPreference('translator_action_params'));
                     if (is_array($default_action_params)) {
                         foreach ($default_action_params as $default_action_param) {
                             $default_action_param_array = explode("=", $default_action_param);
@@ -104,8 +104,13 @@ class MleCMS extends CGExtensions {
                             }
                         }
                     }
-                    break;
                 }
+                break;
+            case "langs":
+            case "default":
+            case "init":
+                $params["nocache"] = 1;
+                break;
         }
         parent::DoAction($name, $id, $params, $returnid);
     }
@@ -155,7 +160,10 @@ class MleCMS extends CGExtensions {
     }
 
     function SetParameters() {
-        //$this->InitializeFrontend();
+        
+        if (version_compare(CMS_VERSION, '1.10') < 0)
+                $this->InitializeFrontend();
+        
         $this->CreateParameter('name', '', $this->Lang('help_name'));
         $this->CreateParameter('template', '', $this->Lang('help_template'));
     }

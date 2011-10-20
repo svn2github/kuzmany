@@ -41,15 +41,34 @@ class mle_smarty {
         $smarty->register_modifier('translate', array('mle_smarty', 'translator_modifier'));
     }
 
-    /**
+     /**
      *  Translator smarty functon
      * @param array $params 
      * @param array $smarty
      * @return type 
      */
     public static function translator($params, &$smarty) {
-        $module = cms_utils::get_module('MleCMS');
-        return $module->DoAction('translator', '', $params);
+	
+		$smarty = cmsms()->GetSmarty();
+		$vars['editKey'] = $params['text'];
+
+		Translation::$defFile = 'keys';
+		$lang_value = Translation::getValue($vars);
+
+		// set lang key
+		if ($smarty->get_template_vars('lang_locale')) {
+			Translation::$defFile = $smarty->get_template_vars('lang_locale');
+		}
+		
+		$lang_value = Translation::getValue($vars);
+
+		if(isset($params["assign"])) {
+			
+			$smarty->assign($params["assign"], $lang_value);
+		} else { 
+			
+			echo $lang_value;	
+		}
     }
 
     public static function translator_block($params, $content, &$smarty, &$repeat) {
@@ -84,28 +103,40 @@ class mle_smarty {
         $module->DoAction('translator', '', $params);
     }
 
-    /**
+       /**
      *  get mle values from object (example $item->title, $item->title_en...)
      * @param array $params
      * @param array $smarty 
      */
     public static function mle_assign($params, &$smarty) {
 
-        if (!isSet($params["object"]) || !is_object($params["object"]) || !isSet($params["par"]))
+        if ((!isSet($params["array"]) && (!isSet($params["object"]) || !is_object($params["object"]) )) || !isSet($params["par"]))
             return;
 
         $smarty = cmsms()->GetSmarty();
         $lang_parent = $smarty->get_template_vars('lang_parent');
-        $object = $params["object"];
+        if (isSet($params["object"]))
+            $object = $params["object"];
+        if (isSet($params["array"]))
+            $object = $params["array"];
         $par = $params["par"];
         $mle_par = $params["par"] . '_' . $lang_parent;
 
 
-        $value = $object->$par;
-        if ($object->$mle_par != "")
-            $value = $object->$mle_par;
+        if (isSet($params["object"])) {
+            $value = $object->$par;
+            if ($object->$mle_par != "")
+                $value = $object->$mle_par;
+            $object->$par = $value;
+        }
 
-        $object->$par = $value;
+        if (isSet($params["array"])) {
+            $value = $object[$par];
+            if ($object[$mle_par] != "")
+                $value = $object[$mle_par];
+            
+            $object[$par] = $value;
+        }
 
         if (isSet($params["assign"]))
             $smarty->assign($params["assign"], $object);

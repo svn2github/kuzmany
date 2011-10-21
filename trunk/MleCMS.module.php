@@ -41,7 +41,6 @@ class MleCMS extends CGExtensions {
 
     public function __construct() {
         parent::__construct();
-        mle_smarty::init();
     }
 
     function GetName() {
@@ -157,19 +156,21 @@ class MleCMS extends CGExtensions {
 
         $this->SetParameterType('template', CLEAN_STRING);
         $this->SetParameterType('name', CLEAN_STRING);
+
+        mle_smarty::init();
     }
 
     function SetParameters() {
 
         if (version_compare(CMS_VERSION, '1.10') < 0) {
             $this->InitializeFrontend();
-            $this->CreateParameter('name', '', $this->Lang('help_name'));
-            $this->CreateParameter('template', '', $this->Lang('help_template'));
+            $this->InitializeAdmin();
         }
     }
 
     function InitializeAdmin() {
-        $this->SetParameters();
+        $this->CreateParameter('name', '', $this->Lang('help_name'));
+        $this->CreateParameter('template', '', $this->Lang('help_template'));
     }
 
     function LazyLoadFrontend() {

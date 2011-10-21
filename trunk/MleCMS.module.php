@@ -78,10 +78,10 @@ class MleCMS extends CGExtensions {
 
     function HasAdmin() {
         return ($this->CheckAccess()
-                || $this->CheckAccess('manage ' . MLE_SNIPPET . 'mle')
-                || $this->CheckAccess('manage ' . MLE_BLOCK . 'mle')
-                || $this->CheckAccess('manage translator_mle')
-                );
+        || $this->CheckAccess('manage ' . MLE_SNIPPET . 'mle')
+        || $this->CheckAccess('manage ' . MLE_BLOCK . 'mle')
+        || $this->CheckAccess('manage translator_mle')
+        );
     }
 
     /**
@@ -160,12 +160,12 @@ class MleCMS extends CGExtensions {
     }
 
     function SetParameters() {
-        
-        if (version_compare(CMS_VERSION, '1.10') < 0)
-                $this->InitializeFrontend();
-        
-        $this->CreateParameter('name', '', $this->Lang('help_name'));
-        $this->CreateParameter('template', '', $this->Lang('help_template'));
+
+        if (version_compare(CMS_VERSION, '1.10') < 0) {
+            $this->InitializeFrontend();
+            $this->CreateParameter('name', '', $this->Lang('help_name'));
+            $this->CreateParameter('template', '', $this->Lang('help_template'));
+        }
     }
 
     function InitializeAdmin() {

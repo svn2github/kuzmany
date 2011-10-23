@@ -176,7 +176,6 @@ class Translation {
         $xml->load($filePath);
 
         $xpath = new DOMXPath($xml);
-
         $result = $xpath->query('//root/items/item[@key="' . $key . '"]');
 
         if ($result->item(0) != NULL) {
@@ -215,6 +214,29 @@ class Translation {
                 throw new Exception(__CLASS__ . ' :: Cannot create new language file with filename "' . $filename . '"');
 
         return true;
+    }
+
+    public static function translate($params) {
+        $smarty = cmsms()->GetSmarty();
+
+        // do nothing
+        if (!isSet($params['text']))
+            return;
+
+        $vars['editKey'] = $params['text'];
+
+        self::$defFile = 'keys';
+        $lang_value = self::getValue($vars);
+        // set lang key
+        if ($smarty->get_template_vars('lang_locale'))
+            self::$defFile = $smarty->get_template_vars('lang_locale');
+
+        $lang_value = self::getValue($vars);
+
+        if (isSet($params["assign"]))
+            $smarty->assign($params["assign"], $lang_value);
+        else
+            echo $lang_value;
     }
 
 }

@@ -41,41 +41,22 @@ class mle_smarty {
         $smarty->register_modifier('translate', array('mle_smarty', 'translator_modifier'));
     }
 
-     /**
+    /**
      *  Translator smarty functon
      * @param array $params 
      * @param array $smarty
      * @return type 
      */
     public static function translator($params, &$smarty) {
-	
-		$smarty = cmsms()->GetSmarty();
-		$vars['editKey'] = $params['text'];
 
-		Translation::$defFile = 'keys';
-		$lang_value = Translation::getValue($vars);
-
-		// set lang key
-		if ($smarty->get_template_vars('lang_locale')) {
-			Translation::$defFile = $smarty->get_template_vars('lang_locale');
-		}
-		
-		$lang_value = Translation::getValue($vars);
-
-		if(isset($params["assign"])) {
-			
-			$smarty->assign($params["assign"], $lang_value);
-		} else { 
-			
-			echo $lang_value;	
-		}
+        $smarty = cmsms()->GetSmarty();
+        Translation::translate($params);
     }
 
     public static function translator_block($params, $content, &$smarty, &$repeat) {
         if (!$content)
             return;
 
-        $module = cms_utils::get_module('MleCMS');
         // opening tag
         if ($repeat) {
             // get from cache
@@ -83,15 +64,14 @@ class mle_smarty {
             $repeat = false;
         } else {
             // set cache
-            $params["text"] = $content;
-            return $module->DoAction('translator', '', $params);
-
+            $params["text"] = trim($content);
+            Translation::translate($params);
             return;
         }
     }
 
     public static function translator_modifier($content, $assign = null) {
-        
+
         $module = cms_utils::get_module('MleCMS');
 
         $params = array();
@@ -103,7 +83,7 @@ class mle_smarty {
         $module->DoAction('translator', '', $params);
     }
 
-       /**
+    /**
      *  get mle values from object (example $item->title, $item->title_en...)
      * @param array $params
      * @param array $smarty 
@@ -134,7 +114,7 @@ class mle_smarty {
             $value = $object[$par];
             if ($object[$mle_par] != "")
                 $value = $object[$mle_par];
-            
+
             $object[$par] = $value;
         }
 

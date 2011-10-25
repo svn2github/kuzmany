@@ -29,6 +29,12 @@ $(document).ready(function(){
 	{$alias}
     </p>
 </div>
+<div class="pageoverflow">
+    <p class="pagetext">{$mod->Lang('extra')}:</p>
+    <p class="pageinput">
+	{$extra}
+    </p>
+</div>
 <div class="pageoverflow locale">
     <p class="pagetext">{$mod->Lang('locale')}:</p>
     <p class="pageinput">

@@ -57,6 +57,11 @@ if (isset($params['alias'])) {
     $alias = $params['alias'];
 }
 
+$extra = '';
+if (isset($params['extra'])) {
+    $extra = $params['extra'];
+}
+
 $locale = get_site_preference('frontendlang','');
 if (isset($params['locale'])) {
     $locale = $params['locale'];
@@ -104,9 +109,9 @@ if (isset($params['submit'])) {
         // insert the order record
         $sort = $db->GetOne('SELECT MAX(sort) FROM ' . cms_db_prefix() . 'module_mlecms_config');
         $query = 'INSERT INTO ' . cms_db_prefix() . 'module_mlecms_config
-		(name,alias,locale,flag,sort,created_date,modified_date)
-		VALUES (?,?,?,?,?,NOW(),NOW())';
-        $dbr = $db->Execute($query, array($name, $alias, $locale, $flag, ($sort + 1)));
+		(name,alias,extra,locale,flag,sort,created_date,modified_date)
+		VALUES (?,?,?,?,?,?,NOW(),NOW())';
+        $dbr = $db->Execute($query, array($name, $alias, $extra, $locale, $flag, ($sort + 1)));
         $cid = $db->Insert_ID();
         if (!$cid) {
             echo $this->ShowErrors($this->Lang('nonamegiven'));
@@ -115,11 +120,12 @@ if (isset($params['submit'])) {
         $query = 'UPDATE  ' . cms_db_prefix() . 'module_mlecms_config set
 		name=?,
                 alias = ?,
+                extra = ?,
                 locale = ?,
                 flag  = ?,
                 modified_date = NOW()
 		WHERE id = ?';
-        $dbr = $db->Execute($query, array($name, $alias, $locale, $flag, $compid));
+        $dbr = $db->Execute($query, array($name, $alias, $extra, $locale, $flag, $compid));
         $cid = $compid;
     }
 
@@ -141,6 +147,8 @@ if ($compid) {
         $name = $row["name"];
     if ($row["alias"])
         $alias = $row["alias"];
+    if ($row["extra"])
+        $extra = $row["extra"];
     if ($row["locale"])
         $locale = $row["locale"];
     if ($row["flag"])
@@ -153,6 +161,7 @@ $this->smarty->assign('endform', $this->CreateFormEnd());
 
 $this->smarty->assign('name', $this->CreateInputText($id, 'name', $name, 50, 255));
 $this->smarty->assign('alias', $this->CreateInputText($id, 'alias', $alias, 50, 255));
+$this->smarty->assign('extra', $this->CreateInputText($id, 'extra', $extra, 50, 255));
 $this->smarty->assign('locale', $this->CreateInputDropdown($id, 'locale', $this->getLangsLocale(), -1, (array_search($locale,$this->getLangsLocale()) ? $locale : "custom")));
 $this->smarty->assign('locale_custom', $this->CreateInputText($id, 'locale_custom', (array_search($locale,$this->getLangsLocale()) ? "" : $locale), 50, 255));
 $this->smarty->assign('flag', $flag);

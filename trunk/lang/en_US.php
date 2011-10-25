@@ -24,6 +24,7 @@ $lang['mle_config'] = 'Multilang config';
 $lang['idtext'] = 'ID';
 $lang['alias'] = 'Root alias';
 $lang['name'] = 'Name';
+$lang['extra'] = 'Extra';
 
 $lang['custom'] = 'Custom';
 $lang['locale_custom'] = 'Locale custom';
@@ -68,7 +69,8 @@ $lang['mle_translator_example'] = 'Put to your template: {translate text="anythi
 
 $lang['help_name'] = 'snippet or block name';
 $lang['help_template'] = 'template (default Flags)';
-
+$lang['help_excludeprefix'] = 'exclude prefix (for langs action) ';
+$lang['help_includeprefix'] = 'include prefix (for langs action) ';
 
 $lang['changelog'] = '<ul>
 <li>Version 1.4 - 1.7 - april 2011 - som small updates</li>

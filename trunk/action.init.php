@@ -41,4 +41,5 @@ if (!$lang)
     return;
 $smarty->assign('lang_parent', $lang["alias"]);
 $smarty->assign('lang_locale', $lang["locale"]);
+$smarty->assign('lang_extra', $lang["extra"]);
 ?>

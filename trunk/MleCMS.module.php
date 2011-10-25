@@ -52,7 +52,7 @@ class MleCMS extends CGExtensions {
     }
 
     function GetVersion() {
-        return '1.10.1';
+        return '1.10.2';
     }
 
     function GetHelp() {
@@ -154,6 +154,8 @@ class MleCMS extends CGExtensions {
         $this->RegisterModulePlugin();
         $this->RestrictUnknownParams();
 
+        $this->SetParameterType('excludeprefix', CLEAN_STRING);
+        $this->SetParameterType('includeprefix', CLEAN_STRING);
         $this->SetParameterType('template', CLEAN_STRING);
         $this->SetParameterType('name', CLEAN_STRING);
 
@@ -169,6 +171,8 @@ class MleCMS extends CGExtensions {
     }
 
     function InitializeAdmin() {
+        $this->CreateParameter('includeprefix', '', $this->Lang('help_includeprefix'));
+        $this->CreateParameter('excludeprefix', '', $this->Lang('help_excludeprefix'));
         $this->CreateParameter('name', '', $this->Lang('help_name'));
         $this->CreateParameter('template', '', $this->Lang('help_template'));
     }

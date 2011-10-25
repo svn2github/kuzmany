@@ -31,6 +31,9 @@ if (!isset($gCms))
 $current_version = $oldversion;
 $db = cmsms()->GetDb();
 
+$taboptarray = array('mysql' => 'TYPE=MyISAM');
+$dict = NewDataDictionary($db);
+
 switch ($current_version) {
     case "1.0":
         $dict = NewDataDictionary($db);
@@ -90,6 +93,10 @@ switch ($current_version) {
         $contentops = cmsms()->GetContentOperations();
         $contentops->ClearCache();
         $current_version = "1.9";
+    case "1.10.1":
+        $sqlarray = $dict->AddColumnSQL(cms_db_prefix() . 'module_mlecms_config', 'extra C(60)');
+        $dict->ExecuteSQLArray($sqlarray);
+        $current_version = "1.10.2";
 }
 
 // put mention into the admin log

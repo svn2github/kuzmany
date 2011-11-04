@@ -96,7 +96,10 @@ switch ($current_version) {
     case "1.10.1":
         $sqlarray = $dict->AddColumnSQL(cms_db_prefix() . 'module_mlecms_config', 'extra C(60)');
         $dict->ExecuteSQLArray($sqlarray);
-        $current_version = "1.10.2";
+    case "1.10.2":
+        $sqlarray = $dict->AddColumnSQL(cms_db_prefix() . 'module_mlecms_config', 'direction C(10)');
+        $dict->ExecuteSQLArray($sqlarray);
+        $current_version = "1.10.3";
 }
 
 // put mention into the admin log

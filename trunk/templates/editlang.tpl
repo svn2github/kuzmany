@@ -35,6 +35,7 @@ $(document).ready(function(){
 	{$extra}
     </p>
 </div>
+
 <div class="pageoverflow locale">
     <p class="pagetext">{$mod->Lang('locale')}:</p>
     <p class="pageinput">
@@ -45,6 +46,13 @@ $(document).ready(function(){
     <p class="pagetext">{$mod->Lang('locale_custom')}:</p>
     <p class="pageinput">
 	{$locale_custom}
+    </p>
+</div>
+
+<div class="pageoverflow direction">
+    <p class="pagetext">{$mod->Lang('direction')}:</p>
+    <p class="pageinput">
+	{$direction}
     </p>
 </div>
 <div class="pageoverflow">

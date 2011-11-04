@@ -25,6 +25,9 @@ $lang['idtext'] = 'ID';
 $lang['alias'] = 'Root alias';
 $lang['name'] = 'Name';
 $lang['extra'] = 'Extra';
+$lang['ltr'] = 'Left-to-right text or table';
+$lang['rtl'] = 'Right-to-left text or table';
+$lang['direction'] = 'Direction';
 
 $lang['custom'] = 'Custom';
 $lang['locale_custom'] = 'Locale custom';

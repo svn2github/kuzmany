@@ -32,6 +32,10 @@ if (!isset($gCms))
 $db = cmsms()->GetDb();
 $config = cmsms()->GetConfig();
 
+$directions = array();
+$directions[$this->Lang('ltr')] = 'ltr';
+$directions[$this->Lang('rtl')] = 'rtl';
+
 
 if (!$this->CheckAccess()) {
     echo $this->ShowErrors($this->Lang('accessdenied'));
@@ -60,6 +64,11 @@ if (isset($params['alias'])) {
 $extra = '';
 if (isset($params['extra'])) {
     $extra = $params['extra'];
+}
+
+$direction = '';
+if (isset($params['direction'])) {
+    $direction = $params['direction'];
 }
 
 $locale = get_site_preference('frontendlang','');
@@ -109,9 +118,9 @@ if (isset($params['submit'])) {
         // insert the order record
         $sort = $db->GetOne('SELECT MAX(sort) FROM ' . cms_db_prefix() . 'module_mlecms_config');
         $query = 'INSERT INTO ' . cms_db_prefix() . 'module_mlecms_config
-		(name,alias,extra,locale,flag,sort,created_date,modified_date)
-		VALUES (?,?,?,?,?,?,NOW(),NOW())';
-        $dbr = $db->Execute($query, array($name, $alias, $extra, $locale, $flag, ($sort + 1)));
+		(name,alias,extra,locale,direction,flag,sort,created_date,modified_date)
+		VALUES (?,?,?,?,?,?,?,NOW(),NOW())';
+        $dbr = $db->Execute($query, array($name, $alias, $extra, $locale, $direction, $flag, ($sort + 1)));
         $cid = $db->Insert_ID();
         if (!$cid) {
             echo $this->ShowErrors($this->Lang('nonamegiven'));
@@ -122,10 +131,11 @@ if (isset($params['submit'])) {
                 alias = ?,
                 extra = ?,
                 locale = ?,
+                direction = ?,
                 flag  = ?,
                 modified_date = NOW()
 		WHERE id = ?';
-        $dbr = $db->Execute($query, array($name, $alias, $extra, $locale, $flag, $compid));
+        $dbr = $db->Execute($query, array($name, $alias, $extra, $locale, $direction, $flag, $compid));
         $cid = $compid;
     }
 
@@ -151,6 +161,8 @@ if ($compid) {
         $extra = $row["extra"];
     if ($row["locale"])
         $locale = $row["locale"];
+    if ($row["direction"])
+        $direction = $row["direction"];
     if ($row["flag"])
         $flag = $row["flag"];
 }else {
@@ -162,6 +174,8 @@ $this->smarty->assign('endform', $this->CreateFormEnd());
 $this->smarty->assign('name', $this->CreateInputText($id, 'name', $name, 50, 255));
 $this->smarty->assign('alias', $this->CreateInputText($id, 'alias', $alias, 50, 255));
 $this->smarty->assign('extra', $this->CreateInputText($id, 'extra', $extra, 50, 255));
+
+$this->smarty->assign('direction', $this->CreateInputDropdown($id, 'direction', $directions, -1, $direction));
 $this->smarty->assign('locale', $this->CreateInputDropdown($id, 'locale', $this->getLangsLocale(), -1, (array_search($locale,$this->getLangsLocale()) ? $locale : "custom")));
 $this->smarty->assign('locale_custom', $this->CreateInputText($id, 'locale_custom', (array_search($locale,$this->getLangsLocale()) ? "" : $locale), 50, 255));
 $this->smarty->assign('flag', $flag);

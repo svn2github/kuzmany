@@ -40,7 +40,6 @@ if (is_array($this->GetDependencies())) {
     }
 }
 
-
 ## TAB HEADERS from CGE
 echo $this->StartTabHeaders();
 if ($this->CheckAccess()) {

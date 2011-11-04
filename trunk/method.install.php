@@ -35,6 +35,7 @@ $flds = "
 	name C(64),
 	alias C(10),
 	locale C(10),
+	direction C(10),
 	flag C(60),
 	extra C(60),
 	sort I,

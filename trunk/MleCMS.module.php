@@ -46,6 +46,7 @@ class MleCMS extends CGExtensions {
     public function AllowAutoUpgrade() {
         return FALSE;
     }
+
     function GetName() {
         return 'MleCMS';
     }
@@ -55,7 +56,7 @@ class MleCMS extends CGExtensions {
     }
 
     function GetVersion() {
-        return '1.10.3';
+        return '1.10.5';
     }
 
     function GetHelp() {
@@ -198,9 +199,9 @@ class MleCMS extends CGExtensions {
                     // only for url_rewriting
                     // url check
                     if ($config['url_rewriting'] == 'mod_rewrite') {
-                        $base_url = $config["root_url"] . '/' . $this->get_root_alias();
+                        $base_url = $config["root_url"] . '/' . mle_tools::get_root_alias();
                     } else if ($config['url_rewriting'] == 'internal') {
-                        $base_url = $config["root_url"] . '/index.php/' . $this->get_root_alias();
+                        $base_url = $config["root_url"] . '/index.php/' . mle_tools::get_root_alias();
                     }
                     if (startswith($param->url, $base_url)) {
                         $results[] = $param;
@@ -219,6 +220,7 @@ class MleCMS extends CGExtensions {
             $cookie_domain = (strpos($pu_root_url['host'], '.') !== false) ? $pu_root_url['host'] : null;
             $cookie_secure = (isset($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) == 'on') ? true : false;
 
+
             switch ($this->GetPreference('mle_auto_redirect')) {
                 case 1:
                     $friendly_position = $smarty->get_template_vars('friendly_position');
@@ -230,7 +232,7 @@ class MleCMS extends CGExtensions {
                     }
             }
 
-            $alias = $this->get_root_alias();
+            $alias = mle_tools::get_root_alias();
             // alias
             if (!$alias)
                 return;
@@ -283,17 +285,6 @@ LEFT JOIN ' . cms_db_prefix() . 'content  content_hierchy ON (content_hierchy.hi
                 }
             }
         }
-    }
-
-    public function getLangsLocale() {
-        $alllangs = array(
-            "Afrikaans" => "af_ZA", "Български" => "bg_BG", "Català" => "ca_ES", "Česky" => "cs_CZ", "Dansk" => "da_DK", "Deutsch" => "de_DE", "Ελληνικα" => "el_GR", "English" => "en_US",
-            "Español" => "es_ES", "Eesti" => "et_EE", "Euskara" => "eu_ES", "Esperanto" => "eo_UY", "Suomi" => "fi_FI", "Français" => "fr_FR", "Magyar" => "hu_HU", "Bahasa Indonesia" => "id_ID", "Íslenska" => "is_IS", "Italiano" => "it_IT", "Hebrew" => "iw_IL",
-            "日本語" => "ja_JP", "Lietuvių" => "lt_LT", "Mongolian" => "mn_MN", "Norsk bokmål" => "nb_NO", "Nederlands" => "nl_NL", "Polski" => "pl_PL", "Português Brasileiro" => "pt_BR",
-            "Português" => "pt_PT", "Romansh" => "rm_CH", "Română" => "ro_RO", "Русский" => "ru_RU", "Slovenčina" => "sk_SK", "Slovenia" => "sl_SI", "српски Srpski" => "sr_YU", "Svenska" => "sv_SE", "Türkçe" => "tr_TR", "简体中文" => "zh_CN", "繁體中文" => "zh_TW",
-            $this->Lang("custom") => "custom"
-        );
-        return $alllangs;
     }
 
     public function getLangs($sortorder='ASC') {
@@ -377,35 +368,6 @@ LEFT JOIN ' . cms_db_prefix() . 'content  content_hierchy ON (content_hierchy.hi
             }
         }
         return false;
-    }
-
-    /**
-     * Root alias with cms cache
-     * @return <type>
-     */
-    public function get_root_alias() {
-        $alias = cms_utils::get_app_data('root_alias');
-        if ($alias)
-            return $alias;
-
-        $gCms = cmsms();
-        $contentops = $gCms->GetContentOperations();
-        $smarty = $gCms->GetSmarty();
-        if ($alias == '') {
-            $alias = $smarty->get_template_vars('page_alias');
-        }
-        $id = $contentops->GetPageIDFromAlias($alias);
-
-        while ($id > 0) {
-            $content = $contentops->LoadContentFromId($id);
-            if (!is_object($content))
-                return '';
-            $alias = $content->Alias();
-            $id = $content->ParentId();
-        }
-        cms_utils::set_app_data('root_alias', $alias);
-        return $alias;
-        ;
     }
 
 }

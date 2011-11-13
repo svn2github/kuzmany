@@ -30,7 +30,7 @@ if (!isset($gCms))
 
 $alias = $this->ProcessTemplateFromData($this->GetPreference('mle_id'));
 if (!$alias)
-    $alias = $this->get_root_alias();
+    $alias = mle_tools::get_root_alias();
 
 if (!$alias)
     return;
@@ -44,6 +44,12 @@ $smarty->assign('lang_parent', $lang["alias"]);
 $smarty->assign('lang_locale', $lang["locale"]);
 $smarty->assign('lang_extra', $lang["extra"]);
 $smarty->assign('lang_direction', $lang["direction"]);
-if (isSet($lang["locale"]) && empty($lang["locale"]) == false)
-    setlocale(LC_ALL, $lang["locale"]);
+if (isSet($lang["setlocale"]) && empty($lang["setlocale"]) == false)
+    eval('setlocale(' . $lang["setlocale"] . ');');
+    
+
+
+
+
+    
 ?>

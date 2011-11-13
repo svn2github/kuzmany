@@ -35,6 +35,7 @@ $flds = "
 	name C(64),
 	alias C(10),
 	locale C(10),
+	setlocale C(100),
 	direction C(10),
 	flag C(60),
 	extra C(60),
@@ -55,7 +56,7 @@ $this->CreatePermission('manage ' . MLE_BLOCK . 'mle', 'manage ' . MLE_BLOCK . '
 // preference
 $this->SetPreference('mle_hierarchy_switch', 1);
 $this->SetPreference('mle_auto_redirect', 0);
-$this->SetPreference('mle_id', '{MleCMS action="get_root_alias"}');
+$this->SetPreference('mle_id', '{get_root_alias}');
 $this->SetPreference('mle_separator', '/');
 $this->SetPreference('mle_search_restriction', 1);
 

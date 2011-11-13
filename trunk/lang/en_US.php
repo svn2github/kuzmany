@@ -30,8 +30,11 @@ $lang['rtl'] = 'Right-to-left text or table';
 $lang['direction'] = 'Direction';
 
 $lang['custom'] = 'Custom';
-$lang['locale_custom'] = 'Locale custom';
-$lang['locale'] = 'Locale';
+$lang['locale_custom'] = 'Locale custom for CMSMS';
+$lang['locale'] = 'Locale for CMSMS';
+$lang['setlocale'] = 'Set locale information (for advanced users)';
+$lang['documentation'] = 'Documentation';
+$lang['example'] = 'Example';
 $lang['flag'] = 'Flag';
 
 // Snippets
@@ -76,6 +79,7 @@ $lang['help_excludeprefix'] = 'exclude prefix (for langs action) ';
 $lang['help_includeprefix'] = 'include prefix (for langs action) ';
 
 $lang['changelog'] = '<ul>
+<li>Version 1.10.5 - november 2011 - setlocale, extra param</li>
 <li>Version 1.4 - 1.7 - april 2011 - som small updates</li>
 <li>Version 1.3 - january 2011 - new millestone - Mle Translator</li>
 <li>Version 1.2 - january 2011 - new millestone - auto redirection</li>
@@ -87,6 +91,8 @@ $lang['help'] = '<h3>What Does This Do?</h3>
 <p>This module add multilanguage solution to your CMS Made Simple.</p>
 <h3>How Do I Use It</h3>
 <p>Check installation guide <a href="http://cmsmadesimple.sk/modules/MleCMS/installation-guide.html">Installation Guide</a></p>
+<p>or</p>
+<p><a target="_blank" href="http://blog.arvixe.com/creating-a-multilingual-cmsms-site-using-mlecms-module/">Creating a Multilingual CMSMS Site Using MleCMS Module</a></p>
 <h3>Plugins</h3>
 <p><strong>Translate</strong> {translate text="some text"} or {translator}some text{/translator} or {"some text"|translate}</p>
 <p>Params</p>
@@ -99,7 +105,7 @@ $lang['help'] = '<h3>What Does This Do?</h3>
 <p>Params</p>
 <ul>
 <li>object or array (required) - object/array for mle assign</li>
-<li>par (required)  - par for find mutlilangue string (example: title and mle version  are  title_sk, title_de, title_fr)</li>
+<li>par (required)  - par for find mutlilangue string (example: title and mle version  are  title_sk, title_de, title_fr, where title is default string for default language. Great MLE solution in templates!!)</li>
 <li>assign (optional)  - assign to object</li>
 </ul>
 <br />

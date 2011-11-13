@@ -28,7 +28,7 @@
 if (!isset($gCms))
     exit;
 
-$value = $this->get_root_alias();
+$value = mle_tools::get_root_alias();
 
 echo $value;
 ?>

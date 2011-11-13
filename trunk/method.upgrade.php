@@ -89,7 +89,7 @@ switch ($current_version) {
     case "1.9":
         // delete any dependencies
         $query = "DELETE FROM " . cms_db_prefix() . "module_deps WHERE child_module = ? AND parent_module = ?";
-        $db->Execute($query, array($this->GetName(),'ContentCache'));
+        $db->Execute($query, array($this->GetName(), 'ContentCache'));
         $contentops = cmsms()->GetContentOperations();
         $contentops->ClearCache();
         $current_version = "1.9";
@@ -100,6 +100,13 @@ switch ($current_version) {
         $sqlarray = $dict->AddColumnSQL(cms_db_prefix() . 'module_mlecms_config', 'direction C(10)');
         $dict->ExecuteSQLArray($sqlarray);
         $current_version = "1.10.3";
+    case "1.10.3":
+        if ($this->GetPreference('mle_id') == '{MleCMS action="get_root_alias"}' || $this->GetPreference('mle_id') == "{MleCMS action='get_root_alias'}")
+            $this->SetPreference('mle_id', '{get_root_alias}');
+    case "1.10.4":
+        $sqlarray = $dict->AddColumnSQL(cms_db_prefix() . 'module_mlecms_config', 'setlocale C(100)');
+        $dict->ExecuteSQLArray($sqlarray);
+        $current_version = "1.10.5";
 }
 
 // put mention into the admin log

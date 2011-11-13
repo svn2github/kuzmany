@@ -66,6 +66,11 @@ if (isset($params['extra'])) {
     $extra = $params['extra'];
 }
 
+$setlocale = '';
+if (isset($params['setlocale'])) {
+    $setlocale = $params['setlocale'];
+}
+
 $direction = '';
 if (isset($params['direction'])) {
     $direction = $params['direction'];
@@ -118,9 +123,9 @@ if (isset($params['submit'])) {
         // insert the order record
         $sort = $db->GetOne('SELECT MAX(sort) FROM ' . cms_db_prefix() . 'module_mlecms_config');
         $query = 'INSERT INTO ' . cms_db_prefix() . 'module_mlecms_config
-		(name,alias,extra,locale,direction,flag,sort,created_date,modified_date)
-		VALUES (?,?,?,?,?,?,?,NOW(),NOW())';
-        $dbr = $db->Execute($query, array($name, $alias, $extra, $locale, $direction, $flag, ($sort + 1)));
+		(name,alias,extra,locale,setlocale,direction,flag,sort,created_date,modified_date)
+		VALUES (?,?,?,?,?,?,?,?,NOW(),NOW())';
+        $dbr = $db->Execute($query, array($name, $alias, $extra, $locale,$setlocale, $direction, $flag, ($sort + 1)));
         $cid = $db->Insert_ID();
         if (!$cid) {
             echo $this->ShowErrors($this->Lang('nonamegiven'));
@@ -131,11 +136,12 @@ if (isset($params['submit'])) {
                 alias = ?,
                 extra = ?,
                 locale = ?,
+                setlocale = ?,
                 direction = ?,
                 flag  = ?,
                 modified_date = NOW()
 		WHERE id = ?';
-        $dbr = $db->Execute($query, array($name, $alias, $extra, $locale, $direction, $flag, $compid));
+        $dbr = $db->Execute($query, array($name, $alias, $extra, $locale,$setlocale, $direction, $flag, $compid));
         $cid = $compid;
     }
 
@@ -161,6 +167,8 @@ if ($compid) {
         $extra = $row["extra"];
     if ($row["locale"])
         $locale = $row["locale"];
+    if ($row["setlocale"])
+        $setlocale = $row["setlocale"];
     if ($row["direction"])
         $direction = $row["direction"];
     if ($row["flag"])
@@ -174,10 +182,11 @@ $this->smarty->assign('endform', $this->CreateFormEnd());
 $this->smarty->assign('name', $this->CreateInputText($id, 'name', $name, 50, 255));
 $this->smarty->assign('alias', $this->CreateInputText($id, 'alias', $alias, 50, 255));
 $this->smarty->assign('extra', $this->CreateInputText($id, 'extra', $extra, 50, 255));
+$this->smarty->assign('setlocale', $this->CreateInputText($id, 'setlocale', $setlocale, 50, 100));
 
 $this->smarty->assign('direction', $this->CreateInputDropdown($id, 'direction', $directions, -1, $direction));
-$this->smarty->assign('locale', $this->CreateInputDropdown($id, 'locale', $this->getLangsLocale(), -1, (array_search($locale,$this->getLangsLocale()) ? $locale : "custom")));
-$this->smarty->assign('locale_custom', $this->CreateInputText($id, 'locale_custom', (array_search($locale,$this->getLangsLocale()) ? "" : $locale), 50, 255));
+$this->smarty->assign('locale', $this->CreateInputDropdown($id, 'locale', mle_tools::getLangsLocale(), -1, (array_search($locale,mle_tools::getLangsLocale()) ? $locale : "custom")));
+$this->smarty->assign('locale_custom', $this->CreateInputText($id, 'locale_custom', (array_search($locale,mle_tools::getLangsLocale()) ? "" : $locale), 50, 255));
 $this->smarty->assign('flag', $flag);
 $this->smarty->assign('submit', $this->CreateInputSubmit($id, 'submit', $this->lang('submit')));
 $this->smarty->assign('cancel', $this->CreateInputSubmit($id, 'cancel', $this->lang('cancel')));

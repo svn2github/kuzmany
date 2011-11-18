@@ -44,7 +44,7 @@ class MleCMS extends CGExtensions {
     }
 
     public function AllowAutoUpgrade() {
-        return FALSE;
+        return TRUE;
     }
 
     function GetName() {
@@ -56,7 +56,7 @@ class MleCMS extends CGExtensions {
     }
 
     function GetVersion() {
-        return '1.10.5';
+        return '1.10.6';
     }
 
     function GetHelp() {

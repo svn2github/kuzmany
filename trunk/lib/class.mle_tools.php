@@ -44,6 +44,17 @@ class mle_tools {
         return $alllangs;
     }
 
+    public static function get_lang($lang_id) {
+        $lang = cms_utils::get_app_data(__CLASS__ . __FUNCTION__ . $lang_id);
+        if ($lang)
+            return $lang;
+        $db = cmsms()->GetDb();
+        $query = 'SELECT * FROM ' . cms_db_prefix() . 'module_mlecms_config WHERE id = ?';
+        $lang = $db->GetRow($query, array($lang_id));
+        cms_utils::set_app_data(__CLASS__ . __FUNCTION__ . $lang_id, $lang);
+        return $lang;
+    }
+
 }
 
 ?>

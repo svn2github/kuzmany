@@ -76,34 +76,22 @@ if (isset($params['direction'])) {
     $direction = $params['direction'];
 }
 
-$locale = get_site_preference('frontendlang','');
+$locale = get_site_preference('frontendlang', '');
 if (isset($params['locale'])) {
     $locale = $params['locale'];
 }
 
 $locale_custom = '';
-if (isset($params['locale_custom']) && empty($params['locale_custom']) == false  && $locale == 'custom') {
+if (isset($params['locale_custom']) && empty($params['locale_custom']) == false && $locale == 'custom') {
     $locale = $params['locale_custom'];
 }
 
 
 $flag = '';
-/*
-  if (isset($params['flag'])) {
-  $flag = $params['flag'];
-  } */
 
 if (isset($params['submit'])) {
 
     $destdir = cms_join_path($gCms->config['image_uploads_path'], $this->GetName());
-
-    // handle image delete first
-    if (isset($params['deleteimg'])) {
-        $srcname = cms_join_path($destdir, $params['deleteimg']);
-        @unlink($srcname);
-        $flag = '';
-    }
-
 
     $errors = array();
     if (!is_dir($destdir))
@@ -113,10 +101,23 @@ if (isset($params['submit'])) {
     $handler->set_allow_overwrite(true);
     $res = $handler->handle_upload('flag', '', '');
     $err = $handler->get_error();
-    if ($res === FALSE)
-        $flag = '';
-    else
+    if ($res === FALSE) {
+        if (empty($compid) == false) {
+            // load flag from DB
+            $tmp_lang = mle_tools::get_lang($compid);
+            $flag = $tmp_lang["flag"];
+        }
+    } else {
         $flag = 'images/' . $this->GetName() . '/' . $res;
+    }
+
+    // handle image delete first
+    if (isset($params['deleteimg'])) {
+        $srcname = cms_join_path($destdir, $params['deleteimg']);
+        @unlink($srcname);
+        $flag = '';
+    }
+
 
 
     if ($compid == "") {
@@ -125,7 +126,7 @@ if (isset($params['submit'])) {
         $query = 'INSERT INTO ' . cms_db_prefix() . 'module_mlecms_config
 		(name,alias,extra,locale,setlocale,direction,flag,sort,created_date,modified_date)
 		VALUES (?,?,?,?,?,?,?,?,NOW(),NOW())';
-        $dbr = $db->Execute($query, array($name, $alias, $extra, $locale,$setlocale, $direction, $flag, ($sort + 1)));
+        $dbr = $db->Execute($query, array($name, $alias, $extra, $locale, $setlocale, $direction, $flag, ($sort + 1)));
         $cid = $db->Insert_ID();
         if (!$cid) {
             echo $this->ShowErrors($this->Lang('nonamegiven'));
@@ -141,7 +142,7 @@ if (isset($params['submit'])) {
                 flag  = ?,
                 modified_date = NOW()
 		WHERE id = ?';
-        $dbr = $db->Execute($query, array($name, $alias, $extra, $locale,$setlocale, $direction, $flag, $compid));
+        $dbr = $db->Execute($query, array($name, $alias, $extra, $locale, $setlocale, $direction, $flag, $compid));
         $cid = $compid;
     }
 
@@ -185,8 +186,8 @@ $this->smarty->assign('extra', $this->CreateInputText($id, 'extra', $extra, 50, 
 $this->smarty->assign('setlocale', $this->CreateInputText($id, 'setlocale', $setlocale, 50, 100));
 
 $this->smarty->assign('direction', $this->CreateInputDropdown($id, 'direction', $directions, -1, $direction));
-$this->smarty->assign('locale', $this->CreateInputDropdown($id, 'locale', mle_tools::getLangsLocale(), -1, (array_search($locale,mle_tools::getLangsLocale()) ? $locale : "custom")));
-$this->smarty->assign('locale_custom', $this->CreateInputText($id, 'locale_custom', (array_search($locale,mle_tools::getLangsLocale()) ? "" : $locale), 50, 255));
+$this->smarty->assign('locale', $this->CreateInputDropdown($id, 'locale', mle_tools::getLangsLocale(), -1, (array_search($locale, mle_tools::getLangsLocale()) ? $locale : "custom")));
+$this->smarty->assign('locale_custom', $this->CreateInputText($id, 'locale_custom', (array_search($locale, mle_tools::getLangsLocale()) ? "" : $locale), 50, 255));
 $this->smarty->assign('flag', $flag);
 $this->smarty->assign('submit', $this->CreateInputSubmit($id, 'submit', $this->lang('submit')));
 $this->smarty->assign('cancel', $this->CreateInputSubmit($id, 'cancel', $this->lang('cancel')));

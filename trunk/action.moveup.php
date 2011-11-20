@@ -25,14 +25,16 @@
 #
 #-------------------------------------------------------------------------
 
+
 if (!isset($gCms)) exit;
 
 if (!$this->CheckAccess()) {
     echo $this->ShowErrors($this->Lang('accessdenied')); return;
 }
 
+
 if (!isset($params['compid'])) {
-    $this->RedirectToTab();
+    $this->RedirectToTab($id);
     exit;
 }
 
@@ -42,7 +44,7 @@ $db->Execute('UPDATE  ' . cms_db_prefix() . 'module_mlecms_config SET sort  =  ?
 
 @$this->SendEvent('LangEdited', array());
 
-$this->RedirectToTab();
+$this->RedirectToTab($id);
 exit;
 
 ?>

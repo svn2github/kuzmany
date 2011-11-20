@@ -27,23 +27,25 @@
 
 if (!isset($gCms)) exit;
 
-if (!$this->CheckAccess("")) {
+if (!$this->CheckAccess()) {
     echo $this->ShowErrors($this->Lang('accessdenied')); return;
 }
 
+
 if (!isset($params['compid'])) {
-    $this->RedirectToTab();
+    $this->RedirectToTab($id);
     exit;
 }
 
 $sort = $db->GetOne('SELECT sort FROM ' . cms_db_prefix() . 'module_mlecms_config WHERE id = ?',array($params["compid"]));
+
 
 $db->Execute('UPDATE ' . cms_db_prefix() . 'module_mlecms_config SET sort  =  ? WHERE sort > ? LIMIT 1',array(($sort),$sort));
 $db->Execute('UPDATE ' . cms_db_prefix() . 'module_mlecms_config SET sort  =  ? WHERE id = ? LIMIT 1',array(($sort+1),$params["compid"]));
 
 @$this->SendEvent('LangEdited', array());
 
-$this->RedirectToTab();
+$this->RedirectToTab($id);
 exit;
 
 ?>

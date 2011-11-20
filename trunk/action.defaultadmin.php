@@ -31,6 +31,8 @@
 if (!isset($gCms))
     exit;
 
+
+
 if (is_array($this->GetDependencies())) {
     foreach ($this->GetDependencies() as $module => $module_version) {
         if (!cms_utils::get_module($module)) {
@@ -120,6 +122,5 @@ if ($this->CheckPermission('Modify Site Preferences')) {
     include(dirname(__FILE__) . '/function.admin_optionstab.php');
     echo $this->EndTab();
 }
-
 echo $this->EndTabContent();
 ?>

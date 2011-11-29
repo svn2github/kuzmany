@@ -107,6 +107,8 @@ class mle_smarty {
             $value = $object->$par;
             if ($object->$mle_par != "")
                 $value = $object->$mle_par;
+            elseif (isSet($params["nodefault"]) && $params["nodefault"] != $lang_parent)
+                $value = '';
             $object->$par = $value;
         }
 
@@ -114,9 +116,12 @@ class mle_smarty {
             $value = $object[$par];
             if ($object[$mle_par] != "")
                 $value = $object[$mle_par];
+            elseif (isSet($params["nodefault"]) && $params["nodefault"] != $lang_parent)
+                $value = '';
 
             $object[$par] = $value;
         }
+
 
         if (isSet($params["assign"]))
             $smarty->assign($params["assign"], $object);

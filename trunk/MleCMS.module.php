@@ -135,11 +135,11 @@ class MleCMS extends CGExtensions {
     }
 
     function GetDependencies() {
-        return array('CGExtensions' => '1.23');
+        return array('CGExtensions' => '1.27');
     }
 
     function MinimumCMSVersion() {
-        return "1.9.4";
+        return "1.10.2";
     }
 
     function InstallPostMessage() {

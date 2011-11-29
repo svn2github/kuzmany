@@ -40,7 +40,7 @@ if (!isset($params['compid'])) {
 $sort = $db->GetOne('SELECT sort FROM ' . cms_db_prefix() . 'module_mlecms_config WHERE id = ?',array($params["compid"]));
 
 
-$db->Execute('UPDATE ' . cms_db_prefix() . 'module_mlecms_config SET sort  =  ? WHERE sort > ? LIMIT 1',array(($sort),$sort));
+$db->Execute('UPDATE ' . cms_db_prefix() . 'module_mlecms_config SET sort  =  ? WHERE sort > ? ORDER BY sort ASC LIMIT 1',array(($sort),$sort));
 $db->Execute('UPDATE ' . cms_db_prefix() . 'module_mlecms_config SET sort  =  ? WHERE id = ? LIMIT 1',array(($sort+1),$params["compid"]));
 
 @$this->SendEvent('LangEdited', array());

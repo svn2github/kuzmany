@@ -83,14 +83,12 @@ switch ($current_version) {
         $this->CreatePermission('manage translator_mle', 'manage translator_mle');
         $current_version = "1.7";
     case "1.8":
-        cmsms()->clear_cached_files();
         $current_version = "1.9";
     case "1.9":
         // delete any dependencies
         $query = "DELETE FROM " . cms_db_prefix() . "module_deps WHERE child_module = ? AND parent_module = ?";
         $db->Execute($query, array($this->GetName(), 'ContentCache'));
         $contentops = cmsms()->GetContentOperations();
-        cmsms()->clear_cached_files();
         $current_version = "1.9";
     case "1.10.1":
         $sqlarray = $dict->AddColumnSQL(cms_db_prefix() . 'module_mlecms_config', 'extra C(60)');

@@ -45,7 +45,7 @@ $smarty->assign('lang_locale', $lang["locale"]);
 $smarty->assign('lang_extra', $lang["extra"]);
 $smarty->assign('lang_direction', $lang["direction"]);
 if (isSet($lang["setlocale"]) && empty($lang["setlocale"]) == false)
-    eval('setlocale(' . $lang["setlocale"] . ');');
+    setlocale(LC_ALL, $lang["setlocale"]);
     
 
 

@@ -103,7 +103,11 @@ switch ($current_version) {
     case "1.10.4":
         $sqlarray = $dict->AddColumnSQL(cms_db_prefix() . 'module_mlecms_config', 'setlocale C(100)');
         $dict->ExecuteSQLArray($sqlarray);
-        $current_version = "1.10.5";
+    case "1.10.5":
+        $query = "UPDATE " . cms_db_prefix() . "module_mlecms_config SET setlocale = ''";
+        $db->Execute($query, array());
+        
+        $current_version = "1.10.6";
 }
 
 // put mention into the admin log

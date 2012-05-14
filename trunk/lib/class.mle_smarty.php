@@ -171,7 +171,7 @@ class mle_smarty {
     }
 
     public static function get_root_alias() {
-        mle_tools::get_root_alias();
+        return mle_tools::get_root_alias();
     }
 
 }

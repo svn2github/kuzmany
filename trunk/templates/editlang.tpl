@@ -70,7 +70,7 @@ $(document).ready(function(){
     <p class="pageinput">
 	{$setlocale}
 <br >{$mod->Lang('documentation')}: <a target="_blank" href="http://www.php.net/setlocale">www.php.net/setlocale</a> 
-<br >{$mod->Lang('example')}:  LC_ALL, 'de_DE@euro', 'de_DE', 'de', 'ge'
+<br >{$mod->Lang('example')}:  de_DE@euro
     </p>
 </div>
 

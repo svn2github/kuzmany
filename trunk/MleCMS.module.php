@@ -81,10 +81,10 @@ class MleCMS extends CGExtensions {
 
     function HasAdmin() {
         return ($this->CheckAccess()
-        || $this->CheckAccess('manage ' . MLE_SNIPPET . 'mle')
-        || $this->CheckAccess('manage ' . MLE_BLOCK . 'mle')
-        || $this->CheckAccess('manage translator_mle')
-        );
+                || $this->CheckAccess('manage ' . MLE_SNIPPET . 'mle')
+                || $this->CheckAccess('manage ' . MLE_BLOCK . 'mle')
+                || $this->CheckAccess('manage translator_mle')
+                );
     }
 
     /**
@@ -94,7 +94,7 @@ class MleCMS extends CGExtensions {
      * @param type $params
      * @param type $returnid 
      */
-    public function DoAction($name, $id, $params, $returnid='') {
+    public function DoAction($name, $id, $params, $returnid = '') {
         switch ($name) {
             case "translator":
                 if ($this->GetPreference('translator_action_params') != "") {
@@ -287,7 +287,7 @@ LEFT JOIN ' . cms_db_prefix() . 'content  content_hierchy ON (content_hierchy.hi
         }
     }
 
-    public function getLangs($sortorder='ASC') {
+    public function getLangs($sortorder = 'ASC') {
         $langs = cms_utils::get_app_data('langs');
         if ($langs)
             return $langs;
@@ -307,7 +307,8 @@ LEFT JOIN ' . cms_db_prefix() . 'content  content_hierchy ON (content_hierchy.hi
             if (isSet($params["name"])) {
                 if (!isSet($params["source"])) {
                     $source_array = json_decode($this->GetTemplate($params["name"]));
-                    $source = $source_array->$lang["alias"];
+                    if (isSet($source_array->$lang["alias"]))
+                        $source = $source_array->$lang["alias"];
                 } else {
                     $source = $params["source"][$lang["alias"]];
                 }

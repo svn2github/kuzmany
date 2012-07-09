@@ -1,4 +1,4 @@
-{if isSet($title_section)}}<h3>{$title_section}</h3>{/if}
+{if isset($title_section)}}<h3>{$title_section}</h3>{/if}
 
 {if $snippets|@count > 0}
 <table cellspacing="0" class="pagetable">

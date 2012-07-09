@@ -209,8 +209,9 @@ class Translation {
             if (!cge_dir::mkdirr($storePath))
                 throw new Exception(__CLASS__ . ' :: Cannot create store folder');
 
-        if (!file_exists($storePath . DIR_SEP . $filename))
-            if (!file_put_contents($storePath . DIR_SEP . $filename, "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\" ?><root><items lang=\"" . substr($filename, 0, 5) . "\"></items></root>"))
+            
+        if (!file_exists($storePath . DIRECTORY_SEPARATOR . $filename))
+            if (!file_put_contents($storePath . DIRECTORY_SEPARATOR . $filename, "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\" ?><root><items lang=\"" . substr($filename, 0, 5) . "\"></items></root>"))
                 throw new Exception(__CLASS__ . ' :: Cannot create new language file with filename "' . $filename . '"');
 
         return true;

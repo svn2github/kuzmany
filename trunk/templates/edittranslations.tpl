@@ -7,9 +7,9 @@
 </style>
 {/literal}
 
-{if isSet($langsArray)}{assign var=pLangs value=$langsArray.langs}{/if}
-{if isSet($pLangs[0])}{assign var=firstLang value=$pLangs[0].locale}{/if}
-{if isSet($langsArray.xml)}{assign var=xml value=$langsArray.xml}{/if}
+{if isset($langsArray)}{assign var=pLangs value=$langsArray.langs}{/if}
+{if isset($pLangs[0])}{assign var=firstLang value=$pLangs[0].locale}{/if}
+{if isset($langsArray.xml)}{assign var=xml value=$langsArray.xml}{/if}
 
 <table id="trans" cellspacing="0" class="pagetable">
 

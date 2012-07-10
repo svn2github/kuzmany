@@ -139,8 +139,9 @@ class MleCMS extends CGExtensions {
     }
 
     function MinimumCMSVersion() {
-        return "1.10.2";
+        return "1.11";
     }
+
 
     function InstallPostMessage() {
         return $this->Lang('postinstall');
@@ -182,6 +183,10 @@ class MleCMS extends CGExtensions {
     }
 
     function LazyLoadFrontend() {
+        return FALSE;
+    }
+
+    function LazyLoadAdmin() {
         return TRUE;
     }
 

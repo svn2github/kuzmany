@@ -28,6 +28,7 @@
 if (!isset($gCms))
     exit;
 
+
 $alias = $this->ProcessTemplateFromData($this->GetPreference('mle_id'));
 if (!$alias)
     $alias = mle_tools::get_root_alias();
@@ -44,12 +45,7 @@ $smarty->assign('lang_parent', $lang["alias"]);
 $smarty->assign('lang_locale', $lang["locale"]);
 $smarty->assign('lang_extra', $lang["extra"]);
 $smarty->assign('lang_direction', $lang["direction"]);
-if (isSet($lang["setlocale"]) && empty($lang["setlocale"]) == false)
-    setlocale(LC_ALL, $lang["setlocale"]);
-    
-
-
-
+CmsNlsOperations::set_language($lang["locale"]);
 
     
 ?>

@@ -29,6 +29,8 @@
 if (!isset($gCms))
     exit;
 
+$taboptarray = array('mysql' => 'TYPE=MyISAM');
+
 // Creates the otazky table
 $flds = "
 	id I KEY AUTO,

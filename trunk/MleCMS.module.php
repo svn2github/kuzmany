@@ -27,7 +27,9 @@
 #-------------------------------------------------------------------------
 
 
-$cgextensions = cms_join_path($gCms->config['root_path'], 'modules', 'CGExtensions', 'CGExtensions.module.php');
+$config = cmsms()->GetConfig();
+
+$cgextensions = cms_join_path($config['root_path'], 'modules', 'CGExtensions', 'CGExtensions.module.php');
 if (!is_readable($cgextensions)) {
     echo '<h1><font color="red">ERROR: The CGExtensions module could not be found.</font></h1>';
     return;

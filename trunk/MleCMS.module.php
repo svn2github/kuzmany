@@ -141,7 +141,7 @@ class MleCMS extends CGExtensions {
     }
 
     function MinimumCMSVersion() {
-        return "1.10";
+        return "1.11-beta";
     }
 
 

@@ -33,11 +33,13 @@ class mle_smarty {
      */
     public static function init() {
         $smarty = cmsms()->GetSmarty();
-        $smarty->register_function('mle_assign', array('mle_smarty', 'mle_assign'));
+        // translators
         $smarty->register_function('translate', array('mle_smarty', 'translator'));
-        $smarty->register_function('mle_search_checker', array('mle_smarty', 'mle_search_checker'));
         $smarty->register_block('translator', array('mle_smarty', 'translator_block'));
         $smarty->register_modifier('translate', array('mle_smarty', 'translator_modifier'));
+
+        $smarty->register_function('mle_assign', array('mle_smarty', 'mle_assign'));
+        $smarty->register_function('mle_search_checker', array('mle_smarty', 'mle_search_checker'));
         $smarty->register_function('get_root_alias', array('mle_smarty', 'get_root_alias'));
     }
 

@@ -46,6 +46,7 @@ $smarty->assign('lang_locale', $lang["locale"]);
 $smarty->assign('lang_extra', $lang["extra"]);
 $smarty->assign('lang_direction', $lang["direction"]);
 CmsNlsOperations::set_language($lang["locale"]);
-
-    
+$ln = CmsNlsOperations::get_language_info($lang["locale"]);
+if (is_object($ln))
+    setlocale(LC_ALL, $ln->locale());
 ?>

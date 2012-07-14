@@ -65,6 +65,7 @@ $(document).ready(function(){
     </p>
 </div>
 
+    {*
 <div class="pageoverflow locale">
     <p class="pagetext">{$mod->Lang('setlocale')}:</p>
     <p class="pageinput">
@@ -72,7 +73,7 @@ $(document).ready(function(){
 <br >{$mod->Lang('documentation')}: <a target="_blank" href="http://www.php.net/setlocale">www.php.net/setlocale</a> 
 <br >{$mod->Lang('example')}:  de_DE@euro
     </p>
-</div>
+</div>*}
 
 
 <div class="pageoverflow">

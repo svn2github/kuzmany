@@ -79,6 +79,7 @@ $lang['help_excludeprefix'] = 'exclude prefix (for langs action) ';
 $lang['help_includeprefix'] = 'include prefix (for langs action) ';
 
 $lang['changelog'] = '<ul>
+<li>Version 1.11 - july 2012 - CMSMS 1.11 support</li>
 <li>Version 1.10.5 - november 2011 - setlocale, extra param</li>
 <li>Version 1.4 - 1.7 - april 2011 - som small updates</li>
 <li>Version 1.3 - january 2011 - new millestone - Mle Translator</li>

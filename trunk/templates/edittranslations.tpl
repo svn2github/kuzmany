@@ -21,7 +21,6 @@
         <th class="pageicon"></th>
     </tr>
 
-    <br />
 
 
 
@@ -53,6 +52,10 @@
 {literal}
 <script type="text/javascript">
 
+{/literal}
+    var areyousure = "{$mod->Lang('areyousure')}";
+    {literal}
+
     $(window).load(function(){
        //$('#trans .keys td').css('width', $('#trans').width() / $('#trans th').size());
     });
@@ -66,7 +69,7 @@
 
         /** remove events */
         $('#trans .del').bind('click', function(event){
-            var confirmBox = window.confirm('Are you sure?');
+            var confirmBox = window.confirm(areyousure);
             if (confirmBox){
                 $.myvars = {};
                 $.myvars.thisObj = $(this);
@@ -92,7 +95,9 @@
                         });
                     }
                 });
-            } // end confirmBox
+            }else{
+                return false;
+                    } // end confirmBox
         })
 
         /** update events */

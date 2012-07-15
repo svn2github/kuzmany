@@ -51,11 +51,11 @@ INNER JOIN ' . cms_db_prefix() . 'content  content ON content.content_alias = ml
 LEFT JOIN ' . cms_db_prefix() . 'content  content_hierchy ON (content_hierchy.hierarchy = CONCAT(content.hierarchy,?))';
     $query.=' WHERE 1';
     
-    if(isSet($params["includeprefix"])){
+    if(isset($params["includeprefix"])){
         $query.= ' AND LEFT(mle.alias,'.  strlen($params["includeprefix"]).') = ?';
         $parms[] = $params["includeprefix"];
     }
-    if(isSet($params["excludeprefix"])){
+    if(isset($params["excludeprefix"])){
         $query.= ' AND LEFT(mle.alias,'.  strlen($params["excludeprefix"]).') != ?';
         $parms[] = $params["excludeprefix"];
     }

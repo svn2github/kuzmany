@@ -92,40 +92,40 @@ class mle_smarty {
      */
     public static function mle_assign($params, &$smarty) {
 
-        if ((!isSet($params["array"]) && (!isSet($params["object"]) || !is_object($params["object"]) )) || !isSet($params["par"]))
+        if ((!isset($params["array"]) && (!isset($params["object"]) || !is_object($params["object"]) )) || !isset($params["par"]))
             return;
 
         $smarty = cmsms()->GetSmarty();
         $lang_parent = $smarty->get_template_vars('lang_parent');
-        if (isSet($params["object"]))
+        if (isset($params["object"]))
             $object = $params["object"];
-        if (isSet($params["array"]))
+        if (isset($params["array"]))
             $object = $params["array"];
         $par = $params["par"];
         $mle_par = $params["par"] . '_' . $lang_parent;
 
 
-        if (isSet($params["object"])) {
+        if (isset($params["object"])) {
             $value = $object->$par;
             if ($object->$mle_par != "")
                 $value = $object->$mle_par;
-            elseif (isSet($params["nodefault"]) && $params["nodefault"] != $lang_parent)
+            elseif (isset($params["nodefault"]) && $params["nodefault"] != $lang_parent)
                 $value = '';
             $object->$par = $value;
         }
 
-        if (isSet($params["array"])) {
+        if (isset($params["array"])) {
             $value = $object[$par];
             if ($object[$mle_par] != "")
                 $value = $object[$mle_par];
-            elseif (isSet($params["nodefault"]) && $params["nodefault"] != $lang_parent)
+            elseif (isset($params["nodefault"]) && $params["nodefault"] != $lang_parent)
                 $value = '';
 
             $object[$par] = $value;
         }
 
 
-        if (isSet($params["assign"]))
+        if (isset($params["assign"]))
             $smarty->assign($params["assign"], $object);
         else
             echo $value;
@@ -139,7 +139,7 @@ class mle_smarty {
      */
     public static function mle_search_checker($params, &$smarty) {
 
-        if (!isSet($params["from"]) || !isSet($params["select"]))
+        if (!isset($params["from"]) || !isset($params["select"]))
             return;
 
         $where = '';
@@ -166,7 +166,7 @@ class mle_smarty {
             cms_utils::set_app_data($key, $value);
         }
 
-        if (isSet($params["assign"]))
+        if (isset($params["assign"]))
             $smarty->assign($params["assign"], $value);
         else
             echo $value;

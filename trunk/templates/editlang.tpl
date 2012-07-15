@@ -59,9 +59,9 @@ $(document).ready(function(){
     <p class="pagetext">{$mod->Lang('flag')}:</p>
     <p class="pageinput">
 	     {if isset($flag) && !empty($flag) && $flag != '0'}{$flag}<br/>
-       {$mod->Lang('delete')}:<input type="checkbox" name="{$mod->GetActionId()}deleteimg" value="{$flag}"><br/>
+       {$mod->Lang('delete')}:<input type="checkbox" name="{$mod->GetActionId()}deleteimg" value="{$flag}" /><br/>
      {/if}
-        <input type="file" name="{$actionid}flag" size="50" maxlength="255">
+        <input type="file" name="{$actionid}flag" size="50" maxlength="255" />
     </p>
 </div>
 

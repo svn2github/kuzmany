@@ -1,6 +1,6 @@
 <div style="clear:both" class="pageoptions"><p class="pageoptions">{$addlink}</p></div>
 {if $itemcount > 0}
-<table cellspacing="0" class="pagetable">
+<table cellspacing="0"  class="pagetable">
 	<thead>
 		<tr>
 			<th>{$mod->Lang('idtext')}</th>

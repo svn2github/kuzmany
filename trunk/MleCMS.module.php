@@ -200,7 +200,7 @@ class MleCMS extends CGExtensions {
             $results = array();
             $search_results = $params[1];
             foreach ($search_results as $param) {
-                if (isSet($param->module) && isSet($param->modulerecord)) {
+                if (isset($param->module) && isset($param->modulerecord)) {
                     $results[] = $param;
                 } else {
                     // only for url_rewriting
@@ -311,10 +311,10 @@ LEFT JOIN ' . cms_db_prefix() . 'content  content_hierchy ON (content_hierchy.hi
         $entryarray = array();
         $source = '';
         foreach ($langs as $lang) {
-            if (isSet($params["name"])) {
-                if (!isSet($params["source"])) {
+            if (isset($params["name"])) {
+                if (!isset($params["source"])) {
                     $source_array = json_decode($this->GetTemplate($params["name"]));
-                    if (isSet($source_array->$lang["alias"]))
+                    if (isset($source_array->$lang["alias"]))
                         $source = $source_array->$lang["alias"];
                 } else {
                     $source = $params["source"][$lang["alias"]];

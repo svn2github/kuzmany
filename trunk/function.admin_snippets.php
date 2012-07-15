@@ -53,9 +53,8 @@ foreach ($template_list as $template)
 {
 	$onerow = new stdClass();
 	$onerow->name = $template;
-	$onerow->deletelink = $this->CreateLink($id, 'deleteSnippet', $returnid, $gCms->variables['admintheme']->DisplayImage('icons/system/delete.gif', $this->Lang('delete_snippet'),'','','systemicon'), array('name'=>$template,'prefix'=>$prefix), $this->Lang('areyousure'));
-	$onerow->editlink = $this->CreateLink($id, 'manageSnippet', $returnid, $gCms->variables['admintheme']->DisplayImage('icons/system/edit.gif', $this->Lang('edit_snippet'),'','','systemicon'), array('name'=>$template,'prefix'=>$prefix,'wysiwyg'=>$wysiwyg));
-	$onerow->export = $this->CreateLink($id, 'exportSnippet', $returnid, $gCms->variables['admintheme']->DisplayImage('icons/system/export.gif', $this->Lang('export_snippet'),'','','systemicon'), array('name'=>$template,'prefix'=>$prefix, 'disable_theme' => 'true'));
+	$onerow->deletelink = $this->CreateLink($id, 'deleteSnippet', $returnid, cmsms()->get_variable('admintheme')->DisplayImage('icons/system/delete.gif', $this->Lang('delete'),'','','systemicon'), array('name'=>$template,'prefix'=>$prefix), $this->Lang('areyousure'));
+	$onerow->editlink = $this->CreateLink($id, 'manageSnippet', $returnid, cmsms()->get_variable('admintheme')->DisplayImage('icons/system/edit.gif', $this->Lang('edit'),'','','systemicon'), array('name'=>$template,'prefix'=>$prefix,'wysiwyg'=>$wysiwyg));
 	$onerow->edit = $this->CreateLink($id, 'manageSnippet', $returnid,$template, array('name'=>$template,'prefix'=>$prefix,'wysiwyg'=>$wysiwyg));
 	$onerow->rowclass = $rowclass;
 	$templates[] = $onerow;
@@ -74,7 +73,7 @@ $this->smarty->assign('addSnippetLink',$this->CreateLink($id,
 
 $this->smarty->assign('addSnippetIcon',$this->CreateLink($id,
 				'manageSnippet', '',
-				$gCms->variables['admintheme']->DisplayImage('icons/system/newobject.gif', $this->Lang('add_snippet'),'',
+				cmsms()->get_variable('admintheme')->DisplayImage('icons/system/newobject.gif', $this->Lang('add_snippet'),'',
 					'','systemicon'), array('prefix'=>$prefix,'wysiwyg'=>$wysiwyg)));
 
 // Import section

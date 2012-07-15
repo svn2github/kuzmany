@@ -221,7 +221,7 @@ class Translation {
         $smarty = cmsms()->GetSmarty();
 
         // do nothing
-        if (!isSet($params['text']))
+        if (!isset($params['text']))
             return;
 
         $vars['editKey'] = $params['text'];
@@ -231,10 +231,10 @@ class Translation {
         // set lang key
         if ($smarty->get_template_vars('lang_locale'))
             self::$defFile = $smarty->get_template_vars('lang_locale');
-
+        
         $lang_value = self::getValue($vars);
 
-        if (isSet($params["assign"]))
+        if (isset($params["assign"]))
             $smarty->assign($params["assign"], $lang_value);
         else
             echo $lang_value;

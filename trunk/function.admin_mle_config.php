@@ -32,7 +32,7 @@ if (!isset($gCms))
 $query = "SELECT * FROM " . cms_db_prefix() . "module_mlecms_config ORDER BY sort ASC";
 $dbresult = $db->Execute($query);
 
-$admintheme = & cmsms()->get_variable('admintheme');
+$admintheme = cmsms()->get_variable('admintheme');
 global $themeObject;
 $numrows = $dbresult->NumRows();
 $index = 0;

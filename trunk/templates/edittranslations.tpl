@@ -10,6 +10,7 @@
 <table id="trans" cellspacing="0" class="pagetable">
 
     <tr id="label">
+        <th><span></span></th>
         {foreach from=$langsArray item=pLang}
             <th><span>{$pLang.name}</span></th>
         {/foreach}
@@ -22,6 +23,9 @@
 
     {foreach from=$keysArray item=items key=key name="itemsLoop"}
              <tr id="{$key}" class="keys{if $smarty.foreach.itemsLoop.index is odd} row2{else} row1{/if}">
+                 <td>
+                     {$key}
+                 </td>
         {foreach from=$langsArray item=pLang}
             {assign var="locale" value=$pLang.locale}
                 <td data-lang="{$pLang.locale}">

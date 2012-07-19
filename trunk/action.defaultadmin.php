@@ -31,8 +31,6 @@
 if (!isset($gCms))
     exit;
 
-
-
 if (is_array($this->GetDependencies())) {
     foreach ($this->GetDependencies() as $module => $module_version) {
         if (!cms_utils::get_module($module)) {
@@ -108,11 +106,7 @@ if ($this->CheckAccess('manage translator_mle')) {
 
 if ($this->CheckPermission('Modify Templates')) {
     echo $this->StartTab('mle_template', $params);
-    echo $this->ShowTemplateList($id, $returnid, 'mle_template',
-                    'default_mle_template',
-                    'mle_template',
-                    'current_mle_template',
-                    $this->Lang('addedit_mle_template'), '');
+    echo $this->ShowTemplateList($id, $returnid, 'mle_template', 'default_mle_template', 'mle_template', 'current_mle_template', $this->Lang('addedit_mle_template'), '');
     echo $this->EndTab();
 }
 

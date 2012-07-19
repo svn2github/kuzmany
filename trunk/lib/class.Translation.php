@@ -32,7 +32,7 @@ class Translation {
             self::$_translations = unserialize(self::$_mod->GetPreference('translations'));
     }
 
-    private static function _save() {
+    public static function save() {
         self::$_mod->SetPreference('translations', serialize(self::$_translations));
     }
 
@@ -44,7 +44,7 @@ class Translation {
     public static function remove($key) {
         self::_init();
         unset(self::$_translations[$key]);
-        self::_save();
+        self::save();
     }
 
     public static function update($post) {
@@ -53,9 +53,12 @@ class Translation {
         $key = $post['editKey'];
         $value = $post['editValue'];
         self::$_translations[$key][$editLang] = $value;
-        self::_save();
+        self::save();
     }
-
+    public static function add_to_translations($key, $locale, $value) {
+        self::_init();
+        self::$_translations[$key][$locale] = $value;
+    }
     public static function translate($params) {
 
         self::_init();
@@ -69,7 +72,7 @@ class Translation {
         $lang_value = self::$_translations[$params['text']][self::$_lang];
         if (!$lang_value) {
             $lang_value = self::$_translations[$params['text']][self::$_lang] = $params['text'];
-            self::_save();
+            self::save();
         }
 
 

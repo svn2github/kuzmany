@@ -106,8 +106,26 @@ switch ($current_version) {
     case "1.10.5":
         $query = "UPDATE " . cms_db_prefix() . "module_mlecms_config SET setlocale = ''";
         $db->Execute($query, array());
-        
+
         $current_version = "1.10.6";
+    case "1.11":
+        $langs = $this->getLangs();
+        $langs[] = array('name' => 'keys', 'locale' => 'keys');
+        Translation_old::setLanguages($langs);
+        $items = Translation_old::getContentTable();
+        foreach ($items["xml"]["keys"]["items"] as $item) {
+            $key = $item;
+            foreach ($items["langs"] as $lang) {
+                if (!isset($lang["id"]))
+                    continue;
+                $locale = $lang["locale"];
+                if (isset($items["xml"][$locale]["items"][$key]))
+                    Translation::add_to_translations($key, $locale, $items["xml"][$locale]["items"][$key]);
+            }
+        }
+        Translation::save();
+
+        $current_version = "1.11.1";
 }
 
 // put mention into the admin log

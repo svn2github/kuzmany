@@ -81,7 +81,7 @@ $lang['help_excludeprefix'] = 'exclude prefix (for langs action) ';
 $lang['help_includeprefix'] = 'include prefix (for langs action) ';
 
 $lang['changelog'] = '<ul>
-<li>Version 1.11.1.1 - july 2012 - fix auto language redirection</li>
+<li>Version 1.11.2 - july 2012 - fix auto language redirection</li>
 <li>Version 1.11.1 - july 2012 - translator reworked (XML files bye bye)</li>
 <li>Version 1.11 - july 2012 - CMSMS 1.11 support</li>
 <li>Version 1.10.5 - november 2011 - setlocale, extra param</li>

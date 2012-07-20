@@ -18,7 +18,7 @@ class Translation {
         
     }
 
-    private function _init() {
+    private static function _init() {
         if (self::$_mod == null)
             self::$_mod = cms_utils::get_module('MleCMS');
 

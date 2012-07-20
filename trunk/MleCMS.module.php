@@ -114,7 +114,7 @@ class MleCMS extends CGExtensions {
             case "langs":
             case "default":
             case "init":
-                $params["nocache"] = 1;
+                //$params["nocache"] = 1;
                 break;
         }
         parent::DoAction($name, $id, $params, $returnid);
@@ -222,26 +222,37 @@ class MleCMS extends CGExtensions {
             }
             $params[1] = $results;
         } elseif ($originator == 'Core' && $eventname == 'ContentPostRender' && $this->GetPreference('mle_auto_redirect')) {
-            // i have cookies, do nothing
+
+            // dont check language
+            if (!$this->GetPreference('mle_auto_redirect'))
+                return;
+
+            if (cms_cookies::get($this->GetName() . 'init'))
+                return;
+
+            // defaul locale setting
             $locale = cms_cookies::get(__CLASS__);
-            $user_lang = CmsNlsOperations::detect_browser_language();
+            if (!$locale)
+                $locale = CmsNlsOperations::detect_browser_language();
 
-            if (!$locale) {
-                $contentops = $gCms->GetContentOperations();
-                // set cookie
-                $alias = mle_tools::get_root_alias();
-                // alias
-                if (!$alias)
-                    return;
+            // root alias detection
+            $contentops = $gCms->GetContentOperations();
+            $alias = mle_tools::get_root_alias();
+            // alias
+            if (!$alias)
+                return;
 
-                $lang = mle_tools::get_lang_from_alias($alias);
-                $locale = $lang["locale"];
-            }
+            $lang = mle_tools::get_lang_from_alias($alias);
+
+            // set ini
+            if (!cms_cookies::get($this->GetName() . 'init'))
+                cms_cookies::set($this->GetName() . 'init', 1);
 
 
-            if ($locale != $user_lang) {
-                cms_cookies::set($this->GetName(), $user_lang, (3600 * 24 * 31));
-                $lang = mle_tools::get_lang_from_locale($user_lang);
+            // do redirection
+            if ($locale != $lang["locale"]) {
+                cms_cookies::set($this->GetName(), $locale, time() + (3600 * 24 * 31));
+                $lang = mle_tools::get_lang_from_locale($locale);
                 switch ($this->GetPreference('mle_auto_redirect')) {
                     case 1:
                         // root, i redirect page
@@ -257,6 +268,7 @@ class MleCMS extends CGExtensions {
                             $hierarchy_array[] = str_pad($one, 5, '0', STR_PAD_LEFT);
                         }
                         $new_friendly_position = (count($hierarchy_array) ? '.' : '') . implode(".", $hierarchy_array);
+
                         $query = 'SELECT mle.*,content_hierchy.content_alias as alias FROM ' . cms_db_prefix() . 'module_mlecms_config mle
 INNER JOIN ' . cms_db_prefix() . 'content  content ON content.content_alias = mle.alias
 LEFT JOIN ' . cms_db_prefix() . 'content  content_hierchy ON (content_hierchy.hierarchy = CONCAT(content.hierarchy,?))

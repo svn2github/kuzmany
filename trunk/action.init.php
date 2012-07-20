@@ -47,9 +47,11 @@ $smarty->assign('lang_direction', $lang["direction"]);
 CmsNlsOperations::set_language($lang["locale"]);
 $ln = CmsNlsOperations::get_language_info($lang["locale"]);
 
+if (cms_cookies::get($this->GetName()) != $lang["locale"]){
+    cms_cookies::set($this->GetName(), $lang["locale"], time()+(3600*24*31));
+}
+
 if (is_object($ln))
     setlocale(LC_ALL, $ln->locale());
 
-if (cms_cookies::get($this->GetName()) != $lang["locale"])
-    cms_cookies::set($this->GetName(), $lang["locale"], (3600*24*31));
 ?>

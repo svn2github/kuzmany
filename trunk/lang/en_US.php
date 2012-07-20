@@ -64,6 +64,7 @@ $lang['mle_template'] = 'Multilang template';
 $lang['addedit_mle_template'] = 'Add/Edit multilang template';
 $lang['mle_hierarchy_switch'] = 'Hierarchy switch';
 $lang['mle_search_restriction'] = 'Search MLE restriction (only for search in pages)';
+$lang['mle_search_restriction_note'] = 'Your page URL must starts with root_alias prefix (etc: mod_rewrite (en/my-page) or internal index.php/en/my-page)';
 $lang['mle_auto_redirect'] = 'Language detection';
 $lang['none'] = 'None';
 $lang['root_redirect'] = 'Redirect in the root directory';

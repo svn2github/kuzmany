@@ -46,6 +46,7 @@ $this->smarty->assign('mle_search_restriction', $this->CreateInputYesNoDropdown(
 ##$this->smarty->assign('mle_template', $this->CreateTextArea(false,$id, $this->GetTemplate('mle_template'), 'mle_template'));
 
 
+
 // Display the populated template
 echo $this->ProcessTemplate('adminprefs.tpl');
 ?>

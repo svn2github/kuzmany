@@ -137,13 +137,12 @@ class MleCMS extends CGExtensions {
     }
 
     function GetDependencies() {
-        return array('CGExtensions' => '1.27');
+        return array('CGExtensions' => '1.29', 'ExtendedTools' => '1.3.1',);
     }
 
     function MinimumCMSVersion() {
         return "1.11-beta";
     }
-
 
     function InstallPostMessage() {
         return $this->Lang('postinstall');
@@ -196,6 +195,8 @@ class MleCMS extends CGExtensions {
         $gCms = cmsms();
         $db = cmsms()->GetDb();
         $config = cmsms()->GetConfig();
+        $smarty = $gCms->GetSmarty();
+        
         if ($originator == 'Search' && $eventname == 'SearchCompleted' && $this->GetPreference('mle_search_restriction')) {
             $results = array();
             $search_results = $params[1];
@@ -217,78 +218,51 @@ class MleCMS extends CGExtensions {
             }
             $params[1] = $results;
         } elseif ($originator == 'Core' && $eventname == 'ContentPostRender' && $this->GetPreference('mle_auto_redirect')) {
+            // i have cookies, do nothing
+            $locale = cms_cookies::get(__CLASS__);
+            $user_lang = CmsNlsOperations::detect_browser_language();
 
-            $contentops = $gCms->GetContentOperations();
-            $smarty = $gCms->GetSmarty();
-            // set cookie
-            $pu_root_url = parse_url($config['root_url']);
-            $pu_root_url['path'] = (empty($pu_root_url['path'])) ? '/' : $pu_root_url['path'];
-            $cookie_path = rtrim($pu_root_url['path'], '/') . '/';
-            $cookie_domain = (strpos($pu_root_url['host'], '.') !== false) ? $pu_root_url['host'] : null;
-            $cookie_secure = (isset($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) == 'on') ? true : false;
+            if (!$locale) {
+                $contentops = $gCms->GetContentOperations();
+                // set cookie
+                $alias = mle_tools::get_root_alias();
+                // alias
+                if (!$alias)
+                    return;
 
-
-            switch ($this->GetPreference('mle_auto_redirect')) {
-                case 1:
-                    $friendly_position = $smarty->get_template_vars('friendly_position');
-                    $friendly_position_array = explode(".", $friendly_position);
-                    // if no root, no redirect
-                    if (count($friendly_position_array) != 1) {
-                        setcookie('mle_init', 1, time() + 1800, $cookie_path, $cookie_domain, $cookie_secure);
-                        return;
-                    }
+                $lang = mle_tools::get_lang_from_alias($alias);
+                $locale = $lang["locale"];
             }
 
-            $alias = mle_tools::get_root_alias();
-            // alias
-            if (!$alias)
-                return;
-            // compare to your DB
-            //  return
-            if (isset($_COOKIE['mle_init'])) {
-                setcookie('mle', $alias, time() + (3600 * 24 * 31 * 12), $cookie_path, $cookie_domain, $cookie_secure);
-                setcookie('mle_init', 1, time() + 1800, $cookie_path, $cookie_domain, $cookie_secure);
-                return;
-            }
 
-            if (isset($_COOKIE['mle'])) {
-                $root_alias = $_COOKIE['mle'];
-            } else {
-                $root_alias = $db->GetOne('SELECT alias FROM ' . cms_db_prefix() . 'module_mlecms_config WHERE alias = ?', array($alias));
-            }
-            if ($root_alias) {
-                $all_langs = $this->getLangs();
-                $user_lang = $this->language_user_setting($all_langs);
-                if ($root_alias != $user_lang) {
-                    setcookie('mle_init', 1, time() + 1800, $cookie_path, $cookie_domain, $cookie_secure);
-                    switch ($this->GetPreference('mle_auto_redirect')) {
-                        case 1:
-                            // root, i redirect page
-                            redirect_to_alias($user_lang);
-                            break;
-                        case 2:
-                            // no root
-                            $friendly_position = $smarty->get_template_vars('friendly_position');
-                            $friendly_position_array = explode(".", $friendly_position);
-                            unset($friendly_position_array[0]);
-                            $hierarchy_array = array();
-                            foreach ($friendly_position_array as $one) {
-                                $hierarchy_array[] = str_pad($one, 5, '0', STR_PAD_LEFT);
-                            }
-                            $new_friendly_position = (count($hierarchy_array) ? '.' : '') . implode(".", $hierarchy_array);
-                            $query = 'SELECT mle.*,content_hierchy.content_alias as alias FROM ' . cms_db_prefix() . 'module_mlecms_config mle
+            if ($locale != $user_lang) {
+                cms_cookies::set($this->GetName(), $user_lang, (3600 * 24 * 31));
+                $lang = mle_tools::get_lang_from_locale($user_lang);
+                switch ($this->GetPreference('mle_auto_redirect')) {
+                    case 1:
+                        // root, i redirect page
+                        redirect_to_alias($lang["alias"]);
+                        break;
+                    case 2:
+                        // no root
+                        $friendly_position = $smarty->get_template_vars('friendly_position');
+                        $friendly_position_array = explode(".", $friendly_position);
+                        unset($friendly_position_array[0]);
+                        $hierarchy_array = array();
+                        foreach ($friendly_position_array as $one) {
+                            $hierarchy_array[] = str_pad($one, 5, '0', STR_PAD_LEFT);
+                        }
+                        $new_friendly_position = (count($hierarchy_array) ? '.' : '') . implode(".", $hierarchy_array);
+                        $query = 'SELECT mle.*,content_hierchy.content_alias as alias FROM ' . cms_db_prefix() . 'module_mlecms_config mle
 INNER JOIN ' . cms_db_prefix() . 'content  content ON content.content_alias = mle.alias
 LEFT JOIN ' . cms_db_prefix() . 'content  content_hierchy ON (content_hierchy.hierarchy = CONCAT(content.hierarchy,?))
     WHERE content.content_alias = ?
 ';
-                            $lang = $db->GetRow($query, array($new_friendly_position, $user_lang));
-                            if (!$lang)
-                                return;
-                            redirect_to_alias($lang["alias"]);
-                            break;
-                    }
-                } else {
-                    setcookie('mle_init', 1, time() + 1800, $cookie_path, $cookie_domain, $cookie_secure);
+                        $lang = $db->GetRow($query, array($new_friendly_position, $lang["alias"]));
+                        if (!$lang)
+                            return;
+                        redirect_to_alias($lang["alias"]);
+                        break;
                 }
             }
         }
@@ -326,72 +300,6 @@ LEFT JOIN ' . cms_db_prefix() . 'content  content_hierchy ON (content_hierchy.hi
         return $entryarray;
     }
 
-    /**
-     * Browser settings identification - from MLE CMSMS edition
-     * @param array $row
-     * @return array
-     */
-    public function language_user_setting(array $rows) {
-        $browser_langs = array();
-
-        //Check if we have $_SERVER['HTTP_ACCEPT_LANGUAGE'] set and
-        //it no longer breaks if you only have one language set :)
-        if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
-            $str = strtolower(trim($_SERVER["HTTP_ACCEPT_LANGUAGE"]));
-            $str = str_replace(' ', '', $str);
-            $browser_accept = explode(',', $str);
-
-            //Go through all language preference specs
-            for ($i = 0; $i < count($browser_accept); $i++) {
-                //The language part is either a code or a code with a quality
-                //We cannot do anything with a * code, so it is skipped
-                //If the quality is missing, it is assumed to be 1 according to the RFC
-                if (preg_match("!([a-z-]+)(;q=([0-9\\.]+))?!", $browser_accept[$i], $found)) {
-                    $quality = (isset($found[3]) ? (float) $found[3] : 1.0);
-                    $browser_langs[] = array($found[1], $quality, $i + 1);
-                }
-                unset($found);
-            }
-        } elseif (isset($_SERVER['HTTP_USER_AGENT'])) {
-            $str = strtolower(trim($_SERVER["HTTP_USER_AGENT"]));
-            $user_agent = explode(';', $str);
-
-            for ($i = 0; $i < sizeof($user_agent); $i++) {
-                $languages = explode('-', $user_agent[$i]);
-                if (sizeof($languages) == 2 || strlen(trim($languages[0])) == 2) {
-                    $browser_langs[] = array(trim($languages[0]), 1.0, $i + 1);
-                }
-            }
-        }
-        //Sort by quality and order
-        usort($browser_langs, "language_accept_order");
-        foreach ($browser_langs as $arr_language) {
-            $language = $arr_language[0];
-            if (strlen($language) > 2)
-                $language = substr($language, 0, 2);
-            foreach ($rows as $row) {
-                $row_index = cge_array::find_index($row, $language);
-                if ($row_index)
-                    return $row["alias"];
-            }
-        }
-        return false;
-    }
-
-}
-
-//Order the array of compiled accept-language codes by quality value
-function language_accept_order($a, $b) {
-    if ($a[1] == $b[1])
-        return ($a[2] > $b[2]) ? 1 : -1;
-    return ($a[1] > $b[1]) ? -1 : 1;
-}
-
-function isAjax() {
-    if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'] == "XMLHttpRequest")
-        return true;
-
-    return false;
 }
 
 ?>

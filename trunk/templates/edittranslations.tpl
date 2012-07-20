@@ -7,6 +7,8 @@
     </style>
 {/literal}
 
+<p><strong>{$mod->Lang('example')}</strong>: {literal}{translate text="my text"} or {"my text"|translate} or {translate}my text{/translate}{/literal}</p>
+
 <table id="trans" cellspacing="0" class="pagetable">
 
     <tr id="label">

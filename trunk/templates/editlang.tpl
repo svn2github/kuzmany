@@ -27,12 +27,16 @@ $(document).ready(function(){
     <p class="pagetext">{$mod->Lang('alias')}:</p>
     <p class="pageinput">
 	{$alias}
+        <br />
+        {$mod->Lang('par_template')}: {literal}{$lang_parent}{/literal}
     </p>
 </div>
 <div class="pageoverflow">
     <p class="pagetext">{$mod->Lang('extra')}:</p>
     <p class="pageinput">
 	{$extra}
+        <br />
+        {$mod->Lang('par_template')}: {literal}{$lang_extra}{/literal}
     </p>
 </div>
 
@@ -40,6 +44,8 @@ $(document).ready(function(){
     <p class="pagetext">{$mod->Lang('locale')}:</p>
     <p class="pageinput">
 	{$locale}
+        <br />
+        {$mod->Lang('par_template')}: {literal}{$lang_locale}{/literal}
     </p>
 </div>
 <div class="pageoverflow localecustom" style="display:none">
@@ -53,6 +59,8 @@ $(document).ready(function(){
     <p class="pagetext">{$mod->Lang('direction')}:</p>
     <p class="pageinput">
 	{$direction}
+        <br />
+        {$mod->Lang('par_template')}: {literal}{$lang_direction}{/literal}
     </p>
 </div>
 <div class="pageoverflow">

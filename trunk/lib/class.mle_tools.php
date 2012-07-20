@@ -55,6 +55,27 @@ class mle_tools {
         return $lang;
     }
 
+    public static function get_lang_from_locale($locale) {
+        $lang = cms_utils::get_app_data(__CLASS__ . __FUNCTION__ . $locale);
+        if ($lang)
+            return $lang;
+        $db = cmsms()->GetDb();
+        $query = 'SELECT * FROM ' . cms_db_prefix() . 'module_mlecms_config WHERE locale = ?';
+        $lang = $db->GetRow($query, array($locale));
+        cms_utils::set_app_data(__CLASS__ . __FUNCTION__ . $locale, $lang);
+        return $lang;
+    }
+    public static function get_lang_from_alias($alias) {
+        $lang = cms_utils::get_app_data(__CLASS__ . __FUNCTION__ . $alias);
+        if ($lang)
+            return $lang;
+        $db = cmsms()->GetDb();
+        $query = 'SELECT * FROM ' . cms_db_prefix() . 'module_mlecms_config WHERE alias = ?';
+        $lang = $db->GetRow($query, array($alias));
+        cms_utils::set_app_data(__CLASS__ . __FUNCTION__ . $alias, $lang);
+        return $lang;
+    }
+
     public static function get_langs() {
         $langs = cms_utils::get_app_data(__CLASS__ . __FUNCTION__);
         if ($langs)

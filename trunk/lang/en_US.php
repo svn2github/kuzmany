@@ -28,6 +28,7 @@ $lang['extra'] = 'Extra';
 $lang['ltr'] = 'Left-to-right text or table';
 $lang['rtl'] = 'Right-to-left text or table';
 $lang['direction'] = 'Direction';
+$lang['par_template'] = 'Smarty parameter in template';
 
 $lang['custom'] = 'Custom';
 $lang['locale_custom'] = 'Locale custom for CMSMS';
@@ -62,12 +63,12 @@ $lang['translator_action_params'] = 'Default params for translator action';
 $lang['mle_template'] = 'Multilang template';
 $lang['addedit_mle_template'] = 'Add/Edit multilang template';
 $lang['mle_hierarchy_switch'] = 'Hierarchy switch';
-$lang['mle_search_restriction'] = 'Search MLE restriction (only for page search)';
-$lang['mle_search_restriction_note'] = 'Your page URL must starts with root_alias prefix (etc: mod_rewrite (en/my-page) or internal index.php/en/my-page)';
+$lang['mle_search_restriction'] = 'Search MLE restriction (only for search in pages)';
 $lang['mle_auto_redirect'] = 'Language detection';
 $lang['none'] = 'None';
 $lang['root_redirect'] = 'Redirect in the root directory';
 $lang['hierarchy_redirect'] = 'Redirect on each level of hierarchy';
+$lang['for_template_separator'] = 'Value for "Separator" template';
 
 // Translator
 $lang['mle_translator'] = 'Translator';
@@ -79,6 +80,7 @@ $lang['help_excludeprefix'] = 'exclude prefix (for langs action) ';
 $lang['help_includeprefix'] = 'include prefix (for langs action) ';
 
 $lang['changelog'] = '<ul>
+<li>Version 1.11.1 - july 2012 - translator reworked (XML files bye bye)</li>
 <li>Version 1.11 - july 2012 - CMSMS 1.11 support</li>
 <li>Version 1.10.5 - november 2011 - setlocale, extra param</li>
 <li>Version 1.4 - 1.7 - april 2011 - som small updates</li>

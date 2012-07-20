@@ -106,7 +106,9 @@ if ($this->CheckAccess('manage translator_mle')) {
 
 if ($this->CheckPermission('Modify Templates')) {
     echo $this->StartTab('mle_template', $params);
-    echo $this->ShowTemplateList($id, $returnid, 'mle_template', 'default_mle_template', 'mle_template', 'current_mle_template', $this->Lang('addedit_mle_template'), '');
+    $templatelist = $this->ShowTemplateList($id, $returnid, 'mle_template', 'default_mle_template', 'mle_template', 'current_mle_template', $this->Lang('addedit_mle_template'), '');
+    $smarty->assign('templatelist', $templatelist);
+    echo $this->ProcessTemplate('templates.tpl');
     echo $this->EndTab();
 }
 

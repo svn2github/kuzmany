@@ -11,12 +11,14 @@
         <p class="pagetext">{$mod->Lang('mle_separator')}:</p>
         <p class="pageinput">
                   {$mle_separator}
+                  <br /><strong>{$mod->Lang('for_template_separator')}</strong>
         </p>
     </div>
         <div class="pageoverflow">
         <p class="pagetext">{$mod->Lang('translator_action_params')}:</p>
         <p class="pageinput">
                   {$translator_action_params}
+                  <br /><strong>{$mod->Lang('example')}</strong>: {literal}nocache=1{/literal}
         </p>
     </div>
     <div class="pageoverflow">

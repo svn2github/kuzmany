@@ -191,12 +191,16 @@ class MleCMS extends CGExtensions {
         return TRUE;
     }
 
+    public function AllowSmartyCaching() {
+        return TRUE;
+    }
+
     function DoEvent($originator, $eventname, &$params) {
         $gCms = cmsms();
         $db = cmsms()->GetDb();
         $config = cmsms()->GetConfig();
         $smarty = $gCms->GetSmarty();
-        
+
         if ($originator == 'Search' && $eventname == 'SearchCompleted' && $this->GetPreference('mle_search_restriction')) {
             $results = array();
             $search_results = $params[1];

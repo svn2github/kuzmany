@@ -33,6 +33,7 @@ class Translation {
     }
 
     public static function save() {
+        if(self::$_mod != null)
         self::$_mod->SetPreference('translations', serialize(self::$_translations));
     }
 

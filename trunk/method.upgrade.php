@@ -113,18 +113,19 @@ switch ($current_version) {
         $langs[] = array('name' => 'keys', 'locale' => 'keys');
         Translation_old::setLanguages($langs);
         $items = Translation_old::getContentTable();
-        foreach ($items["xml"]["keys"]["items"] as $item) {
-            $key = $item;
-            foreach ($items["langs"] as $lang) {
-                if (!isset($lang["id"]))
-                    continue;
-                $locale = $lang["locale"];
-                if (isset($items["xml"][$locale]["items"][$key]))
-                    Translation::add_to_translations($key, $locale, $items["xml"][$locale]["items"][$key]);
+        if ($items) {
+            foreach ($items["xml"]["keys"]["items"] as $item) {
+                $key = $item;
+                foreach ($items["langs"] as $lang) {
+                    if (!isset($lang["id"]))
+                        continue;
+                    $locale = $lang["locale"];
+                    if (isset($items["xml"][$locale]["items"][$key]))
+                        Translation::add_to_translations($key, $locale, $items["xml"][$locale]["items"][$key]);
+                }
             }
+            Translation::save();
         }
-        Translation::save();
-
         $current_version = "1.11.1";
 }
 

@@ -81,8 +81,7 @@ if (file_exists($fn)) {
     $this->SetTemplate('mle_templateSeparator', $template);
 }
 
-$this->AddEventHandler('Core', 'ContentPostRender', false);
-$this->AddEventHandler('Search', 'SearchCompleted', false);
+$this->RegisterEvents();
 
 $this->CreateEvent('LangEdited');
 $this->CreateEvent('BlockEdited');

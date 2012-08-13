@@ -41,6 +41,8 @@ define('MLE_BLOCK', 'block_');
 
 class MleCMS extends CGExtensions {
 
+    private $_mle_init = false;
+
     public function __construct() {
         parent::__construct();
     }
@@ -184,7 +186,7 @@ class MleCMS extends CGExtensions {
     }
 
     function LazyLoadFrontend() {
-        return FALSE;
+        return false;
     }
 
     function LazyLoadAdmin() {
@@ -193,6 +195,16 @@ class MleCMS extends CGExtensions {
 
     public function AllowSmartyCaching() {
         return TRUE;
+    }
+
+    public function HandlesEvents() {
+        return true;
+    }
+
+    public function RegisterEvents() {
+        $this->AddEventHandler('Core', 'ContentPostRender');
+        $this->AddEventHandler('Search', 'SearchCompleted');
+        $this->AddEventHandler('Search', 'SmartyPreCompile');
     }
 
     function DoEvent($originator, $eventname, &$params) {
@@ -221,6 +233,16 @@ class MleCMS extends CGExtensions {
                 }
             }
             $params[1] = $results;
+        } elseif ($originator == 'Core' && $eventname == 'SmartyPreCompile' && $this->_mle_init == false) {
+
+            // language detector
+            $obj = new mle_detector($this);
+            $obj->find_language();
+
+            /* if (is_object($obj))
+              CmsNlsOperations::set_language_detector($obj); */
+
+            $this->_mle_init = true;
         } elseif ($originator == 'Core' && $eventname == 'ContentPostRender' && $this->GetPreference('mle_auto_redirect')) {
 
             // dont check language

@@ -32,6 +32,7 @@ class mle_smarty {
      * Initialize the smarty plugins.
      */
     public static function init() {
+        
         $smarty = cmsms()->GetSmarty();
         // translators
         $smarty->register_function('translate', array('mle_smarty', 'translator'));
@@ -42,6 +43,7 @@ class mle_smarty {
         $smarty->register_function('mle_assign', array('mle_smarty', 'mle_assign'));
         $smarty->register_function('mle_search_checker', array('mle_smarty', 'mle_search_checker'));
         $smarty->register_function('get_root_alias', array('mle_smarty', 'get_root_alias'));
+        
     }
 
     /**

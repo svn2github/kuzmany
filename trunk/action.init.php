@@ -28,30 +28,6 @@
 if (!isset($gCms))
     exit;
 
-$alias = $this->ProcessTemplateFromData($this->GetPreference('mle_id'));
-if (!$alias)
-    $alias = mle_tools::get_root_alias();
-
-if (!$alias)
-    return;
-
-$db = cmsms()->GetDb();
-$query = 'SELECT * FROM ' . cms_db_prefix() . 'module_mlecms_config  WHERE alias = ?';
-$lang = $db->GetRow($query, array($alias));
-if (!$lang)
-    return;
-$smarty->assign('lang_parent', $lang["alias"]);
-$smarty->assign('lang_locale', $lang["locale"]);
-$smarty->assign('lang_extra', $lang["extra"]);
-$smarty->assign('lang_direction', $lang["direction"]);
-CmsNlsOperations::set_language($lang["locale"]);
-$ln = CmsNlsOperations::get_language_info($lang["locale"]);
-
-if (cms_cookies::get($this->GetName()) != $lang["locale"]){
-    cms_cookies::set($this->GetName(), $lang["locale"], time()+(3600*24*31));
-}
-
-if (is_object($ln))
-    setlocale(LC_ALL, $ln->locale());
+/* deprecated */
 
 ?>

@@ -49,16 +49,12 @@ class mle_detector extends CmsLanguageDetector {
         $smarty->assign('lang_extra', $lang["extra"]);
         $smarty->assign('lang_direction', $lang["direction"]);
 
-
-        CmsNlsOperations::set_language($lang["locale"]);
-        $ln = CmsNlsOperations::get_language_info($lang["locale"]);
-
         if (cms_cookies::get($mod->GetName()) != $lang["locale"]) {
             cms_cookies::set($mod->GetName(), $lang["locale"], time() + (3600 * 24 * 31));
         }
+        
+        return $lang["locale"];
 
-        if (is_object($ln))
-            setlocale(LC_ALL, $ln->locale());
     }
 
 }

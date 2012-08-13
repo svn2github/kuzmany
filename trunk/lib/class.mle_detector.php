@@ -15,11 +15,6 @@ class mle_detector extends CmsLanguageDetector {
 
     public function find_language() {
 
-        if (!is_object($this->_mod))
-            return;
-
-        $mod = $this->_mod;
-
         //$alias = $mod->ProcessTemplateFromData($mod->GetPreference('mle_id'));
         $alias = mle_tools::get_root_alias();
         

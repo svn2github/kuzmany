@@ -22,7 +22,7 @@ class mle_detector extends CmsLanguageDetector {
 
         //$alias = $mod->ProcessTemplateFromData($mod->GetPreference('mle_id'));
         $alias = mle_tools::get_root_alias();
-
+        
         $gCms = cmsms();
         $contentops = $gCms->GetContentOperations();
 

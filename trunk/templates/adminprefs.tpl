@@ -1,7 +1,7 @@
 {$startform}
 <fieldset>
     <legend>{$mod->Lang('options')}</legend>
-        <div class="pageoverflow">
+        {*<div class="pageoverflow">
         <p class="pagetext">{$mod->Lang('mle_id')}:</p>
         <p class="pageinput">
                   {$mle_id}
@@ -20,7 +20,7 @@
                   {$translator_action_params}
                   <br /><strong>{$mod->Lang('example')}</strong>: {literal}nocache=1{/literal}
         </p>
-    </div>
+    </div>*}
     <div class="pageoverflow">
         <p class="pagetext">{$mod->Lang('mle_auto_redirect')}:</p>
         <p class="pageinput">

@@ -14,42 +14,39 @@ class mle_detector extends CmsLanguageDetector {
     }
 
     public function find_language() {
+        
+        if($this->_mod == null)
+            return;
 
+        $gCms = cmsms();
+        $smarty = $gCms->GetSmarty();
+        $db = cmsms()->GetDb();
+        $contentops = $gCms->GetContentOperations();
         //$alias = $mod->ProcessTemplateFromData($mod->GetPreference('mle_id'));
         $alias = mle_tools::get_root_alias();
-        
-        $gCms = cmsms();
-        $contentops = $gCms->GetContentOperations();
-
-
-        $smarty = $gCms->GetSmarty();
-
         if ($alias == '')
-            $alias = cmsms()->get_variable('page_alias');
+            $alias = cms_utils::get_current_alias();
 
         if (!$alias)
             return;
-
-
-        $db = cmsms()->GetDb();
-        $smarty = cmsms()->GetSmarty();
 
         $query = 'SELECT * FROM ' . cms_db_prefix() . 'module_mlecms_config  WHERE alias = ?';
         $lang = $db->GetRow($query, array($alias));
         if (!$lang)
             return;
-        
+
+        if (cms_cookies::get($this->_mod->GetName()) != $lang["locale"]) {
+            cms_cookies::set($this->_mod->GetName(), $lang["locale"], time() + (3600 * 24 * 31));
+        }
+
         $smarty->assign('lang_parent', $lang["alias"]);
         $smarty->assign('lang_locale', $lang["locale"]);
         $smarty->assign('lang_extra', $lang["extra"]);
-        $smarty->assign('lang_direction', $lang["direction"]);
-
-        if (cms_cookies::get($mod->GetName()) != $lang["locale"]) {
-            cms_cookies::set($mod->GetName(), $lang["locale"], time() + (3600 * 24 * 31));
-        }
         
-        return $lang["locale"];
+        $lang_dir = CmsNlsOperations::get_language_info($lang["locale"])->direction();
+        $smarty->assign('lang_dir', $lang_dir);
 
+        return $lang["locale"];
     }
 
 }

@@ -8,10 +8,10 @@ if (!$this->CheckAccess('manage translator_mle')) {
     return;
 }
 
-if (extended_tools_opts::is_ajax() && $_POST['aAction'] == 'update')
+if (mle_tools::is_ajax() && $_POST['aAction'] == 'update')
     Translation::update($_POST);
 
-if (extended_tools_opts::is_ajax() && $_POST['aAction'] == 'remove')
+if (mle_tools::is_ajax() && $_POST['aAction'] == 'remove')
     Translation::remove($_POST['delKey']);
 
 exit;

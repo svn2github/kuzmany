@@ -58,9 +58,6 @@ $this->CreatePermission('manage ' . MLE_BLOCK . 'mle', 'manage ' . MLE_BLOCK . '
 // preference
 $this->SetPreference('mle_hierarchy_switch', 1);
 $this->SetPreference('mle_auto_redirect', 0);
-$this->SetPreference('mle_id', '{get_root_alias}');
-$this->SetPreference('mle_separator', '/');
-$this->SetPreference('mle_search_restriction', 1);
 
 $fn = cms_join_path(dirname(__FILE__), 'templates', 'orig_mle_template.tpl');
 if (file_exists($fn)) {

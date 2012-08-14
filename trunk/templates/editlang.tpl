@@ -55,14 +55,6 @@ $(document).ready(function(){
     </p>
 </div>
 
-<div class="pageoverflow direction">
-    <p class="pagetext">{$mod->Lang('direction')}:</p>
-    <p class="pageinput">
-	{$direction}
-        <br />
-        {$mod->Lang('par_template')}: {literal}{$lang_direction}{/literal}
-    </p>
-</div>
 <div class="pageoverflow">
     <p class="pagetext">{$mod->Lang('flag')}:</p>
     <p class="pageinput">

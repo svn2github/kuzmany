@@ -7,6 +7,13 @@
  */
 class mle_tools {
 
+    public static function is_ajax() {
+        if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'] == "XMLHttpRequest")
+            return true;
+
+        return false;
+    }
+
     public static function get_root_alias() {
         $alias = cms_utils::get_app_data('root_alias');
         if ($alias)
@@ -33,15 +40,24 @@ class mle_tools {
     }
 
     public static function getLangsLocale() {
+
         $mod = cms_utils::get_module('MleCMS');
-        $alllangs = array(
-            "Afrikaans" => "af_ZA", "Български" => "bg_BG", "Català" => "ca_ES", "Česky" => "cs_CZ", "Dansk" => "da_DK", "Deutsch" => "de_DE", "Ελληνικα" => "el_GR", "English" => "en_US",
-            "Español" => "es_ES", "Eesti" => "et_EE", "Euskara" => "eu_ES", "Esperanto" => "eo_UY", "Suomi" => "fi_FI", "Français" => "fr_FR", "Magyar" => "hu_HU", "Bahasa Indonesia" => "id_ID", "Íslenska" => "is_IS", "Italiano" => "it_IT", "Hebrew" => "iw_IL",
-            "日本語" => "ja_JP", "Lietuvių" => "lt_LT", "Mongolian" => "mn_MN", "Norsk bokmål" => "nb_NO", "Nederlands" => "nl_NL", "Polski" => "pl_PL", "Português Brasileiro" => "pt_BR",
-            "Português" => "pt_PT", "Romansh" => "rm_CH", "Română" => "ro_RO", "Русский" => "ru_RU", "Slovenčina" => "sk_SK", "Slovenia" => "sl_SI", "српски Srpski" => "sr_YU", "Svenska" => "sv_SE", "Türkçe" => "tr_TR", "简体中文" => "zh_CN", "繁體中文" => "zh_TW",
-            $mod->Lang("custom") => "custom"
-        );
-        return $alllangs;
+        $tmp = array();
+        if ($allow_none) {
+            $tmp = array('' => lang('nodefault'));
+        }
+        $langs = CmsNlsOperations::get_installed_languages();
+        asort($langs);
+        foreach ($langs as $key) {
+            $obj = CmsNlsOperations::get_language_info($key);
+            $value = $obj->display();
+            if ($obj->fullname()) {
+                $value .= ' (' . $obj->fullname() . ')';
+            }
+            $tmp[$value] = $key;
+        }
+        $tmp[$mod->Lang("custom")] = "custom";
+        return $tmp;
     }
 
     public static function get_lang($lang_id) {
@@ -65,6 +81,7 @@ class mle_tools {
         cms_utils::set_app_data(__CLASS__ . __FUNCTION__ . $locale, $lang);
         return $lang;
     }
+
     public static function get_lang_from_alias($alias) {
         $lang = cms_utils::get_app_data(__CLASS__ . __FUNCTION__ . $alias);
         if ($lang)

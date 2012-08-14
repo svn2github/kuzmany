@@ -32,10 +32,7 @@ if (!isset($gCms))
 $db = cmsms()->GetDb();
 $config = cmsms()->GetConfig();
 
-$directions = array();
-$directions[$this->Lang('ltr')] = 'ltr';
-$directions[$this->Lang('rtl')] = 'rtl';
-
+$direction = '';
 
 if (!$this->CheckAccess()) {
     echo $this->ShowErrors($this->Lang('accessdenied'));
@@ -71,11 +68,6 @@ if (isset($params['setlocale'])) {
     $setlocale = $params['setlocale'];
 }
 
-$direction = '';
-if (isset($params['direction'])) {
-    $direction = $params['direction'];
-}
-
 $locale = get_site_preference('frontendlang', '');
 if (isset($params['locale'])) {
     $locale = $params['locale'];
@@ -91,7 +83,7 @@ $flag = '';
 
 if (isset($params['submit'])) {
 
-    $destdir = cms_join_path($gCms->config['image_uploads_path'], $this->GetName());
+    $destdir = cms_join_path($config['image_uploads_path'], $this->GetName());
 
     $errors = array();
     if (!is_dir($destdir))
@@ -185,7 +177,6 @@ $this->smarty->assign('alias', $this->CreateInputText($id, 'alias', $alias, 50, 
 $this->smarty->assign('extra', $this->CreateInputText($id, 'extra', $extra, 50, 255));
 $this->smarty->assign('setlocale', $this->CreateInputText($id, 'setlocale', $setlocale, 50, 100));
 
-$this->smarty->assign('direction', $this->CreateInputDropdown($id, 'direction', $directions, -1, $direction));
 $this->smarty->assign('locale', $this->CreateInputDropdown($id, 'locale', mle_tools::getLangsLocale(), -1, (array_search($locale, mle_tools::getLangsLocale()) ? $locale : "custom")));
 $this->smarty->assign('locale_custom', $this->CreateInputText($id, 'locale_custom', (array_search($locale, mle_tools::getLangsLocale()) ? "" : $locale), 50, 255));
 $this->smarty->assign('flag', $flag);

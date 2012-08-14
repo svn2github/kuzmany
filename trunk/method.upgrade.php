@@ -126,8 +126,6 @@ switch ($current_version) {
             }
             Translation::save();
         }
-    case "1.11.2":
-        $this->RegisterEvents();
 
         $current_version = "1.12";
 }

@@ -41,8 +41,6 @@ define('MLE_BLOCK', 'block_');
 
 class MleCMS extends CGExtensions {
 
-    private $_mle_init = false;
-
     public function __construct() {
         parent::__construct();
     }
@@ -60,7 +58,7 @@ class MleCMS extends CGExtensions {
     }
 
     function GetVersion() {
-        return '1.11.2.1';
+        return '1.11.3';
     }
 
     function GetHelp() {
@@ -75,8 +73,8 @@ class MleCMS extends CGExtensions {
         return 'zdeno@kuzmany.biz';
     }
 
-    function GetChangeLog() {
-        return $this->Lang('changelog');
+    public function GetChangeLog() {
+        return file_get_contents(dirname(__file__) . '/changelog.inc');
     }
 
     function IsPluginModule() {
@@ -139,11 +137,11 @@ class MleCMS extends CGExtensions {
     }
 
     function GetDependencies() {
-        return array('CGExtensions' => '1.29', 'ExtendedTools' => '1.3.1',);
+        return array('CGExtensions' => '1.29');
     }
 
     function MinimumCMSVersion() {
-        return "1.11-beta";
+        return "1.11.1";
     }
 
     function InstallPostMessage() {
@@ -191,7 +189,7 @@ class MleCMS extends CGExtensions {
     }
 
     function LazyLoadFrontend() {
-        return true;
+        return FALSE;
     }
 
     function LazyLoadAdmin() {
@@ -237,11 +235,13 @@ class MleCMS extends CGExtensions {
                 }
             }
             $params[1] = $results;
+            
         } elseif ($originator == 'Core' && $eventname == 'ContentPostRender' && $this->GetPreference('mle_auto_redirect')) {
 
             // dont check language
             if (!$this->GetPreference('mle_auto_redirect'))
                 return;
+
 
             if (cms_cookies::get($this->GetName() . 'init'))
                 return;
@@ -252,7 +252,6 @@ class MleCMS extends CGExtensions {
                 $locale = CmsNlsOperations::detect_browser_language();
 
             // root alias detection
-            $contentops = $gCms->GetContentOperations();
             $alias = mle_tools::get_root_alias();
             // alias
             if (!$alias)
@@ -263,7 +262,6 @@ class MleCMS extends CGExtensions {
             // set ini
             if (!cms_cookies::get($this->GetName() . 'init'))
                 cms_cookies::set($this->GetName() . 'init', 1);
-
 
             // do redirection
             if ($locale != $lang["locale"]) {

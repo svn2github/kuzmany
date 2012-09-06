@@ -35,7 +35,7 @@ $taboptarray = array('mysql' => 'TYPE=MyISAM');
 $flds = "
 	id I KEY AUTO,
 	name C(64),
-	alias C(10),
+	alias C(255),
 	locale C(10),
 	setlocale C(100),
 	direction C(10),

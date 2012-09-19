@@ -53,8 +53,6 @@ class mle_smarty {
      * @return type 
      */
     public static function translator($params, &$smarty) {
-
-        $smarty = cmsms()->GetSmarty();
         Translation::translate($params);
     }
 
@@ -98,7 +96,6 @@ class mle_smarty {
         if ((!isset($params["array"]) && (!isset($params["object"]) || !is_object($params["object"]) )) || !isset($params["par"]))
             return;
 
-        $smarty = cmsms()->GetSmarty();
         $lang_parent = $smarty->get_template_vars('lang_parent');
         if (isset($params["object"]))
             $object = $params["object"];

@@ -14,22 +14,20 @@ class mle_detector extends CmsLanguageDetector {
     }
 
     public function find_language() {
-        
-        if($this->_mod == null)
+        if ($this->_mod == null)
             return;
 
         $gCms = cmsms();
         $smarty = $gCms->GetSmarty();
         $db = cmsms()->GetDb();
         $contentops = $gCms->GetContentOperations();
-        //$alias = $mod->ProcessTemplateFromData($mod->GetPreference('mle_id'));
         $alias = mle_tools::get_root_alias();
         if ($alias == '')
             $alias = cms_utils::get_current_alias();
-
+        
         if (!$alias)
             return;
-
+        
         $query = 'SELECT * FROM ' . cms_db_prefix() . 'module_mlecms_config  WHERE alias = ?';
         $lang = $db->GetRow($query, array($alias));
         if (!$lang)
@@ -42,10 +40,9 @@ class mle_detector extends CmsLanguageDetector {
         $smarty->assign('lang_parent', $lang["alias"]);
         $smarty->assign('lang_locale', $lang["locale"]);
         $smarty->assign('lang_extra', $lang["extra"]);
-        
-        $lang_dir = CmsNlsOperations::get_language_info($lang["locale"])->direction();
-        $smarty->assign('lang_dir', $lang_dir);
 
+        $lang_dir = CmsNlsOperations::get_language_info($lang["locale"])->direction();
+        $smarty->assign('lang_dir', $lang_dir); 
         return $lang["locale"];
     }
 

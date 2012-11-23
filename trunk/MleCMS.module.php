@@ -156,7 +156,8 @@ class MleCMS extends CGExtensions {
         return $this->Lang('really_uninstall');
     }
 
-    function InitializeFrontend() {
+    public function InitializeFrontend() {
+        
         $this->RegisterModulePlugin();
         $this->RestrictUnknownParams();
 
@@ -171,14 +172,6 @@ class MleCMS extends CGExtensions {
             CmsNlsOperations::set_language_detector($obj);
 
         mle_smarty::init();
-    }
-
-    function SetParameters() {
-
-        if (version_compare(CMS_VERSION, '1.10') < 0) {
-            $this->InitializeFrontend();
-            $this->InitializeAdmin();
-        }
     }
 
     function InitializeAdmin() {
@@ -197,11 +190,11 @@ class MleCMS extends CGExtensions {
     }
 
     public function AllowSmartyCaching() {
-        return TRUE;
+        return FALSE;
     }
 
     public function HandlesEvents() {
-        return true;
+        return TRUE;
     }
 
     public function RegisterEvents() {
@@ -235,7 +228,6 @@ class MleCMS extends CGExtensions {
                 }
             }
             $params[1] = $results;
-            
         } elseif ($originator == 'Core' && $eventname == 'ContentPostRender' && $this->GetPreference('mle_auto_redirect')) {
 
             // dont check language

@@ -160,10 +160,6 @@ if ($compid) {
         $extra = $row["extra"];
     if ($row["locale"])
         $locale = $row["locale"];
-    if ($row["setlocale"])
-        $setlocale = $row["setlocale"];
-    if ($row["direction"])
-        $direction = $row["direction"];
     if ($row["flag"])
         $flag = $row["flag"];
 }else {

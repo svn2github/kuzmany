@@ -43,9 +43,6 @@ class mle_tools {
 
         $mod = cms_utils::get_module('MleCMS');
         $tmp = array();
-        if ($allow_none) {
-            $tmp = array('' => lang('nodefault'));
-        }
         $langs = CmsNlsOperations::get_installed_languages();
         asort($langs);
         foreach ($langs as $key) {

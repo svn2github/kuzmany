@@ -63,21 +63,10 @@ if (isset($params['extra'])) {
     $extra = $params['extra'];
 }
 
-$setlocale = '';
-if (isset($params['setlocale'])) {
-    $setlocale = $params['setlocale'];
-}
-
 $locale = get_site_preference('frontendlang', '');
 if (isset($params['locale'])) {
     $locale = $params['locale'];
 }
-
-$locale_custom = '';
-if (isset($params['locale_custom']) && empty($params['locale_custom']) == false && $locale == 'custom') {
-    $locale = $params['locale_custom'];
-}
-
 
 $flag = '';
 
@@ -174,7 +163,6 @@ $this->smarty->assign('extra', $this->CreateInputText($id, 'extra', $extra, 50, 
 $this->smarty->assign('setlocale', $this->CreateInputText($id, 'setlocale', $setlocale, 50, 100));
 
 $this->smarty->assign('locale', $this->CreateInputDropdown($id, 'locale', mle_tools::getLangsLocale(), -1, (array_search($locale, mle_tools::getLangsLocale()) ? $locale : "custom")));
-$this->smarty->assign('locale_custom', $this->CreateInputText($id, 'locale_custom', (array_search($locale, mle_tools::getLangsLocale()) ? "" : $locale), 50, 255));
 $this->smarty->assign('flag', $flag);
 $this->smarty->assign('submit', $this->CreateInputSubmit($id, 'submit', $this->lang('submit')));
 $this->smarty->assign('cancel', $this->CreateInputSubmit($id, 'cancel', $this->lang('cancel')));

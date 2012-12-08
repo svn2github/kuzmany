@@ -1,15 +1,3 @@
-{literal}
-<script type="text/javascript">
-$(document).ready(function(){
-    if($('.locale').find('select').val() == "custom") $('.localecustom').fadeIn(); else $('.localecustom').fadeOut();
-        $('.locale').change(function(){
-            if($(this).find('option:selected').val() == "custom") $('.localecustom').fadeIn(); else $('.localecustom').fadeOut();
-        })
-
-})
-</script>
-{/literal}
-
 {$startform} 
 {if isset($compid)}
 <div class="pageoverflow">
@@ -46,12 +34,6 @@ $(document).ready(function(){
 	{$locale}
         <br />
         {$mod->Lang('par_template')}: {literal}{$lang_locale}{/literal}
-    </p>
-</div>
-<div class="pageoverflow localecustom" style="display:none">
-    <p class="pagetext">{$mod->Lang('locale_custom')}:</p>
-    <p class="pageinput">
-	{$locale_custom}
     </p>
 </div>
 

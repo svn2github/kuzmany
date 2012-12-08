@@ -27,10 +27,7 @@ $lang['name'] = 'Name';
 $lang['extra'] = 'Extra';
 $lang['par_template'] = 'Smarty parameter in template';
 
-$lang['custom'] = 'Custom';
-$lang['locale_custom'] = 'custom locale setting for CMSMS';
 $lang['locale'] = 'Locale for CMSMS';
-$lang['setlocale'] = 'Set locale information (for advanced users)';
 $lang['documentation'] = 'Documentation';
 $lang['example'] = 'Example';
 $lang['flag'] = 'Flag';

@@ -53,7 +53,6 @@ class mle_tools {
             }
             $tmp[$value] = $key;
         }
-        $tmp[$mod->Lang("custom")] = "custom";
         return $tmp;
     }
 

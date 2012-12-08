@@ -68,6 +68,7 @@ $query.=' ORDER BY mle.sort ASC';
 
 $smarty->assign('mle_separator', $this->GetPreference('mle_separator'));
 $smarty->assign('langs', cge_array::to_object($langs));
+$smarty->assign('langs_count', count($langs));
 
 // unlike template
 $template = 'mle_template' . $this->GetPreference('current_mle_template');

@@ -1,5 +1,5 @@
-{if $ls|@count}
-    {foreach from=$ls item=l name=language}
+{if $langs_count}
+    {foreach from=$langs item=l name=language}
     {capture assign="lang_href"}{cms_selflink href=$l.alias}{/capture}
     {if $lang_href}
         {if $page_alias==$l.alias}

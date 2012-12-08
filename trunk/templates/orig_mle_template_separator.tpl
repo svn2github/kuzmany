@@ -1,4 +1,4 @@
-{if $langs|@count}
+{if $langs_count}
     {foreach from=$langs item=l name=language}
         {*separator*}
     {if $smarty.foreach.language.first==false}/{/if}

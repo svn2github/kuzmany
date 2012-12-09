@@ -60,7 +60,7 @@ class MleCMS extends CGExtensions {
     }
 
     function GetVersion() {
-        return '1.11.3';
+        return '1.11.4';
     }
 
     function GetHelp() {
@@ -139,11 +139,11 @@ class MleCMS extends CGExtensions {
     }
 
     function GetDependencies() {
-        return array('CGExtensions' => '1.29');
+        return array('CGExtensions' => '1.31');
     }
 
     function MinimumCMSVersion() {
-        return "1.11.1";
+        return "1.11.2";
     }
 
     function InstallPostMessage() {

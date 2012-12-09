@@ -71,38 +71,8 @@ $lang['help_template'] = 'template (default Flags)';
 $lang['help_excludeprefix'] = 'exclude prefix (for langs action) ';
 $lang['help_includeprefix'] = 'include prefix (for langs action) ';
 
-$lang['changelog'] = '<ul>
-<li>Version 1.11.2 - july 2012 - fix auto language redirection</li>
-<li>Version 1.11.1 - july 2012 - translator reworked (XML files bye bye)</li>
-<li>Version 1.11 - july 2012 - CMSMS 1.11 support</li>
-<li>Version 1.10.5 - november 2011 - setlocale, extra param</li>
-<li>Version 1.4 - 1.7 - april 2011 - som small updates</li>
-<li>Version 1.3 - january 2011 - new millestone - Mle Translator</li>
-<li>Version 1.2 - january 2011 - new millestone - auto redirection</li>
-<li>Version 1.1 - january 2011 - small update</li>
-<li>Version 1 - january 2011 - Initial Release.</li>
-</ul>';
 
 $lang['help'] = '
-    
-
-<div style="float:right">
- <h3>CMS Made Simple screencasts</h3>
-    <p><a href="http://www.cmsmadesimple.sk/screencasts/?utm_source=modules&utm_medium=refferal&utm_campaign=screencasts24_4_2012">donate &amp; view all screencasts</a></p>
-</div>
-
-     <h3>Like it? Donate :)</h3>
-        <p><form action="https://www.paypal.com/cgi-bin/webscr" method="post">
-    <input type="hidden" name="cmd" value="_s-xclick">
-    <input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----MIIHPwYJKoZIhvcNAQcEoIIHMDCCBywCAQExggEwMIIBLAIBADCBlDCBjjELMAkGA1UEBhMCVVMxCzAJBgNVBAgTAkNBMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MRQwEgYDVQQKEwtQYXlQYWwgSW5jLjETMBEGA1UECxQKbGl2ZV9jZXJ0czERMA8GA1UEAxQIbGl2ZV9hcGkxHDAaBgkqhkiG9w0BCQEWDXJlQHBheXBhbC5jb20CAQAwDQYJKoZIhvcNAQEBBQAEgYAd8LgHuly0HAdfEQXvYyCWYPlsFN62he/TEWMKLMQ8wpNI6K7cTgOSOraKCJ4kJ+TpBf/1jOw+PxawAVJFL7vRZtplfz1GiGRPXQ6GvjhdzeWAm3t4XrBnAUgIKXe86i4CVJIS/OypReCrA1Syy44eGllGJq1C4XngGJq+UtWAlzELMAkGBSsOAwIaBQAwgbwGCSqGSIb3DQEHATAUBggqhkiG9w0DBwQIOkMupW2RyneAgZgaWmP3w8xD1PYAMFr0jnbCDNGmKKhOU6mV1VGYKr9lYJqNhw3d7eqym+mtBzaHpngDZQQBN29bx0WbQjWR/c+hsO+6gQyktd6YSCY8jwYt+ohNQ1R5/4YnVZXk8sm1wV5auH5JyITuMqRQlrVEivlxLarzu+1h5ZrJnZVimF/+HgRNGXBdY0ApzPy+wNfYlhdpb6WLQ3t5P6CCA4cwggODMIIC7KADAgECAgEAMA0GCSqGSIb3DQEBBQUAMIGOMQswCQYDVQQGEwJVUzELMAkGA1UECBMCQ0ExFjAUBgNVBAcTDU1vdW50YWluIFZpZXcxFDASBgNVBAoTC1BheVBhbCBJbmMuMRMwEQYDVQQLFApsaXZlX2NlcnRzMREwDwYDVQQDFAhsaXZlX2FwaTEcMBoGCSqGSIb3DQEJARYNcmVAcGF5cGFsLmNvbTAeFw0wNDAyMTMxMDEzMTVaFw0zNTAyMTMxMDEzMTVaMIGOMQswCQYDVQQGEwJVUzELMAkGA1UECBMCQ0ExFjAUBgNVBAcTDU1vdW50YWluIFZpZXcxFDASBgNVBAoTC1BheVBhbCBJbmMuMRMwEQYDVQQLFApsaXZlX2NlcnRzMREwDwYDVQQDFAhsaXZlX2FwaTEcMBoGCSqGSIb3DQEJARYNcmVAcGF5cGFsLmNvbTCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEAwUdO3fxEzEtcnI7ZKZL412XvZPugoni7i7D7prCe0AtaHTc97CYgm7NsAtJyxNLixmhLV8pyIEaiHXWAh8fPKW+R017+EmXrr9EaquPmsVvTywAAE1PMNOKqo2kl4Gxiz9zZqIajOm1fZGWcGS0f5JQ2kBqNbvbg2/Za+GJ/qwUCAwEAAaOB7jCB6zAdBgNVHQ4EFgQUlp98u8ZvF71ZP1LXChvsENZklGswgbsGA1UdIwSBszCBsIAUlp98u8ZvF71ZP1LXChvsENZklGuhgZSkgZEwgY4xCzAJBgNVBAYTAlVTMQswCQYDVQQIEwJDQTEWMBQGA1UEBxMNTW91bnRhaW4gVmlldzEUMBIGA1UEChMLUGF5UGFsIEluYy4xEzARBgNVBAsUCmxpdmVfY2VydHMxETAPBgNVBAMUCGxpdmVfYXBpMRwwGgYJKoZIhvcNAQkBFg1yZUBwYXlwYWwuY29tggEAMAwGA1UdEwQFMAMBAf8wDQYJKoZIhvcNAQEFBQADgYEAgV86VpqAWuXvX6Oro4qJ1tYVIT5DgWpE692Ag422H7yRIr/9j/iKG4Thia/Oflx4TdL+IFJBAyPK9v6zZNZtBgPBynXb048hsP16l2vi0k5Q2JKiPDsEfBhGI+HnxLXEaUWAcVfCsQFvd2A1sxRr67ip5y2wwBelUecP3AjJ+YcxggGaMIIBlgIBATCBlDCBjjELMAkGA1UEBhMCVVMxCzAJBgNVBAgTAkNBMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MRQwEgYDVQQKEwtQYXlQYWwgSW5jLjETMBEGA1UECxQKbGl2ZV9jZXJ0czERMA8GA1UEAxQIbGl2ZV9hcGkxHDAaBgkqhkiG9w0BCQEWDXJlQHBheXBhbC5jb20CAQAwCQYFKw4DAhoFAKBdMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTEwMDkwNDIwMTAxNFowIwYJKoZIhvcNAQkEMRYEFO2IBxuMl6F9pYJCYc4FN6jkSIZ1MA0GCSqGSIb3DQEBAQUABIGAZaZt+UekL/0Sh9G2IvVoQ8ffFojBh+v1AqY/h8XsS2EuDbJCXxtlOnPOrxUFKt5JPbNfwcEYI7qWy6QLzuqGHLrLALU3rWPDrJ7Qa5WXEJV2PbAsQ2hF9W5p0yp6Yx9sVWVASMh0iIAExL02iLz2rAtIbY8fel1c669OxT63pWs=-----END PKCS7-----
-    ">
-    <input type="image" src="https://www.paypal.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-    <img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
-    </form>
-    </p>
-
-<hr style="clear:both; display:block" />
-
 <h3>What Does This Do?</h3>
 <p>This module add multilanguage solution to your CMS Made Simple.</p>
 <h3>How Do I Use It</h3>
@@ -121,30 +91,11 @@ $lang['help'] = '
 <p>Params</p>
 <ul>
 <li>object or array (required) - object/array for mle assign</li>
-<li>par (required)  - par for find mutlilangue string (example: title and mle version  are  title_sk, title_de, title_fr, where title is default string for default language. Great MLE solution in templates!!)</li>
+<li>par (required)  - parameter for find mutlilangue string (example: title and mle version  are  title_sk, title_de, title_fr, where title is default string for default language. Great MLE solution in templates!!)</li>
 <li>assign (optional)  - assign to object</li>
 </ul>
 <br />
-<p><strong>Mle search checker</strong> - (for modules search search restriction, plugin create sql query) </p>
-<p>Example</p>
-<code>
- {foreach from=$results item=entry}<br />
-        {if $entry->module == "MyModule"}<br />
-        {mle_search_checker select="filed" from="module_mymodule" id=$entry->modulerecord assign="language"}                <br />
-        {if !$lang_parent}{MleCMS action="get_root_alias" assign="lang_parent"}{/if}<br />
-        {*display every record from my category *}<br />
-        {if $language == $lang_parent}  <br />
-        {$entry->title}<br />
-        '.htmlspecialchars('<a href="{$entry->url}">{$entry->urltxt}</a>&nbsp;<span>({$entry->weight}%)</span>').'<br />
-        {/if}<br />
-        {/foreach}<br />
-</code><br />
-<p>Params</p>
-<ul>
-<li>select (required)  - SELECT select</li>
-<li>from (required) - FROM table</li>
-<li>assign (optional)  - assign to object</li>
-</ul>
-</p>
+<h3>Do you like my work? </h3>
+<p><a href="http://cmsmadesimple.sk/donate-card/?utm_source=cmsmadesimple&utm_medium=link&utm_campaign=help" target="_blank">Give me five or feel free to donate me</a></p>    
 ';
 ?>

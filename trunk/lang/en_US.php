@@ -31,8 +31,8 @@ $lang['locale'] = 'Locale for CMSMS';
 $lang['documentation'] = 'Documentation';
 $lang['example'] = 'Example';
 $lang['flag'] = 'Flag';
-$lang['mle_init'] = 'Init function for MLE module (*developers only)';
-$lang['default_root_base'] = 'Default based on root alias identification';
+$lang['mle_init'] = 'Multilanguage detection';
+$lang['default_root_base'] = 'Default (based on root alias identification)';
 
 // Snippets
 
@@ -57,7 +57,6 @@ $lang['mle_template'] = 'Multilang template';
 $lang['addedit_mle_template'] = 'Add/Edit multilang template';
 $lang['mle_hierarchy_switch'] = 'Switch beetwen language in each hierarchy';
 $lang['mle_search_restriction'] = 'Search MLE restriction (only for search in pages)';
-$lang['mle_search_restriction_note'] = 'Your page URLs must starts with root_alias prefix (etc: mod_rewrite (en/my-page) or internal index.php/en/my-page)';
 $lang['mle_auto_redirect'] = 'Language detection';
 $lang['none'] = 'None';
 $lang['root_redirect'] = 'Redirect in the root directory';

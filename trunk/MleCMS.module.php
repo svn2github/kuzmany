@@ -220,6 +220,8 @@ class MleCMS extends CGExtensions {
         $db = cmsms()->GetDb();
         $config = cmsms()->GetConfig();
         $smarty = $gCms->GetSmarty();
+        $contentops = cmsms()->GetContentOperations();
+
 
         if ($originator == 'Search' && $eventname == 'SearchCompleted' && $this->GetPreference('mle_search_restriction')) {
             $results = array();
@@ -228,16 +230,20 @@ class MleCMS extends CGExtensions {
                 if (isset($param->module) && isset($param->modulerecord)) {
                     $results[] = $param;
                 } else {
-                    // only for url_rewriting
-                    // url check
-                    if ($config['url_rewriting'] == 'mod_rewrite') {
-                        $base_url = $config["root_url"] . '/' . mle_tools::get_root_alias();
-                    } else if ($config['url_rewriting'] == 'internal') {
-                        $base_url = $config["root_url"] . '/index.php/' . mle_tools::get_root_alias();
+                    $query = "SELECT content_alias FROM " . cms_db_prefix() . "content WHERE content_name = ?";
+                    $alias = $db->GetOne($query, array($param->title));
+
+                    $id = $contentops->GetPageIDFromAlias($alias);
+                    $root_alias = '';
+                    while ($id > 0) {
+                        $content = $contentops->LoadContentFromId($id);
+                        if (!is_object($content))
+                            break;
+                        $root_alias = $content->Alias();
+                        $id = $content->ParentId();
                     }
-                    if (startswith($param->url, $base_url)) {
+                    if ($root_alias == mle_tools::get_root_alias())
                         $results[] = $param;
-                    }
                 }
             }
             $params[1] = $results;

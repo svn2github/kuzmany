@@ -46,7 +46,6 @@
     <div class="pageoverflow">
         <p class="pagetext">{$mod->Lang('mle_search_restriction')}:</p>
         <p class="pageinput">
-            {$mod->Lang('mle_search_restriction_note')}  <br />
             {$mle_search_restriction}
         </p>
     </div>

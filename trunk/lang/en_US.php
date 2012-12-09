@@ -31,6 +31,8 @@ $lang['locale'] = 'Locale for CMSMS';
 $lang['documentation'] = 'Documentation';
 $lang['example'] = 'Example';
 $lang['flag'] = 'Flag';
+$lang['mle_init'] = 'Init function for MLE module (*developers only)';
+$lang['default_root_base'] = 'Default based on root alias identification';
 
 // Snippets
 

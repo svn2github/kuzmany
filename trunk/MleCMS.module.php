@@ -41,6 +41,8 @@ define('MLE_BLOCK', 'block_');
 
 class MleCMS extends CGExtensions {
 
+    private $_obj = null;
+
     public function __construct() {
         parent::__construct();
     }
@@ -157,7 +159,7 @@ class MleCMS extends CGExtensions {
     }
 
     public function InitializeFrontend() {
-        
+
         $this->RegisterModulePlugin();
         $this->RestrictUnknownParams();
 
@@ -167,9 +169,20 @@ class MleCMS extends CGExtensions {
         $this->SetParameterType('name', CLEAN_STRING);
 
         // language detector
-        $obj = new mle_detector($this);
-        if (is_object($obj))
+        $obj = null;
+        $name = $this->GetPreference('mle_init', '');
+        if ($name == '' || $name == '__DEFAULT__') {
+            $obj = new mle_detector($this);
+        } else {
+            $module = cge_utils::get_module($name);
+            if ($module)
+                $obj = $module->GetMleInit();
+        }
+
+        if (is_object($obj)) {
             CmsNlsOperations::set_language_detector($obj);
+            mle_tools::set_smarty_options($obj->find_language());
+        }
 
         mle_smarty::init();
     }

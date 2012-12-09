@@ -160,8 +160,6 @@ $this->smarty->assign('endform', $this->CreateFormEnd());
 $this->smarty->assign('name', $this->CreateInputText($id, 'name', $name, 50, 255));
 $this->smarty->assign('alias', $this->CreateInputText($id, 'alias', $alias, 50, 255));
 $this->smarty->assign('extra', $this->CreateInputText($id, 'extra', $extra, 50, 255));
-$this->smarty->assign('setlocale', $this->CreateInputText($id, 'setlocale', $setlocale, 50, 100));
-
 $this->smarty->assign('locale', $this->CreateInputDropdown($id, 'locale', mle_tools::getLangsLocale(), -1, (array_search($locale, mle_tools::getLangsLocale()) ? $locale : "custom")));
 $this->smarty->assign('flag', $flag);
 $this->smarty->assign('submit', $this->CreateInputSubmit($id, 'submit', $this->lang('submit')));

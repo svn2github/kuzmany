@@ -1,6 +1,6 @@
 {if $langs_count}
     <select onchange="location.href=options[selectedIndex].value;">
-        {foreach from=$langs item=$l name=language}
+        {foreach from=$langs item=l name=language}
         {capture assign="lang_href"}{cms_selflink href=$l.alias}{/capture}
         {if $lang_href}
             {if $page_alias==$l.alias}

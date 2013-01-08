@@ -168,7 +168,11 @@ class MleCMS extends CGExtensions {
         $this->SetParameterType('template', CLEAN_STRING);
         $this->SetParameterType('name', CLEAN_STRING);
 
-        // language detector
+        $langs = mle_tools::get_langs();
+        if(empty($langs))
+            return;
+        
+        // language detector        
         $obj = null;
         $name = $this->GetPreference('mle_init', '');
         if ($name == '' || $name == '__DEFAULT__') {

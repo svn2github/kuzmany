@@ -52,7 +52,7 @@ class mle_smarty {
      * @param array $smarty
      * @return type 
      */
-    public static function translator($params, &$smarty) {
+    public static function translator($params, &$smarty) {        
         Translation::translate($params);
     }
 

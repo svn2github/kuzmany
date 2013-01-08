@@ -168,24 +168,25 @@ class MleCMS extends CGExtensions {
         $this->SetParameterType('template', CLEAN_STRING);
         $this->SetParameterType('name', CLEAN_STRING);
 
-        $langs = mle_tools::get_langs();
-        if(empty($langs))
-            return;
-        
-        // language detector        
-        $obj = null;
-        $name = $this->GetPreference('mle_init', '');
-        if ($name == '' || $name == '__DEFAULT__') {
-            $obj = new mle_detector($this);
-        } else {
-            $module = cge_utils::get_module($name);
-            if ($module)
-                $obj = $module->GetMleInit();
-        }
 
-        if (is_object($obj)) {
-            CmsNlsOperations::set_language_detector($obj);
-            mle_tools::set_smarty_options($obj->find_language());
+        // language detector        
+        $langs = mle_tools::get_langs();
+        if (empty($langs) == false) {
+            $obj = null;
+            $name = $this->GetPreference('mle_init', '');
+            if ($name == '' || $name == '__DEFAULT__') {
+                $obj = new mle_detector($this);
+            } else {
+                $module = cge_utils::get_module($name);
+                if ($module)
+                    $obj = $module->GetMleInit();
+            }
+
+            if (is_object($obj)) {
+                CmsNlsOperations::set_language_detector($obj);
+                if ($obj->find_language())
+                    mle_tools::set_smarty_options($obj->find_language($x));
+            }
         }
 
         mle_smarty::init();

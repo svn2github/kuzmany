@@ -85,7 +85,7 @@ switch ($current_version) {
     case "1.8":
         $current_version = "1.9";
     case "1.9":
-// delete any dependencies
+        // delete any dependencies
         $query = "DELETE FROM " . cms_db_prefix() . "module_deps WHERE child_module = ? AND parent_module = ?";
         $db->Execute($query, array($this->GetName(), 'ContentCache'));
         $contentops = cmsms()->GetContentOperations();

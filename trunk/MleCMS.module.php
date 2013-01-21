@@ -236,19 +236,35 @@ class MleCMS extends CGExtensions {
                     $results[] = $param;
                 } else {
                     $query = "SELECT content_alias FROM " . cms_db_prefix() . "content WHERE content_name = ?";
-                    $alias = $db->GetOne($query, array($param->title));
+                    $rows = $db->GetAll($query, array($param->title));
+                    if ($rows) {
+                        foreach ($rows as $row) {
+                            $alias = $row['content_alias'];
+                            $content_id = $contentops->GetPageIDFromAlias($alias);
+                            $content = $contentops->LoadContentFromId($content_id);
+                            $url = '';
+                            if (is_object($content)) {
+                                $content_url = $config['root_url'] . '/' . $content->Url();
+                            }
 
-                    $id = $contentops->GetPageIDFromAlias($alias);
-                    $root_alias = '';
-                    while ($id > 0) {
-                        $content = $contentops->LoadContentFromId($id);
-                        if (!is_object($content))
-                            break;
-                        $root_alias = $content->Alias();
-                        $id = $content->ParentId();
+                            if ($content_url != $param->url)
+                                continue;
+
+                            $id = $contentops->GetPageIDFromAlias($alias);
+                            $root_alias = '';
+                            while ($id > 0) {
+                                $content = $contentops->LoadContentFromId($id);
+                                if (!is_object($content))
+                                    break;
+                                $root_alias = $content->Alias();
+                                $id = $content->ParentId();
+                            }
+                            if ($root_alias == mle_tools::get_root_alias())
+                                $param->content_id = $content_id;
+                                $param->alias = $alias;
+                            $results[] = $param;
+                        }
                     }
-                    if ($root_alias == mle_tools::get_root_alias())
-                        $results[] = $param;
                 }
             }
             $params[1] = $results;

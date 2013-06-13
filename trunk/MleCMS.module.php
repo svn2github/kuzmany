@@ -60,7 +60,7 @@ class MleCMS extends CGExtensions {
     }
 
     function GetVersion() {
-        return '1.11.4';
+        return '1.11.5';
     }
 
     function GetHelp() {
@@ -261,7 +261,7 @@ class MleCMS extends CGExtensions {
                             }
                             if ($root_alias == mle_tools::get_root_alias())
                                 $param->content_id = $content_id;
-                                $param->alias = $alias;
+                            $param->alias = $alias;
                             $results[] = $param;
                         }
                     }
@@ -360,6 +360,11 @@ LEFT JOIN ' . cms_db_prefix() . 'content  content_hierchy ON (content_hierchy.hi
             $entryarray[] = $lang;
         }
         return $entryarray;
+    }
+
+    // set mle prefs
+    public function MleSetPreference($name, $data) {
+        file_put_contents($name, serialize($data));
     }
 
 }

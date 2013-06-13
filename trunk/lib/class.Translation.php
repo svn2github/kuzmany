@@ -19,6 +19,7 @@ class Translation {
     }
 
     private static function _init() {
+        $config = cmsms()->GetConfig();
         if (self::$_mod == null)
             self::$_mod = cms_utils::get_module('MleCMS');
 
@@ -28,13 +29,19 @@ class Translation {
         if (self::$_langs == null)
             self::$_langs = mle_tools::get_langs();
 
-        if (self::$_translations == null)
-            self::$_translations = unserialize(self::$_mod->GetPreference('translations'));
+        if (self::$_translations == null) {
+            $data = file_get_contents($config['uploads_path'] . '/translations.dat');
+            self::$_translations = unserialize($data);
+        }
     }
 
     public static function save() {
-        if(self::$_mod != null)
-        self::$_mod->SetPreference('translations', serialize(self::$_translations));
+        $config = cmsms()->GetConfig();
+        file_put_contents($config['uploads_path'] . '/translations.dat', serialize(self::$_translations));
+    }
+
+    public static function set_translation_data($data) {
+        self::$_translations = $data;
     }
 
     public static function get_translations() {
@@ -56,10 +63,12 @@ class Translation {
         self::$_translations[$key][$editLang] = $value;
         self::save();
     }
+
     public static function add_to_translations($key, $locale, $value) {
         self::_init();
         self::$_translations[$key][$locale] = $value;
     }
+
     public static function translate($params) {
 
         self::_init();
@@ -69,7 +78,7 @@ class Translation {
         // do nothing
         if (!isset($params['text']))
             return;
-
+        
         $lang_value = self::$_translations[$params['text']][self::$_lang];
         if (!$lang_value) {
             $lang_value = self::$_translations[$params['text']][self::$_lang] = $params['text'];

@@ -126,7 +126,11 @@ switch ($current_version) {
             }
             Translation::save();
         }
-
+    case "1.11.4":
+        if ($this->GetPreference('translations')) {
+            Translation::set_translation_data(unserialize($this->GetPreference('translations')));
+            Translation::save();
+        }
         $current_version = "1.12";
 }
 

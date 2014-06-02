@@ -32,22 +32,21 @@ if (!isset($gCms))
 $query = "SELECT * FROM " . cms_db_prefix() . "module_mlecms_config ORDER BY sort ASC";
 $dbresult = $db->Execute($query);
 
-$admintheme = cmsms()->get_variable('admintheme');
-global $themeObject;
+$admintheme = cms_utils::get_theme_object();
 $numrows = $dbresult->NumRows();
 $index = 0;
 while ($dbresult && $row = $dbresult->FetchRow()) {
     $onerow = cge_array::to_object($row);
 
     $onerow->title = $this->CreateLink($id, 'admin_mlecms_config_editlang', $returnid, $row['name'], array('compid' => $row['id']));
-    $onerow->editlink = $this->CreateLink($id, 'admin_mlecms_config_editlang', $returnid, cmsms()->get_variable('admintheme')->DisplayImage('icons/system/edit.gif', $this->Lang('edit'), '', '', 'systemicon'), array('compid' => $row['id']));
-    $onerow->deletelink = $this->CreateLink($id, 'admin_mlecms_config_deletelang', $returnid, cmsms()->get_variable('admintheme')->DisplayImage('icons/system/delete.gif', $this->Lang('delete'), '', '', 'systemicon'), array('compid' => $row['id']), $this->Lang('areyousure'));
+    $onerow->editlink = $this->CreateLink($id, 'admin_mlecms_config_editlang', $returnid, $admintheme->DisplayImage('icons/system/edit.gif', $this->Lang('edit'), '', '', 'systemicon'), array('compid' => $row['id']));
+    $onerow->deletelink = $this->CreateLink($id, 'admin_mlecms_config_deletelang', $returnid, $admintheme->DisplayImage('icons/system/delete.gif', $this->Lang('delete'), '', '', 'systemicon'), array('compid' => $row['id']), $this->Lang('areyousure'));
 
         if ($index > 0) {
-            $onerow->moveuplink = $this->CreateLink($id, 'moveup', $returnid, cmsms()->get_variable('admintheme')->DisplayImage('icons/system/arrow-u.gif', lang('up'), '', '', 'systemicon'), array('compid' => $row['id']), '', false, false, 'class="itemlink"');
+            $onerow->moveuplink = $this->CreateLink($id, 'moveup', $returnid, $admintheme->DisplayImage('icons/system/arrow-u.gif', lang('up'), '', '', 'systemicon'), array('compid' => $row['id']), '', false, false, 'class="itemlink"');
         }
         if ($index < $numrows - 1) {
-            $onerow->movedownlink = $this->CreateLink($id, 'movedown', $returnid, cmsms()->get_variable('admintheme')->DisplayImage('icons/system/arrow-d.gif', lang('down'), '', '', 'systemicon'), array('compid' => $row['id']), '', false, false, 'class="itemlink"');
+            $onerow->movedownlink = $this->CreateLink($id, 'movedown', $returnid, $admintheme->DisplayImage('icons/system/arrow-d.gif', lang('down'), '', '', 'systemicon'), array('compid' => $row['id']), '', false, false, 'class="itemlink"');
         }
 
     $entryarray[] = $onerow;

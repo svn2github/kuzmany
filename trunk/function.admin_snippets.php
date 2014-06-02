@@ -42,7 +42,7 @@ if (!$this->CheckAccess('manage ' . $prefix . 'mle'))
 
 */
 
-
+$admintheme = cms_utils::get_theme_object();
 $template_list = cge_template_utils::get_templates_by_prefix('', $prefix);
 
 $rowclass = 'row1';
@@ -53,8 +53,8 @@ foreach ($template_list as $template)
 {
 	$onerow = new stdClass();
 	$onerow->name = $template;
-	$onerow->deletelink = $this->CreateLink($id, 'deleteSnippet', $returnid, cmsms()->get_variable('admintheme')->DisplayImage('icons/system/delete.gif', $this->Lang('delete'),'','','systemicon'), array('name'=>$template,'prefix'=>$prefix), $this->Lang('areyousure'));
-	$onerow->editlink = $this->CreateLink($id, 'manageSnippet', $returnid, cmsms()->get_variable('admintheme')->DisplayImage('icons/system/edit.gif', $this->Lang('edit'),'','','systemicon'), array('name'=>$template,'prefix'=>$prefix,'wysiwyg'=>$wysiwyg));
+	$onerow->deletelink = $this->CreateLink($id, 'deleteSnippet', $returnid, $admintheme->DisplayImage('icons/system/delete.gif', $this->Lang('delete'),'','','systemicon'), array('name'=>$template,'prefix'=>$prefix), $this->Lang('areyousure'));
+	$onerow->editlink = $this->CreateLink($id, 'manageSnippet', $returnid, $admintheme->DisplayImage('icons/system/edit.gif', $this->Lang('edit'),'','','systemicon'), array('name'=>$template,'prefix'=>$prefix,'wysiwyg'=>$wysiwyg));
 	$onerow->edit = $this->CreateLink($id, 'manageSnippet', $returnid,$template, array('name'=>$template,'prefix'=>$prefix,'wysiwyg'=>$wysiwyg));
 	$onerow->rowclass = $rowclass;
 	$templates[] = $onerow;
@@ -73,7 +73,7 @@ $this->smarty->assign('addSnippetLink',$this->CreateLink($id,
 
 $this->smarty->assign('addSnippetIcon',$this->CreateLink($id,
 				'manageSnippet', '',
-				cmsms()->get_variable('admintheme')->DisplayImage('icons/system/newobject.gif', $this->Lang('add_snippet'),'',
+				$admintheme->DisplayImage('icons/system/newobject.gif', $this->Lang('add_snippet'),'',
 					'','systemicon'), array('prefix'=>$prefix,'wysiwyg'=>$wysiwyg)));
 
 // Import section

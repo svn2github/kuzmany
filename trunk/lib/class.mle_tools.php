@@ -100,15 +100,17 @@ class mle_tools {
         return $langs;
     }
 
-    public static function set_smarty_options($locale) {
+    public static function set_smarty_options($locale, $alias = null) {
         $obj = CmsNlsOperations::get_language_info($locale);
         if (!is_object($obj))
             return;
 
         $smarty = cmsms()->GetSmarty();
         $value = $obj->display();
-
-        $lang = self::get_lang_from_locale($locale);
+        if ($alias != null)
+            $lang = self::get_lang_from_alias($alias);
+        else
+            $lang = self::get_lang_from_locale($locale);
         if ($lang) {
             $smarty->assign('lang_extra', $lang["extra"]);
             $smarty->assign('lang_parent', $lang["alias"]);

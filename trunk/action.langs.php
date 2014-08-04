@@ -31,7 +31,12 @@ if (!isset($gCms))
 if ($this->GetPreference('mle_hierarchy_switch')) {
 // get hierarchy lang switch
     $smarty = cmsms()->GetSmarty();
-    $friendly_position = $smarty->get_template_vars('friendly_position');
+    $hm = cmsms()->GetHierarchyManager();
+    $alias = cms_utils::get_current_alias();
+    $node = $hm->find_by_tag('alias', $alias);
+    if(!is_object($node))
+        return;
+    $friendly_position = $node->GetHierarchy();
     $friendly_position_array = explode(".", $friendly_position);
     unset($friendly_position_array[0]);
     $hierarchy_array = array();
@@ -50,17 +55,16 @@ if ($this->GetPreference('mle_hierarchy_switch')) {
 INNER JOIN ' . cms_db_prefix() . 'content  content ON content.content_alias = mle.alias
 LEFT JOIN ' . cms_db_prefix() . 'content  content_hierchy ON (content_hierchy.hierarchy = CONCAT(content.hierarchy,?))';
     $query.=' WHERE 1';
-    
-    if(isset($params["includeprefix"])){
-        $query.= ' AND LEFT(mle.alias,'.  strlen($params["includeprefix"]).') = ?';
+    if (isset($params["includeprefix"])) {
+        $query.= ' AND LEFT(mle.alias,' . strlen($params["includeprefix"]) . ') = ?';
         $parms[] = $params["includeprefix"];
     }
-    if(isset($params["excludeprefix"])){
-        $query.= ' AND LEFT(mle.alias,'.  strlen($params["excludeprefix"]).') != ?';
+    if (isset($params["excludeprefix"])) {
+        $query.= ' AND LEFT(mle.alias,' . strlen($params["excludeprefix"]) . ') != ?';
         $parms[] = $params["excludeprefix"];
     }
 
-$query.=' ORDER BY mle.sort ASC';
+    $query.=' ORDER BY mle.sort ASC';
     $langs = $db->GetAll($query, array($parms));
 } else {
     $langs = $this->getLangs();

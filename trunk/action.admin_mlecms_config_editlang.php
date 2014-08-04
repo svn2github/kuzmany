@@ -63,7 +63,7 @@ if (isset($params['extra'])) {
     $extra = $params['extra'];
 }
 
-$locale = get_site_preference('frontendlang', '');
+$locale = CmsNlsOperations::get_default_language();
 if (isset($params['locale'])) {
     $locale = $params['locale'];
 }
@@ -160,7 +160,9 @@ $this->smarty->assign('endform', $this->CreateFormEnd());
 $this->smarty->assign('name', $this->CreateInputText($id, 'name', $name, 50, 255));
 $this->smarty->assign('alias', $this->CreateInputText($id, 'alias', $alias, 50, 255));
 $this->smarty->assign('extra', $this->CreateInputText($id, 'extra', $extra, 50, 255));
-$this->smarty->assign('locale', $this->CreateInputDropdown($id, 'locale', mle_tools::getLangsLocale(), -1, (array_search($locale, mle_tools::getLangsLocale()) ? $locale : "custom")));
+
+
+$this->smarty->assign('locale', $this->CreateInputDropdown($id, 'locale', mle_tools::getLangsLocale(), -1, $locale));
 $this->smarty->assign('flag', $flag);
 $this->smarty->assign('submit', $this->CreateInputSubmit($id, 'submit', $this->lang('submit')));
 $this->smarty->assign('cancel', $this->CreateInputSubmit($id, 'cancel', $this->lang('cancel')));

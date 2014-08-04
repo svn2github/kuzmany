@@ -32,11 +32,12 @@ if ($this->GetPreference('mle_hierarchy_switch')) {
 // get hierarchy lang switch
     $smarty = cmsms()->GetSmarty();
     $hm = cmsms()->GetHierarchyManager();
+    $contentops = cmsms()->GetContentOperations();
     $alias = cms_utils::get_current_alias();
-    $node = $hm->find_by_tag('alias', $alias);
+    $node =   $contentops->LoadContentFromAlias($alias);
     if(!is_object($node))
         return;
-    $friendly_position = $node->GetHierarchy();
+    $friendly_position = $node->Hierarchy();
     $friendly_position_array = explode(".", $friendly_position);
     unset($friendly_position_array[0]);
     $hierarchy_array = array();

@@ -174,7 +174,10 @@ class mle_smarty {
 
     public static function mle_selflink($params, &$smarty) {
         $parms = array();
-        $parms[] = $params['href'];
+        if (isset($params['page']))
+            $parms[] = $params['page'];
+        elseif (isset($params['href']))
+            $parms[] = $params['href'];
         $parms[] = $smarty->getTemplateVars('lang_parent');
         $query = 'SELECT target.content_alias
 			FROM ' . cms_db_prefix() . 'content origin, ' . cms_db_prefix() . 'content lang, ' . cms_db_prefix() . 'content target
@@ -183,14 +186,13 @@ class mle_smarty {
         $db = cmsms()->GetDb();
         $result = $db->GetAll($query, array($parms));
 
-        $smarty->loadPlugin('smarty_function_cms_selflink', true);
-        $url = smarty_function_cms_selflink(array('href' => $result[0]['content_alias']), $smarty);
+        if (isset($params['page']))
+            $params['page'] = $result[0]['content_alias'];
+        elseif (isset($params['href']))
+            $params['href'] = $result[0]['content_alias'];
 
-        if ($params['assign']) {
-            $smarty->assign($params['assign'], $url);
-        } else {
-            return $url;
-        }
+        $smarty->loadPlugin('smarty_function_cms_selflink', true);
+        return smarty_function_cms_selflink($params, $smarty);
     }
 
     public static function get_root_alias() {

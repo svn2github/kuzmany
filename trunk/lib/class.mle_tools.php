@@ -108,7 +108,6 @@ class mle_tools {
             $lang = self::get_lang_from_alias($alias);
         else
             $lang = self::get_lang_from_locale($locale);
-        
         if ($lang) {
             $smarty->assign('lang_extra', $lang["extra"]);
             $smarty->assign('lang_parent', $lang["alias"]);

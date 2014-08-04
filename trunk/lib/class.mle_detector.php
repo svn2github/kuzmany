@@ -24,7 +24,6 @@ class mle_detector extends CmsLanguageDetector {
         $alias = mle_tools::get_root_alias();
         if ($alias == '')
             $alias = cms_utils::get_current_alias();
-
         if (!$alias)
             return;
         $lang = mle_tools::get_lang_from_alias($alias);

@@ -185,7 +185,6 @@ class mle_smarty {
 				AND target.hierarchy = CONCAT(lang.hierarchy, \'.\', SUBSTRING(origin.hierarchy, 7))';
         $db = cmsms()->GetDb();
         $result = $db->GetAll($query, array($parms));
-
         if (isset($params['page']))
             $params['page'] = $result[0]['content_alias'];
         elseif (isset($params['href']))

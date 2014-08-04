@@ -32,7 +32,7 @@ class mle_smarty {
      * Initialize the smarty plugins.
      */
     public static function init() {
-        
+
         $smarty = cmsms()->GetSmarty();
         // translators
         $smarty->register_function('translate', array('mle_smarty', 'translator'));
@@ -41,9 +41,9 @@ class mle_smarty {
         $smarty->register_modifier('translate', array('mle_smarty', 'translator_modifier'));
 
         $smarty->register_function('mle_assign', array('mle_smarty', 'mle_assign'));
+        $smarty->register_function('mle_selflink', array('mle_smarty', 'mle_selflink'));
         $smarty->register_function('mle_search_checker', array('mle_smarty', 'mle_search_checker'));
         $smarty->register_function('get_root_alias', array('mle_smarty', 'get_root_alias'));
-        
     }
 
     /**
@@ -52,7 +52,7 @@ class mle_smarty {
      * @param array $smarty
      * @return type 
      */
-    public static function translator($params, &$smarty) {        
+    public static function translator($params, &$smarty) {
         Translation::translate($params);
     }
 
@@ -170,6 +170,27 @@ class mle_smarty {
             $smarty->assign($params["assign"], $value);
         else
             echo $value;
+    }
+
+    public static function mle_selflink($params, &$smarty) {
+        $parms = array();
+        $parms[] = $params['href'];
+        $parms[] = $smarty->getTemplateVars('lang_parent');
+        $query = 'SELECT target.content_alias
+			FROM ' . cms_db_prefix() . 'content origin, ' . cms_db_prefix() . 'content lang, ' . cms_db_prefix() . 'content target
+			WHERE origin.content_alias = ? AND lang.content_alias = ?
+				AND target.hierarchy = CONCAT(lang.hierarchy, \'.\', SUBSTRING(origin.hierarchy, 7))';
+        $db = cmsms()->GetDb();
+        $result = $db->GetAll($query, array($parms));
+
+        $smarty->loadPlugin('smarty_function_cms_selflink', true);
+        $url = smarty_function_cms_selflink(array('href' => $result[0]['content_alias']), $smarty);
+
+        if ($params['assign']) {
+            $smarty->assign($params['assign'], $url);
+        } else {
+            return $url;
+        }
     }
 
     public static function get_root_alias() {

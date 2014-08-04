@@ -22,10 +22,8 @@ class mle_tools {
         $gCms = cmsms();
         $contentops = $gCms->GetContentOperations();
         $smarty = $gCms->GetSmarty();
-
-        if ($alias == '') {
-            $alias = $smarty->get_template_vars('page_alias');
-        }
+        if (empty($alias)) 
+            $alias = cms_utils::get_current_alias();
         $id = $contentops->GetPageIDFromAlias($alias);
 
         while ($id > 0) {
@@ -104,13 +102,13 @@ class mle_tools {
         $obj = CmsNlsOperations::get_language_info($locale);
         if (!is_object($obj))
             return;
-
         $smarty = cmsms()->GetSmarty();
         $value = $obj->display();
         if ($alias != null)
             $lang = self::get_lang_from_alias($alias);
         else
             $lang = self::get_lang_from_locale($locale);
+        
         if ($lang) {
             $smarty->assign('lang_extra', $lang["extra"]);
             $smarty->assign('lang_parent', $lang["alias"]);

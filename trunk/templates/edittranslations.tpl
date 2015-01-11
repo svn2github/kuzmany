@@ -54,12 +54,9 @@
         var areyousure = "{$mod->Lang('areyousure')}";
     {literal}
 
-        $(window).load(function(){
-           //$('#trans .keys td').css('width', $('#trans').width() / $('#trans th').size());
-        });
 
         $(document).ready(function(){
-            $('#trans .keys td span').live('click', function(){
+            $(document).on('click','#trans .keys td span', function(){
                 $(this).hide();
                 $(this).parents('td').append('<input type="text" value="" />');
                 $(this).siblings('input').val($.trim($(this).text())).focus().select();
@@ -81,7 +78,7 @@
                         data: ({
                             'delKey': delKey,
                             '{/literal}{$cms_secure_param_name}{literal}': '{/literal}{$smarty.get.$cms_secure_param_name}{literal}',
-                            'module': '{/literal}{$smarty.get.module}{literal}',
+                            'module': '{/literal}{$mod->GetName()}{literal}',
                             'showtemplate': 'false',
                             'aAction': 'remove'
                         }),
@@ -99,7 +96,7 @@
             })
 
             /** update events */
-            $('#trans tr td input').live('blur', function(){
+            $(document).on('blur','#trans tr td input', function(){
                 var $this = this;
                 $.ajax({
                     type: 'POST',
@@ -110,7 +107,7 @@
                         'editValue': $.trim($(this).val()),
                         'editLang': $(this).parents('td').attr('data-lang'),
                         '{/literal}{$cms_secure_param_name}{literal}': '{/literal}{$smarty.get.$cms_secure_param_name}{literal}',
-                        'module': '{/literal}{$smarty.get.module}{literal}',
+                        'module': '{/literal}{$mod->GetName()}{literal}',
                         'showtemplate': 'false',
                         'aAction': 'update'
                     }),

@@ -87,12 +87,19 @@ $lang['help'] = '
 <li>assign (optional)  - smarty assign</li>
 </ul>
 <br />
-<p><strong>Mle assign</strong> - (news example: {mle_assign object=$entry par="title" assign="entry"}) </p>
+<p><strong>mle_assign</strong> - (news example: {mle_assign object=$entry par="title" assign="entry"}) </p>
 <p>Params</p>
 <ul>
 <li>object or array (required) - object/array for mle assign</li>
 <li>par (required)  - parameter for find mutlilangue string (example: title and mle version  are  title_sk, title_de, title_fr, where title is default string for default language. Great MLE solution in templates!!)</li>
 <li>assign (optional)  - assign to object</li>
+</ul>
+<br />
+<p><strong>mle_selflink</strong> - ({mle_selfink page="alias"}) </p>
+<p>Params</p>
+<ul>
+<li>page/href - same like for cms_selflink</li>
+<li>assign (optional)</li>
 </ul>
 <br />
 <h3>Do you like my work? </h3>

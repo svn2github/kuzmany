@@ -1,4 +1,8 @@
 <ul>
+    <li>Version 2.0 - january 2015 <br />
+        - CMSMS 2.0 ready
+        - add mle_selflink (mle version of cms_selflink)
+    </li>
     <li>Version 1.11.4 - december 2012 <br />
         - add support for external detection GetMleInit (see MleDomains for expample)<br />
         - fix page search results<br />    

@@ -171,7 +171,7 @@ class MleCMS extends CGExtensions {
 
         // language detector        
         $langs = mle_tools::get_langs();
-        if (empty($langs) == false) {
+        if (empty($langs)==false) {
             $obj = null;
             $name = $this->GetPreference('mle_init', '');
             if ($name == '' || $name == '__DEFAULT__') {

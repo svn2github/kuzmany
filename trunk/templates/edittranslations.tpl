@@ -31,7 +31,7 @@
         {foreach from=$langsArray item=pLang}
             {assign var="locale" value=$pLang.locale}
                 <td data-lang="{$pLang.locale}">
-                    <span>{if $items.$locale}{$items.$locale}{else}{$key|trim}{/if}</span>
+                    <span>{if isset($items.$locale)}{$items.$locale}{else}{$key|trim}{/if}</span>
         </td>
         {/foreach}
     <td><a class='del' href="#">{$deleteIcon}</a></td>

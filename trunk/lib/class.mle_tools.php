@@ -19,13 +19,13 @@ class mle_tools {
         if ($alias)
             return $alias;
 
+
         $gCms = cmsms();
         $contentops = $gCms->GetContentOperations();
         $smarty = $gCms->GetSmarty();
-        if (empty($alias)) 
-            $alias = cms_utils::get_current_alias();
-        $id = $contentops->GetPageIDFromAlias($alias);
-
+        $alias = get_pageid_or_alias_from_url();
+        $content = $contentops->LoadContentFromAlias($alias);
+        $id = $content->Id();
         while ($id > 0) {
             $content = $contentops->LoadContentFromId($id);
             if (!is_object($content))

@@ -35,10 +35,11 @@ $contentops = $gCms->GetContentOperations();
 $smarty = $gCms->GetSmarty();
 $lang_parent = $smarty->get_template_vars('lang_parent');
 
-
 if(!$lang_parent)  return;
 if (isset($params['name']) && $template = $this->GetTemplate($params['name'])) {
     $template = json_decode($template);
+    
+    
     $output = $this->ProcessTemplateFromData($template->$lang_parent);
     echo $output;
 }

@@ -185,7 +185,7 @@ class MleCMS extends CGExtensions {
             if (is_object($obj)) {
                 CmsNlsOperations::set_language_detector($obj);
                 if ($obj->find_language())
-                    mle_tools::set_smarty_options($obj->find_language($x));
+                    mle_tools::set_smarty_options($obj->find_language());
             }
         }
 

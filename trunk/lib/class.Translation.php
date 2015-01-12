@@ -23,12 +23,14 @@ class Translation {
         $smarty = cmsms()->GetSmarty();
         if (self::$_mod == null)
             self::$_mod = cms_utils::get_module('MleCMS');
-        
+
         $tmp_vars = $smarty->get_template_vars();
         if (self::$_lang == null)
-            self::$_lang = $tmp_vars['lang_locale'];
-            //self::$_lang = CmsNlsOperations::get_current_language();
-        
+            if (isset($tmp_vars['lang_locale']))
+                self::$_lang = $tmp_vars['lang_locale'];
+            else
+                self::$_lang = CmsNlsOperations::get_current_language();
+
         if (self::$_langs == null)
             self::$_langs = mle_tools::get_langs();
 
@@ -81,7 +83,7 @@ class Translation {
         // do nothing
         if (!isset($params['text']))
             return;
-        $lang_value = self::$_translations[$params['text']][self::$_lang];
+        $lang_value = isset(self::$_translations[$params['text']][self::$_lang]) ? self::$_translations[$params['text']][self::$_lang] : '';
         if (!$lang_value) {
             $lang_value = self::$_translations[$params['text']][self::$_lang] = $params['text'];
             self::save();

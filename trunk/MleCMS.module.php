@@ -84,10 +84,7 @@ class MleCMS extends CGExtensions {
     }
 
     function HasAdmin() {
-        return ($this->CheckAccess()
-                || $this->CheckAccess('manage ' . MLE_SNIPPET . 'mle')
-                || $this->CheckAccess('manage ' . MLE_BLOCK . 'mle')
-                || $this->CheckAccess('manage translator_mle')
+        return ($this->CheckAccess() || $this->CheckAccess('manage ' . MLE_SNIPPET . 'mle') || $this->CheckAccess('manage ' . MLE_BLOCK . 'mle') || $this->CheckAccess('manage translator_mle')
                 );
     }
 
@@ -168,10 +165,9 @@ class MleCMS extends CGExtensions {
         $this->SetParameterType('template', CLEAN_STRING);
         $this->SetParameterType('name', CLEAN_STRING);
 
-
         // language detector        
         $langs = mle_tools::get_langs();
-        if (empty($langs)==false) {
+        if (empty($langs) == false) {
             $obj = null;
             $name = $this->GetPreference('mle_init', '');
             if ($name == '' || $name == '__DEFAULT__') {
@@ -180,12 +176,16 @@ class MleCMS extends CGExtensions {
                 $module = cge_utils::get_module($name);
                 if ($module)
                     $obj = $module->GetMleInit();
+                
             }
 
             if (is_object($obj)) {
+                
                 CmsNlsOperations::set_language_detector($obj);
-                if ($obj->find_language())
-                    mle_tools::set_smarty_options($obj->find_language());
+                $obj->find_language();
+                    //mle_tools::set_smarty_options($obj->find_language());
+                    
+                    
             }
         }
 

@@ -30,7 +30,7 @@ class mle_detector extends CmsLanguageDetector {
         if (!$lang)
             return '';
         else {
-            mle_tools::set_smarty_options($lang["locale"],$lang["alias"]);
+            mle_tools::set_smarty_options($lang["locale"], $lang["alias"]);
             return $lang["locale"];
         }
     }

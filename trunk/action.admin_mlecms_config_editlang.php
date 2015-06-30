@@ -63,6 +63,11 @@ if (isset($params['extra'])) {
     $extra = $params['extra'];
 }
 
+$canonical = '';
+if (isset($params['canonical'])) {
+    $canonical = $params['canonical'];
+}
+
 $locale = CmsNlsOperations::get_default_language();
 if (isset($params['locale'])) {
     $locale = $params['locale'];
@@ -105,9 +110,9 @@ if (isset($params['submit'])) {
         // insert the order record
         $sort = $db->GetOne('SELECT MAX(sort) FROM ' . cms_db_prefix() . 'module_mlecms_config');
         $query = 'INSERT INTO ' . cms_db_prefix() . 'module_mlecms_config
-		(name,alias,extra,locale,setlocale,direction,flag,sort,created_date,modified_date)
-		VALUES (?,?,?,?,?,?,?,?,NOW(),NOW())';
-        $dbr = $db->Execute($query, array($name, $alias, $extra, $locale, $setlocale, $direction, $flag, ($sort + 1)));
+		(name,alias,extra,canonical, locale,setlocale,direction,flag,sort,created_date,modified_date)
+		VALUES (?,?,?,?,?,?,?,?,?,NOW(),NOW())';
+        $dbr = $db->Execute($query, array($name, $alias, $extra, $canonical, $locale, $setlocale, $direction, $flag, ($sort + 1)));
         $cid = $db->Insert_ID();
         if (!$cid) {
             echo $this->ShowErrors($this->Lang('nonamegiven'));
@@ -117,13 +122,14 @@ if (isset($params['submit'])) {
 		name=?,
                 alias = ?,
                 extra = ?,
+                canonical = ?,
                 locale = ?,
                 setlocale = ?,
                 direction = ?,
                 flag  = ?,
                 modified_date = NOW()
 		WHERE id = ?';
-        $dbr = $db->Execute($query, array($name, $alias, $extra, $locale, $setlocale, $direction, $flag, $compid));
+        $dbr = $db->Execute($query, array($name, $alias, $extra, $canonical, $locale, $setlocale, $direction, $flag, $compid));
         $cid = $compid;
     }
 
@@ -147,6 +153,8 @@ if ($compid) {
         $alias = $row["alias"];
     if ($row["extra"])
         $extra = $row["extra"];
+    if ($row["canonical"])
+        $canonical = $row["canonical"];
     if ($row["locale"])
         $locale = $row["locale"];
     if ($row["flag"])
@@ -160,6 +168,7 @@ $this->smarty->assign('endform', $this->CreateFormEnd());
 $this->smarty->assign('name', $this->CreateInputText($id, 'name', $name, 50, 255));
 $this->smarty->assign('alias', $this->CreateInputText($id, 'alias', $alias, 50, 255));
 $this->smarty->assign('extra', $this->CreateInputText($id, 'extra', $extra, 50, 255));
+$this->smarty->assign('canonical', $this->CreateInputText($id, 'canonical', $canonical, 50, 255));
 
 
 $this->smarty->assign('locale', $this->CreateInputDropdown($id, 'locale', mle_tools::getLangsLocale(), -1, $locale));

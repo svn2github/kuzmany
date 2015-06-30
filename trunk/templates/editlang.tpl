@@ -27,6 +27,12 @@
         {$mod->Lang('par_template')}: {literal}{$lang_extra}{/literal}
     </p>
 </div>
+<div class="pageoverflow">
+    <p class="pagetext">{$mod->Lang('canonical')}:</p>
+    <p class="pageinput">
+	{$canonical}
+    </p>
+</div>
 
 <div class="pageoverflow locale">
     <p class="pagetext">{$mod->Lang('locale')}:</p>

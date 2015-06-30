@@ -14,32 +14,25 @@ class mle_tools {
         return false;
     }
 
-    public static function get_root_alias() {
-
-        $hm = cmsms()->GetHierarchyManager();
-        $smarty = cmsms()->GetSmarty();
-
+     public static function get_root_alias() {
         $alias = cms_utils::get_app_data('root_alias');
         if ($alias)
             return $alias;
 
-        //get curretn alias
-        $alias = get_pageid_or_alias_from_url();
-        if (is_numeric($alias)) {
-            $contentops = cmsms()->GetContentOperations();
-            $alias = $contentops->GetPageAliasFromID($alias);
-        }
+        $gCms = cmsms();
+        $contentops = $gCms->GetContentOperations();
+        $smarty = $gCms->GetSmarty();
+        if (empty($alias)) 
+            $alias = cms_utils::get_current_alias();
+        $id = $contentops->GetPageIDFromAlias($alias);
 
-        $stack = array();
-        $node = $hm->find_by_tag('alias', $alias);
-        while ($node && $node->get_tag('id') > 0) {
-            $stack[] = $node;
-            $node = $node->getParent();
+        while ($id > 0) {
+            $content = $contentops->LoadContentFromId($id);
+            if (!is_object($content))
+                return '';
+            $alias = $content->Alias();
+            $id = $content->ParentId();
         }
-        if (count($stack) == 0)
-            return;
-
-        $alias = $stack[count($stack) - 1]->get_tag('alias');
         cms_utils::set_app_data('root_alias', $alias);
         return $alias;
     }

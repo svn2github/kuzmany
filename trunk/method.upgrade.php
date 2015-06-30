@@ -131,6 +131,10 @@ switch ($current_version) {
             Translation::set_translation_data(unserialize($this->GetPreference('translations')));
             Translation::save();
         }
+    case "1.11.5":
+        $sqlarray = $dict->AddColumnSQL(cms_db_prefix() . 'module_mlecms_config', 'canonical C(60)');
+        $dict->ExecuteSQLArray($sqlarray);
+
         $current_version = "1.12";
 }
 

@@ -25,6 +25,7 @@ $lang['idtext'] = 'ID';
 $lang['alias'] = 'Root alias';
 $lang['name'] = 'Name';
 $lang['extra'] = 'Extra';
+$lang['canonical'] = 'Canonical URL';
 $lang['par_template'] = 'Smarty parameter in template';
 
 $lang['locale'] = 'Locale for CMSMS';

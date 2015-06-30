@@ -16,7 +16,6 @@ class mle_detector extends CmsLanguageDetector {
     public function find_language() {
         if ($this->_mod == null)
             return;
-
         $gCms = cmsms();
         $smarty = $gCms->GetSmarty();
         $db = cmsms()->GetDb();
@@ -31,6 +30,13 @@ class mle_detector extends CmsLanguageDetector {
             return '';
         else {
             mle_tools::set_smarty_options($lang["locale"], $lang["alias"]);
+            //canonical
+            if ($lang["canonical"])
+                if ($_SERVER['HTTP_HOST'] != $lang["canonical"]) {
+                    $current_url = cge_url::current_url();
+                    header("HTTP/1.1 301 Moved Permanently");
+                    header("Location: " . str_replace($_SERVER['HTTP_HOST'], $lang["canonical"], cge_url::current_url()));
+                }
             return $lang["locale"];
         }
     }

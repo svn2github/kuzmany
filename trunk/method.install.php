@@ -41,6 +41,7 @@ $flds = "
 	direction C(10),
 	flag C(60),
 	extra C(60),
+	canonical C(60),
 	sort I,
 	modified_date " . CMS_ADODB_DT . ",
 	created_date " . CMS_ADODB_DT . "

@@ -60,7 +60,7 @@ class MleCMS extends CGExtensions {
     }
 
     function GetVersion() {
-        return '1.11.5';
+        return '2.0-alpha1';
     }
 
     function GetHelp() {
@@ -93,7 +93,7 @@ class MleCMS extends CGExtensions {
      * @param type $name
      * @param type $id
      * @param type $params
-     * @param type $returnid 
+     * @param type $returnid
      */
     public function DoAction($name, $id, $params, $returnid = '') {
         switch ($name) {
@@ -165,7 +165,7 @@ class MleCMS extends CGExtensions {
         $this->SetParameterType('template', CLEAN_STRING);
         $this->SetParameterType('name', CLEAN_STRING);
 
-        // language detector        
+        // language detector
         $langs = mle_tools::get_langs();
         if (empty($langs) == false) {
             $obj = null;
@@ -176,7 +176,7 @@ class MleCMS extends CGExtensions {
                 $module = cge_utils::get_module($name);
                 if ($module)
                     $obj = $module->GetMleInit();
-                
+
             }
              if (is_object($obj)) {
                 CmsNlsOperations::set_language_detector($obj);

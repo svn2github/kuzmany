@@ -47,7 +47,7 @@ if ($this->GetPreference('mle_hierarchy_switch')) {
     $new_friendly_position = (count($hierarchy_array) ? '.' : '') . implode(".", $hierarchy_array);
     $parms = array();
     $parms[] = $new_friendly_position;
-    $query = 'SELECT 
+    $query = 'SELECT
         mle.id,
         mle.name,
         mle.locale,
@@ -71,9 +71,9 @@ LEFT JOIN ' . cms_db_prefix() . 'content  content_hierchy ON (content_hierchy.hi
     $langs = $this->getLangs();
 }
 
-$smarty->assign('mle_separator', $this->GetPreference('mle_separator'));
-$smarty->assign('langs', cge_array::to_object($langs));
-$smarty->assign('langs_count', count($langs));
+$smarty->assignGlobal('mle_separator', $this->GetPreference('mle_separator'));
+$smarty->assignGlobal('langs', cge_array::to_object($langs));
+$smarty->assignGlobal('langs_count', count($langs));
 
 // unlike template
 $template = 'mle_template' . $this->GetPreference('current_mle_template');

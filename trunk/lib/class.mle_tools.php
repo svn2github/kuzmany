@@ -22,7 +22,7 @@ class mle_tools {
         $gCms = cmsms();
         $contentops = $gCms->GetContentOperations();
         $smarty = $gCms->GetSmarty();
-        if (empty($alias)) 
+        if (empty($alias))
             $alias = cms_utils::get_current_alias();
         $id = $contentops->GetPageIDFromAlias($alias);
 
@@ -109,11 +109,11 @@ class mle_tools {
         else
             $lang = self::get_lang_from_locale($locale);
         if ($lang) {
-            $smarty->assign('lang_extra', $lang["extra"]);
-            $smarty->assign('lang_parent', $lang["alias"]);
+            $smarty->assignGlobal('lang_extra', $lang["extra"]);
+            $smarty->assignGlobal('lang_parent', $lang["alias"]);
         }
-        $smarty->assign('lang_locale', $locale);
-        $smarty->assign('lang_dir', $obj->direction());
+        $smarty->assignGlobal('lang_locale', $locale);
+        $smarty->assignGlobal('lang_dir', $obj->direction());
     }
 
 }

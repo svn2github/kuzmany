@@ -15,7 +15,7 @@ class Translation {
 
     /** static class */
     private function __construct() {
-        
+
     }
 
     private static function _init() {

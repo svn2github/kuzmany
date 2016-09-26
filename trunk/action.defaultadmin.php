@@ -42,8 +42,11 @@ if (is_array($this->GetDependencies())) {
 
 ## TAB HEADERS from CGE
 echo $this->StartTabHeaders();
-if ($this->CheckAccess()) {
-    echo $this->SetTabHeader('mle_config', $this->Lang('mle_config'));
+
+
+
+if ($this->CheckAccess('manage translator_mle')) {
+    echo $this->SetTabHeader('mle_translator', $this->Lang('mle_translator'));
 }
 
 if ($this->CheckAccess('manage ' . MLE_SNIPPET . 'mle')) {
@@ -54,9 +57,10 @@ if ($this->CheckAccess('manage ' . MLE_BLOCK . 'mle')) {
     echo $this->SetTabHeader('manage_' . MLE_BLOCK . 'mle', $this->Lang('manage_blocks'));
 }
 
-if ($this->CheckAccess('manage translator_mle')) {
-    echo $this->SetTabHeader('mle_translator', $this->Lang('mle_translator'));
+if ($this->CheckAccess()) {
+    echo $this->SetTabHeader('mle_config', $this->Lang('mle_config'));
 }
+
 
 
 if ($this->CheckPermission('Modify Templates')) {
@@ -74,9 +78,12 @@ echo $this->EndTabHeaders();
 #
 echo $this->StartTabContent();
 
-if ($this->CheckAccess()) {
-    echo $this->StartTab('mle_config');
-    include(dirname(__FILE__) . '/function.admin_mle_config.php');
+
+if ($this->CheckAccess('manage translator_mle')) {
+    $prefix = MLE_BLOCK;
+    echo $this->StartTab('mle_translator', $params);
+    $wysiwyg = true;
+    include(dirname(__FILE__) . '/function.admin_mle_translator.php');
     echo $this->EndTab();
 }
 
@@ -96,13 +103,13 @@ if ($this->CheckAccess('manage ' . MLE_BLOCK . 'mle')) {
     echo $this->EndTab();
 }
 
-if ($this->CheckAccess('manage translator_mle')) {
-    $prefix = MLE_BLOCK;
-    echo $this->StartTab('mle_translator', $params);
-    $wysiwyg = true;
-    include(dirname(__FILE__) . '/function.admin_mle_translator.php');
+if ($this->CheckAccess()) {
+    echo $this->StartTab('mle_config');
+    include(dirname(__FILE__) . '/function.admin_mle_config.php');
     echo $this->EndTab();
 }
+
+
 
 if ($this->CheckPermission('Modify Templates')) {
     echo $this->StartTab('mle_template', $params);

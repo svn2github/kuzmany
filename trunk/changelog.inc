@@ -1,7 +1,11 @@
 <ul>
-    <li>Version 2.0 - january 2015 <br />
-        - CMSMS 2.0 ready
-        - add mle_selflink (mle version of cms_selflink)
+    <li>Version 2.0 - september 2016
+        <ul>
+            <li>CMSMS 2.1.5+ ready</li>
+            <li>removed the 'detector' stuff (doesn't work properly with CMSMS 2* for the moment) - you must use {MleCMS action=init} on the top of your page template</li>
+            <li>add mle_selflink (mle version of cms_selflink)</li>
+            <li>some admin changes</li>
+        </ul>
     </li>
     <li>Version 1.11.4 - december 2012 <br />
         - add support for external detection GetMleInit (see MleDomains for expample)<br />

@@ -28,6 +28,12 @@
 if (!isset($gCms))
     exit;
 
-/* deprecated */
+// As the translate doesn't work properly in CMSMS 2+, we need to call {MleCMS action=init} on the top of the template
+$detector = new mle_detector();
+$lang = $detector->find_language();
+
+CmsNlsOperations::set_language($lang);
+$smarty->assignGlobal('lang',CmsNlsOperations::get_current_language());
+$smarty->assignGlobal('encoding',CmsNlsOperations::get_encoding());
 
 ?>

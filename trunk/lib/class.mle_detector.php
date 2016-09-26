@@ -5,17 +5,18 @@
  *
  * @author @kuzmany
  */
-class mle_detector extends CmsLanguageDetector {
+class mle_detector /*extends CmsLanguageDetector*/ {
 
     private $_mod = null;
 
-    public function __construct($mod) {
-        $this->_mod = $mod;
-    }
+    // public function __construct($mod) {
+    //     $this->_mod = $mod;
+    // }
 
     public function find_language() {
-        if ($this->_mod == null)
-            return;
+        // if ($this->_mod == null)
+            // return;
+
         $gCms = cmsms();
         $smarty = $gCms->GetSmarty();
         $db = cmsms()->GetDb();

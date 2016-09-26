@@ -60,7 +60,7 @@ class MleCMS extends CGExtensions {
     }
 
     function GetVersion() {
-        return '2.0-alpha1';
+        return '2.0-alpha2';
     }
 
     function GetHelp() {
@@ -110,11 +110,11 @@ class MleCMS extends CGExtensions {
                     }
                 }
                 break;
-            case "langs":
+            /*case "langs":
             case "default":
             case "init":
                 //$params["nocache"] = 1;
-                break;
+                break;*/
         }
         parent::DoAction($name, $id, $params, $returnid);
     }
@@ -170,9 +170,25 @@ class MleCMS extends CGExtensions {
         if (empty($langs) == false) {
             $obj = null;
             $name = $this->GetPreference('mle_init', '');
-            if ($name == '' || $name == '__DEFAULT__') {
+
+
+            // Keep the detector stuff for third party detection modules
+            if ($name != '' && $name != '__DEFAULT__') {
+                $module = cge_utils::get_module($name);
+                if ($module)
+                    $obj = $module->GetMleInit();
+
+                if (is_object($obj)) {
+                    CmsNlsOperations::set_language_detector($obj);
+                    //$alias = mle_tools::get_root_alias();
+                }
+            }
+
+            /*if ($name == '' || $name == '__DEFAULT__') {
                 $obj = new mle_detector($this);
-            } else {
+            }
+            else
+            {
                 $module = cge_utils::get_module($name);
                 if ($module)
                     $obj = $module->GetMleInit();
@@ -181,7 +197,7 @@ class MleCMS extends CGExtensions {
              if (is_object($obj)) {
                 CmsNlsOperations::set_language_detector($obj);
                 $alias = mle_tools::get_root_alias();
-            }
+            }*/
         }
 
         mle_smarty::init();

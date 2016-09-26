@@ -1,6 +1,6 @@
 <?php
 
-$lang['friendlyname'] = 'Mle CMS';
+$lang['friendlyname'] = 'Languages & translations';
 $lang['postinstall'] = 'Mle CMS was successful installed';
 $lang['postuninstall'] = 'Mle CMS was successful uninstalled';
 $lang['really_uninstall'] = 'Really? Are you sure
@@ -20,7 +20,7 @@ $lang['accessdenied'] = 'Access Denied. Please check your permissions.';
 $lang['postinstall'] = 'Post Install Message, (e.g., Be sure to set "manage mle_cms" permissions to use this module!)';
 
 // Mle config
-$lang['mle_config'] = 'Multilang config';
+$lang['mle_config'] = 'Languages';
 $lang['idtext'] = 'ID';
 $lang['alias'] = 'Root alias';
 $lang['name'] = 'Name';
@@ -54,8 +54,8 @@ $lang['manage_blocks'] = 'Blocks';
 
 // Options
 $lang['options'] = 'Options';
-$lang['mle_template'] = 'Multilang template';
-$lang['addedit_mle_template'] = 'Add/Edit multilang template';
+$lang['mle_template'] = 'Language choice template';
+$lang['addedit_mle_template'] = 'Add/Edit a language choice template';
 $lang['mle_hierarchy_switch'] = 'Switch beetwen language in each hierarchy';
 $lang['mle_search_restriction'] = 'Search MLE restriction (only for search in pages)';
 $lang['mle_auto_redirect'] = 'Language detection';
@@ -77,19 +77,28 @@ $lang['help'] = '
 <h3>What Does This Do?</h3>
 <p>This module add multilanguage solution to your CMS Made Simple.</p>
 <h3>How Do I Use It</h3>
-<p>Check installation guide <a href="http://cmsmadesimple.sk/modules/MleCMS/installation-guide.html">Installation Guide</a></p>
+<p>In short terms:</p>
+<ol>
+<li>Install the missing languages through the CMS Made Simple install script (you must choose <em>freshen installation</em> to add new languages)</li>
+<li>Create one pages tree per lang</li>
+<li>Configure the Languages module in the Content section</li>
+<li>Add <code>{MleCMS action=init}</code> on the very top of your pages templates</li>
+<li>Add <code>{MleCMS action=langs}</code> if and where you want you languages switch box to be.</li>
+</ol>
+
+<p>If you want more informations, check installation guide <a href="http://cmsmadesimple.sk/modules/MleCMS/installation-guide.html">Installation Guide</a></p>
 <p>or</p>
 <p><a target="_blank" href="http://blog.arvixe.com/creating-a-multilingual-cmsms-site-using-mlecms-module/">Creating a Multilingual CMSMS Site Using MleCMS Module</a></p>
 <h3>Plugins</h3>
-<p><strong>Translate</strong> {translate text="some text"} or {translator}some text{/translator} or {"some text"|translate}</p>
-<p>Params</p>
+<p><strong>Translate</strong> - <code>{translate text=\'some text\'}</code> or <code>{translator}some text{/translator}</code> or <code>{\'some text\'|translate}</code></p>
+<p>Parameters:</p>
 <ul>
 <li>text (required) - text for translate</li>
 <li>assign (optional)  - smarty assign</li>
 </ul>
 <br />
 <p><strong>mle_assign</strong> - (news example: {mle_assign object=$entry par="title" assign="entry"}) </p>
-<p>Params</p>
+<p>Parameters:</p>
 <ul>
 <li>object or array (required) - object/array for mle assign</li>
 <li>par (required)  - parameter for find mutlilangue string (example: title and mle version  are  title_sk, title_de, title_fr, where title is default string for default language. Great MLE solution in templates!!)</li>
@@ -97,6 +106,7 @@ $lang['help'] = '
 </ul>
 <br />
 <p><strong>mle_selflink</strong> - ({mle_selfink page="alias"}) </p>
+<p>Parameters:</p>
 <p>Params</p>
 <ul>
 <li>page/href - same like for cms_selflink</li>

@@ -14,7 +14,7 @@
 {foreach from=$snippets item=entry}
 		<tr class="{$entry->rowclass}" onmouseover="this.className='{$entry->rowclass}hover';" onmouseout="this.className='{$entry->rowclass}';">
 		   <td>{$entry->edit}</td>
-		   <td>{literal}{MleCMS name="{/literal}{$entry->name}{literal}"}{/literal}</td>
+		   <td>{literal}{MleCMS name='{/literal}{$entry->name}{literal}'}{/literal}</td>
 		   <td>{$entry->editlink}</td>
 		   <td>{$entry->deletelink}</td>
 		</tr>

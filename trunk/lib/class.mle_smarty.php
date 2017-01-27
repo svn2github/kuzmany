@@ -174,14 +174,20 @@ class mle_smarty {
 
     public static function mle_selflink($params, &$smarty) {
         $parms = array();
-        if (isset($params['page']))
+        if (isset($params['page'])) {
+            $parms[] = intval($params['page']);
+            $parms[] = intval($params['page']);
             $parms[] = $params['page'];
-        elseif (isset($params['href']))
+        } elseif (isset($params['href'])) {
+            $parms[] = intval($params['href']);
+            $parms[] = intval($params['href']);
             $parms[] = $params['href'];
+        }
         $parms[] = $smarty->getTemplateVars('lang_parent');
+
         $query = 'SELECT target.content_alias
-			FROM ' . cms_db_prefix() . 'content origin, ' . cms_db_prefix() . 'content lang, ' . cms_db_prefix() . 'content target
-			WHERE origin.content_alias = ? AND lang.content_alias = ?
+                       FROM ' . cms_db_prefix() . 'content origin, ' . cms_db_prefix() . 'content lang, ' . cms_db_prefix() . 'content target
+                       WHERE (origin.content_id = ? OR (? = 0 AND origin.content_alias = ?) ) AND lang.content_alias = ?
 				AND target.hierarchy = CONCAT(lang.hierarchy, \'.\', SUBSTRING(origin.hierarchy, 7))';
         $db = cmsms()->GetDb();
         $result = $db->GetAll($query, array($parms));

@@ -73,6 +73,8 @@ if (isset($params['locale'])) {
     $locale = $params['locale'];
 }
 
+$setlocale = '';
+
 $flag = '';
 
 if (isset($params['submit'])) {

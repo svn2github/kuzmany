@@ -35,8 +35,12 @@ class Translation {
             self::$_langs = mle_tools::get_langs();
 
         if (self::$_translations == null) {
-            $data = file_get_contents($config['uploads_path'] . '/translations.dat');
-            self::$_translations = unserialize($data);
+            $translations_file = $config['uploads_path'] . '/translations.dat';
+            if (file_exists($translations_file))
+            {
+                $data = file_get_contents($config['uploads_path'] . '/translations.dat');
+                self::$_translations = unserialize($data);
+            }
         }
     }
 

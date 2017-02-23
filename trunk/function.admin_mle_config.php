@@ -55,6 +55,7 @@ while ($dbresult && $row = $dbresult->FetchRow()) {
 
 
 $addlink = $this->CreateLink($id, 'admin_mlecms_config_editlang', $returnid, $this->Lang('add'));
+
 $smarty->assign('addlink', $addlink);
 
 $this->smarty->assign_by_ref('items', $entryarray);

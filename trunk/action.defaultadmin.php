@@ -44,17 +44,25 @@ if (is_array($this->GetDependencies())) {
 echo $this->StartTabHeaders();
 
 
+// Only display translator / snippets / blocks if langs are defined
+$has_langs = false;
+if (!empty(mle_tools::get_langs()))
+    $has_langs = true;
 
-if ($this->CheckAccess('manage translator_mle')) {
-    echo $this->SetTabHeader('mle_translator', $this->Lang('mle_translator'));
-}
 
-if ($this->CheckAccess('manage ' . MLE_SNIPPET . 'mle')) {
-    echo $this->SetTabHeader('manage_' . MLE_SNIPPET . 'mle', $this->Lang('manage_snippets'));
-}
+if ($has_langs)
+{
+    if ($this->CheckAccess('manage translator_mle')) {
+        echo $this->SetTabHeader('mle_translator', $this->Lang('mle_translator'));
+    }
 
-if ($this->CheckAccess('manage ' . MLE_BLOCK . 'mle')) {
-    echo $this->SetTabHeader('manage_' . MLE_BLOCK . 'mle', $this->Lang('manage_blocks'));
+    if ($this->CheckAccess('manage ' . MLE_SNIPPET . 'mle')) {
+        echo $this->SetTabHeader('manage_' . MLE_SNIPPET . 'mle', $this->Lang('manage_snippets'));
+    }
+
+    if ($this->CheckAccess('manage ' . MLE_BLOCK . 'mle')) {
+        echo $this->SetTabHeader('manage_' . MLE_BLOCK . 'mle', $this->Lang('manage_blocks'));
+    }
 }
 
 if ($this->CheckAccess()) {
@@ -79,28 +87,31 @@ echo $this->EndTabHeaders();
 echo $this->StartTabContent();
 
 
-if ($this->CheckAccess('manage translator_mle')) {
-    $prefix = MLE_BLOCK;
-    echo $this->StartTab('mle_translator', $params);
-    $wysiwyg = true;
-    include(dirname(__FILE__) . '/function.admin_mle_translator.php');
-    echo $this->EndTab();
-}
+if ($has_langs)
+{
+    if ($this->CheckAccess('manage translator_mle')) {
+        $prefix = MLE_BLOCK;
+        echo $this->StartTab('mle_translator', $params);
+        $wysiwyg = true;
+        include(dirname(__FILE__) . '/function.admin_mle_translator.php');
+        echo $this->EndTab();
+    }
 
-if ($this->CheckAccess('manage ' . MLE_SNIPPET . 'mle')) {
-    $prefix = MLE_SNIPPET;
-    echo $this->StartTab('manage_' . $prefix . 'mle', $params);
-    $wysiwyg = false;
-    include(dirname(__FILE__) . '/function.admin_snippets.php');
-    echo $this->EndTab();
-}
+    if ($this->CheckAccess('manage ' . MLE_SNIPPET . 'mle')) {
+        $prefix = MLE_SNIPPET;
+        echo $this->StartTab('manage_' . $prefix . 'mle', $params);
+        $wysiwyg = false;
+        include(dirname(__FILE__) . '/function.admin_snippets.php');
+        echo $this->EndTab();
+    }
 
-if ($this->CheckAccess('manage ' . MLE_BLOCK . 'mle')) {
-    $prefix = MLE_BLOCK;
-    echo $this->StartTab('manage_' . $prefix . 'mle', $params);
-    $wysiwyg = true;
-    include(dirname(__FILE__) . '/function.admin_snippets.php');
-    echo $this->EndTab();
+    if ($this->CheckAccess('manage ' . MLE_BLOCK . 'mle')) {
+        $prefix = MLE_BLOCK;
+        echo $this->StartTab('manage_' . $prefix . 'mle', $params);
+        $wysiwyg = true;
+        include(dirname(__FILE__) . '/function.admin_snippets.php');
+        echo $this->EndTab();
+    }
 }
 
 if ($this->CheckAccess()) {

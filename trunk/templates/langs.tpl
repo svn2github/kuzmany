@@ -31,5 +31,5 @@
 {/foreach}
 	</tbody>
 </table>
-<div class="pageoptions"><p class="pageoptions">{$addlink}</p></div>
+
 {/if}

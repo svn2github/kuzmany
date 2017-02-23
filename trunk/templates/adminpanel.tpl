@@ -1,5 +1,9 @@
 {if isset($title_section)}}<h3>{$title_section}</h3>{/if}
 
+<div class="pageoptions">
+	<p class="pageoptions">{$addSnippetIcon} {$addSnippetLink}</p>
+</div>
+
 {if $snippets|@count > 0}
 <table cellspacing="0" class="pagetable">
    <thead>
@@ -24,7 +28,5 @@
 {/if}
 
 
-<div class="pageoptions">
-	<p class="pageoptions">{$addSnippetIcon} {$addSnippetLink}</p>
-</div>
+
 

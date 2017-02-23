@@ -7,7 +7,7 @@
     </style>
 {/literal}
 
-<p><strong>{$mod->Lang('example')}</strong>: {literal}{translate text="my text"} or {"my text"|translate} or {translate}my text{/translate}{/literal}</p>
+<p>{$mod->Lang('example')}: &nbsp;<strong><code>{ldelim}translate text='my text'{rdelim}</code></strong> <em>{$mod->Lang('or')}</em> <strong><code>{ldelim}'my text'|translate{rdelim}</code></strong> <em>{$mod->Lang('or')}</em> <code><strong>{ldelim}translator{rdelim}my text{ldelim}/translator{rdelim}</strong></code></p>
 
 <table id="trans" cellspacing="0" class="pagetable">
 

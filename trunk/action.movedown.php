@@ -45,7 +45,7 @@ $db->Execute('UPDATE ' . cms_db_prefix() . 'module_mlecms_config SET sort  =  ? 
 
 @$this->SendEvent('LangEdited', array());
 
-$this->RedirectToTab($id);
+$this->RedirectToTab($id, "mle_config");
 exit;
 
 ?>

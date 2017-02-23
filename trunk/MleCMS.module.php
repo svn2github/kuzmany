@@ -60,7 +60,7 @@ class MleCMS extends CGExtensions {
     }
 
     function GetVersion() {
-        return '2.0-alpha2';
+        return '2.0-beta1';
     }
 
     function GetHelp() {
@@ -140,7 +140,7 @@ class MleCMS extends CGExtensions {
     }
 
     function MinimumCMSVersion() {
-        return '2.1.5';
+        return '2.1.6';
     }
 
     function InstallPostMessage() {
@@ -166,7 +166,7 @@ class MleCMS extends CGExtensions {
         $this->SetParameterType('name', CLEAN_STRING);
 
         // language detector
-        $langs = mle_tools::get_langs();
+        /*$langs = mle_tools::get_langs();
         if (empty($langs) == false) {
             $obj = null;
             $name = $this->GetPreference('mle_init', '');
@@ -198,7 +198,7 @@ class MleCMS extends CGExtensions {
                 CmsNlsOperations::set_language_detector($obj);
                 $alias = mle_tools::get_root_alias();
             }*/
-        }
+        /*}*/
 
         mle_smarty::init();
     }

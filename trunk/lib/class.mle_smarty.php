@@ -36,7 +36,7 @@ class mle_smarty {
         $smarty = cmsms()->GetSmarty();
         // translators
         $smarty->register_function('translate', array('mle_smarty', 'translator'));
-        $smarty->register_block('translate', array('mle_smarty', 'translator_block'));
+        //$smarty->register_block('translate', array('mle_smarty', 'translator_block'));
         $smarty->register_block('translator', array('mle_smarty', 'translator_block'));
         $smarty->register_modifier('translate', array('mle_smarty', 'translator_modifier'));
 
@@ -82,8 +82,9 @@ class mle_smarty {
             $params["assign"] = $assign;
 
         $params["text"] = $content;
+        Translation::translate($params);
 
-        $module->DoAction('translator', '', $params);
+        //$module->DoAction('translator', '', $params);
     }
 
     /**

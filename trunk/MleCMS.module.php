@@ -60,7 +60,7 @@ class MleCMS extends CGExtensions {
     }
 
     function GetVersion() {
-        return '2.0-beta1';
+        return '2.0';
     }
 
     function GetHelp() {

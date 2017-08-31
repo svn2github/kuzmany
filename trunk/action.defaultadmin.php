@@ -46,7 +46,8 @@ echo $this->StartTabHeaders();
 
 // Only display translator / snippets / blocks if langs are defined
 $has_langs = false;
-if (!empty(mle_tools::get_langs()))
+$tmp_langs = mle_tools::get_langs();
+if (!empty($tmp_langs))
     $has_langs = true;
 
 

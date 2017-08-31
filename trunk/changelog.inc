@@ -1,10 +1,11 @@
 <ul>
-    <li>Version 2.0 - september 2016
+    <li>Version 2.0 - sept 2017
         <ul>
             <li>CMSMS 2.1.6+ ready</li>
             <li>removed the 'detector' stuff (doesn't work properly with CMSMS 2* for the moment) - you must use {MleCMS action=init} on the top of your page template</li>
             <li>add mle_selflink (mle version of cms_selflink)</li>
             <li>some admin changes</li>
+            <li>bug fixes</li>
         </ul>
     </li>
     
